@@ -1,0 +1,1368 @@
+0, 0xffff8000080f8ea4, 0xd65f03c0, "ret "
+0, 0xffff8000080fe134, 0x710002ff, "cmp w23, #0"
+0, 0xffff8000080fe138, 0xfa5312c4, "ccmp x22, x19, #4, ne"
+0, 0xffff8000080fe13c, 0x54fff220, "b.eq #0xffff8000080fdf80"
+0, 0xffff8000080fdf80, 0xaa1403e0, "mov x0, x20"
+0, 0xffff8000080fdf84, 0xaa1303e1, "mov x1, x19"
+0, 0xffff8000080fdf88, 0x528000a2, "mov w2, #5"
+0, 0xffff8000080fdf8c, 0x97fff699, "bl #0xffff8000080fb9f0"
+0, 0xffff8000080fb9f0, 0xd503233f, "paciasp "
+0, 0xffff8000080fb9f4, 0xa9bc7bfd, "stp x29, x30, [sp, #-0x40]!", store, 0x1000b8d70, RAM
+0, 0xffff8000080fb9f8, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080fb9fc, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8d80, RAM
+0, 0xffff8000080fba00, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080fba04, 0xaa0103f4, "mov x20, x1"
+0, 0xffff8000080fba08, 0xa9025bf5, "stp x21, x22, [sp, #0x20]", store, 0x1000b8d90, RAM
+0, 0xffff8000080fba0c, 0x2a0203f6, "mov w22, w2"
+0, 0xffff8000080fba10, 0xa90363f7, "stp x23, x24, [sp, #0x30]", store, 0x1000b8da0, RAM
+0, 0xffff8000080fba14, 0xb9418e60, "ldr w0, [x19, #0x18c]", load, 0x1037843bcc, RAM
+0, 0xffff8000080fba18, 0x350031c0, "cbnz w0, #0xffff8000080fc050"
+0, 0xffff8000080fba1c, 0xf9409a77, "ldr x23, [x19, #0x130]", load, 0x1037843b70, RAM
+0, 0xffff8000080fba20, 0xb9498ae0, "ldr w0, [x23, #0x988]", load, 0x1037844348, RAM
+0, 0xffff8000080fba24, 0x7100041f, "cmp w0, #1"
+0, 0xffff8000080fba28, 0x540031a9, "b.ls #0xffff8000080fc05c"
+0, 0xffff8000080fba2c, 0xf940c261, "ldr x1, [x19, #0x180]", load, 0x1037843bc0, RAM
+0, 0xffff8000080fba30, 0xf944e6f5, "ldr x21, [x23, #0x9c8]", load, 0x1037844388, RAM
+0, 0xffff8000080fba34, 0xf944eae0, "ldr x0, [x23, #0x9d0]", load, 0x1037844390, RAM
+0, 0xffff8000080fba38, 0xcb0102b5, "sub x21, x21, x1"
+0, 0xffff8000080fba3c, 0xcb0002b5, "sub x21, x21, x0"
+0, 0xffff8000080fba40, 0xf9406280, "ldr x0, [x20, #0xc0]", load, 0x1001582c0, RAM
+0, 0xffff8000080fba44, 0xb4000040, "cbz x0, #0xffff8000080fba4c"
+0, 0xffff8000080fba48, 0x36082616, "tbz w22, #1, #0xffff8000080fbf08"
+0, 0xffff8000080fbf08, 0xaa1403e2, "mov x2, x20"
+0, 0xffff8000080fbf0c, 0xaa1303e1, "mov x1, x19"
+0, 0xffff8000080fbf10, 0xaa1503e0, "mov x0, x21"
+0, 0xffff8000080fbf14, 0x940051a3, "bl #0xffff8000081105a0"
+0, 0xffff8000081105a0, 0xd503233f, "paciasp "
+0, 0xffff8000081105a4, 0xa9bd7bfd, "stp x29, x30, [sp, #-0x30]!", store, 0x1000b8d40, RAM
+0, 0xffff8000081105a8, 0x910003fd, "mov x29, sp"
+0, 0xffff8000081105ac, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8d50, RAM
+0, 0xffff8000081105b0, 0xaa0203f3, "mov x19, x2"
+0, 0xffff8000081105b4, 0xaa0003f4, "mov x20, x0"
+0, 0xffff8000081105b8, 0xf90013f5, "str x21, [sp, #0x20]", store, 0x1000b8d60, RAM
+0, 0xffff8000081105bc, 0xaa0103f5, "mov x21, x1"
+0, 0xffff8000081105c0, 0xf9404260, "ldr x0, [x19, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000081105c4, 0xb9403a65, "ldr w5, [x19, #0x38]", load, 0x100158238, RAM
+0, 0xffff8000081105c8, 0x710000bf, "cmp w5, #0"
+0, 0xffff8000081105cc, 0x9a9f07e7, "cset x7, ne"
+0, 0xffff8000081105d0, 0xaa0703e6, "mov x6, x7"
+0, 0xffff8000081105d4, 0xb4000040, "cbz x0, #0xffff8000081105dc"
+0, 0xffff8000081105d8, 0xf9404666, "ldr x6, [x19, #0x88]", load, 0x100158288, RAM
+0, 0xffff8000081105dc, 0xf9406262, "ldr x2, [x19, #0xc0]", load, 0x1001582c0, RAM
+0, 0xffff8000081105e0, 0xf9402aa3, "ldr x3, [x21, #0x50]", load, 0x1037843a90, RAM
+0, 0xffff8000081105e4, 0xeb020281, "subs x1, x20, x2"
+0, 0xffff8000081105e8, 0x540006a4, "b.mi #0xffff8000081106bc"
+0, 0xffff8000081105ec, 0xd34afc20, "lsr x0, x1, #0xa"
+0, 0xffff8000081105f0, 0xb4000680, "cbz x0, #0xffff8000081106c0"
+0, 0xffff8000081105f4, 0x9276d421, "and x1, x1, #0xfffffffffffffc00"
+0, 0xffff8000081105f8, 0x8b020021, "add x1, x1, x2"
+0, 0xffff8000081105fc, 0xf9006261, "str x1, [x19, #0xc0]", store, 0x1001582c0, RAM
+0, 0xffff800008110600, 0x34000965, "cbz w5, #0xffff80000811072c"
+0, 0xffff80000811072c, 0xb940de6c, "ldr w12, [x19, #0xdc]", load, 0x1001582dc, RAM
+0, 0xffff800008110730, 0x91030263, "add x3, x19, #0xc0"
+0, 0xffff800008110734, 0x2a0003e8, "mov w8, w0"
+0, 0xffff800008110738, 0x5280000d, "mov w13, #0"
+0, 0xffff80000811073c, 0xd2800006, "mov x6, #0"
+0, 0xffff800008110740, 0x8b2c4002, "add x2, x0, w12, uxtw"
+0, 0xffff800008110744, 0xd34afc4a, "lsr x10, x2, #0xa"
+0, 0xffff800008110748, 0xf10ffc5f, "cmp x2, #0x3ff"
+0, 0xffff80000811074c, 0x54fff6e9, "b.ls #0xffff800008110628"
+0, 0xffff800008110628, 0xb9001c62, "str w2, [x3, #0x1c]", store, 0x1001582dc, RAM
+0, 0xffff80000811062c, 0x2a0203e9, "mov w9, w2"
+0, 0xffff800008110630, 0x34000d65, "cbz w5, #0xffff8000081107dc"
+0, 0xffff8000081107dc, 0xb5fff9c6, "cbnz x6, #0xffff800008110714"
+0, 0xffff8000081107e0, 0x35fff36d, "cbnz w13, #0xffff80000811064c"
+0, 0xffff8000081107e4, 0x17ffffb7, "b #0xffff8000081106c0"
+0, 0xffff8000081106c0, 0x52800000, "mov w0, #0"
+0, 0xffff8000081106c4, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8d50, RAM
+0, 0xffff8000081106c8, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1000b8d60, RAM
+0, 0xffff8000081106cc, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8d40, RAM
+0, 0xffff8000081106d0, 0xd50323bf, "autiasp "
+0, 0xffff8000081106d4, 0xd2800001, "mov x1, #0"
+0, 0xffff8000081106d8, 0xd2800002, "mov x2, #0"
+0, 0xffff8000081106dc, 0xd2800003, "mov x3, #0"
+0, 0xffff8000081106e0, 0xd2800004, "mov x4, #0"
+0, 0xffff8000081106e4, 0xd2800005, "mov x5, #0"
+0, 0xffff8000081106e8, 0xd2800006, "mov x6, #0"
+0, 0xffff8000081106ec, 0xd2800007, "mov x7, #0"
+0, 0xffff8000081106f0, 0xd2800008, "mov x8, #0"
+0, 0xffff8000081106f4, 0xd2800009, "mov x9, #0"
+0, 0xffff8000081106f8, 0xd280000a, "mov x10, #0"
+0, 0xffff8000081106fc, 0xd280000b, "mov x11, #0"
+0, 0xffff800008110700, 0xd280000c, "mov x12, #0"
+0, 0xffff800008110704, 0xd280000d, "mov x13, #0"
+0, 0xffff800008110708, 0xd2800010, "mov x16, #0"
+0, 0xffff80000811070c, 0xd2800011, "mov x17, #0"
+0, 0xffff800008110710, 0xd65f03c0, "ret "
+0, 0xffff8000080fbf18, 0x17fffecd, "b #0xffff8000080fba4c"
+0, 0xffff8000080fba4c, 0xb940c677, "ldr w23, [x19, #0xc4]", load, 0x1037843b04, RAM
+0, 0xffff8000080fba50, 0x35001937, "cbnz w23, #0xffff8000080fbd74"
+0, 0xffff8000080fba54, 0xaa1503e0, "mov x0, x21"
+0, 0xffff8000080fba58, 0xaa1303e1, "mov x1, x19"
+0, 0xffff8000080fba5c, 0x94005371, "bl #0xffff800008110820"
+0, 0xffff800008110820, 0xd503233f, "paciasp "
+0, 0xffff800008110824, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8d50, RAM
+0, 0xffff800008110828, 0x910003fd, "mov x29, sp"
+0, 0xffff80000811082c, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8d60, RAM
+0, 0xffff800008110830, 0xaa0103f3, "mov x19, x1"
+0, 0xffff800008110834, 0xaa0003f4, "mov x20, x0"
+0, 0xffff800008110838, 0xf9400263, "ldr x3, [x19]", load, 0x1037843a40, RAM
+0, 0xffff80000811083c, 0xb40000a3, "cbz x3, #0xffff800008110850"
+0, 0xffff800008110850, 0xf9404262, "ldr x2, [x19, #0x80]", load, 0x1037843ac0, RAM
+0, 0xffff800008110854, 0xf9402a65, "ldr x5, [x19, #0x50]", load, 0x1037843a90, RAM
+0, 0xffff800008110858, 0xeb020281, "subs x1, x20, x2"
+0, 0xffff80000811085c, 0xb9401664, "ldr w4, [x19, #0x14]", load, 0x1037843a54, RAM
+0, 0xffff800008110860, 0x54000544, "b.mi #0xffff800008110908"
+0, 0xffff800008110864, 0xd34afc20, "lsr x0, x1, #0xa"
+0, 0xffff800008110868, 0xb4000520, "cbz x0, #0xffff80000811090c"
+0, 0xffff80000811086c, 0x9276d421, "and x1, x1, #0xfffffffffffffc00"
+0, 0xffff800008110870, 0x8b020021, "add x1, x1, x2"
+0, 0xffff800008110874, 0xf9004261, "str x1, [x19, #0x80]", store, 0x1037843ac0, RAM
+0, 0xffff800008110878, 0xb40007c3, "cbz x3, #0xffff800008110970"
+0, 0xffff800008110970, 0xb9409e6b, "ldr w11, [x19, #0x9c]", load, 0x1037843adc, RAM
+0, 0xffff800008110974, 0x91020264, "add x4, x19, #0x80"
+0, 0xffff800008110978, 0x2a0003e6, "mov w6, w0"
+0, 0xffff80000811097c, 0xd2800007, "mov x7, #0"
+0, 0xffff800008110980, 0x5280000c, "mov w12, #0"
+0, 0xffff800008110984, 0x8b2b4002, "add x2, x0, w11, uxtw"
+0, 0xffff800008110988, 0xd34afc49, "lsr x9, x2, #0xa"
+0, 0xffff80000811098c, 0xf10ffc5f, "cmp x2, #0x3ff"
+0, 0xffff800008110990, 0x54fff8a9, "b.ls #0xffff8000081108a4"
+0, 0xffff8000081108a4, 0xb9001c82, "str w2, [x4, #0x1c]", store, 0x1037843adc, RAM
+0, 0xffff8000081108a8, 0x2a0203e8, "mov w8, w2"
+0, 0xffff8000081108ac, 0xb4000ba3, "cbz x3, #0xffff800008110a20"
+0, 0xffff800008110a20, 0xb5fff9c7, "cbnz x7, #0xffff800008110958"
+0, 0xffff800008110a24, 0x35fff52c, "cbnz w12, #0xffff8000081108c8"
+0, 0xffff800008110a28, 0x17ffffb9, "b #0xffff80000811090c"
+0, 0xffff80000811090c, 0x52800000, "mov w0, #0"
+0, 0xffff800008110910, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8d60, RAM
+0, 0xffff800008110914, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8d50, RAM
+0, 0xffff800008110918, 0xd50323bf, "autiasp "
+0, 0xffff80000811091c, 0xd2800001, "mov x1, #0"
+0, 0xffff800008110920, 0xd2800002, "mov x2, #0"
+0, 0xffff800008110924, 0xd2800003, "mov x3, #0"
+0, 0xffff800008110928, 0xd2800004, "mov x4, #0"
+0, 0xffff80000811092c, 0xd2800005, "mov x5, #0"
+0, 0xffff800008110930, 0xd2800006, "mov x6, #0"
+0, 0xffff800008110934, 0xd2800007, "mov x7, #0"
+0, 0xffff800008110938, 0xd2800008, "mov x8, #0"
+0, 0xffff80000811093c, 0xd2800009, "mov x9, #0"
+0, 0xffff800008110940, 0xd280000a, "mov x10, #0"
+0, 0xffff800008110944, 0xd280000b, "mov x11, #0"
+0, 0xffff800008110948, 0xd280000c, "mov x12, #0"
+0, 0xffff80000811094c, 0xd2800010, "mov x16, #0"
+0, 0xffff800008110950, 0xd2800011, "mov x17, #0"
+0, 0xffff800008110954, 0xd65f03c0, "ret "
+0, 0xffff8000080fba60, 0x2a170017, "orr w23, w0, w23"
+0, 0xffff8000080fba64, 0xf9404283, "ldr x3, [x20, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000080fba68, 0xb4000063, "cbz x3, #0xffff8000080fba74"
+0, 0xffff8000080fba6c, 0xf9408460, "ldr x0, [x3, #0x108]", load, 0x100158f08, RAM
+0, 0xffff8000080fba70, 0xb50002a0, "cbnz x0, #0xffff8000080fbac4"
+0, 0xffff8000080fba74, 0xf9406280, "ldr x0, [x20, #0xc0]", load, 0x1001582c0, RAM
+0, 0xffff8000080fba78, 0xb5000040, "cbnz x0, #0xffff8000080fba80"
+0, 0xffff8000080fba80, 0x371811b6, "tbnz w22, #3, #0xffff8000080fbcb4"
+0, 0xffff8000080fba84, 0x35001097, "cbnz w23, #0xffff8000080fbc94"
+0, 0xffff8000080fba88, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8d80, RAM
+0, 0xffff8000080fba8c, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8d90, RAM
+0, 0xffff8000080fba90, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1000b8da0, RAM
+0, 0xffff8000080fba94, 0xa8c47bfd, "ldp x29, x30, [sp], #0x40", load, 0x1000b8d70, RAM
+0, 0xffff8000080fba98, 0xd50323bf, "autiasp "
+0, 0xffff8000080fba9c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080fbaa0, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080fbaa4, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080fbaa8, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080fbaac, 0xd2800004, "mov x4, #0"
+0, 0xffff8000080fbab0, 0xd2800005, "mov x5, #0"
+0, 0xffff8000080fbab4, 0xd2800006, "mov x6, #0"
+0, 0xffff8000080fbab8, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080fbabc, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080fbac0, 0xd65f03c0, "ret "
+0, 0xffff8000080fdf90, 0xf9404260, "ldr x0, [x19, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000080fdf94, 0xb4000060, "cbz x0, #0xffff8000080fdfa0"
+0, 0xffff8000080fdf98, 0xb9401400, "ldr w0, [x0, #0x14]", load, 0x100158e14, RAM
+0, 0xffff8000080fdf9c, 0xf9004660, "str x0, [x19, #0x88]", store, 0x100158288, RAM
+0, 0xffff8000080fdfa0, 0xaa1303e0, "mov x0, x19"
+0, 0xffff8000080fdfa4, 0x97ffec93, "bl #0xffff8000080f91f0"
+0, 0xffff8000080f91f0, 0xd503233f, "paciasp "
+0, 0xffff8000080f91f4, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8d90, RAM
+0, 0xffff8000080f91f8, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080f91fc, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1000b8da0, RAM
+0, 0xffff8000080f9200, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080f9204, 0xf9404260, "ldr x0, [x19, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000080f9208, 0xb4000380, "cbz x0, #0xffff8000080f9278"
+0, 0xffff8000080f920c, 0xd503201f, "nop "
+0, 0xffff8000080f9210, 0xf940a804, "ldr x4, [x0, #0x150]", load, 0x100158f50, RAM
+0, 0xffff8000080f9214, 0xf9400001, "ldr x1, [x0]", load, 0x100158e00, RAM
+0, 0xffff8000080f9218, 0xf9406c82, "ldr x2, [x4, #0xd8]", load, 0x1009ed258, RAM
+0, 0xffff8000080f921c, 0xb40000a1, "cbz x1, #0xffff8000080f9230"
+0, 0xffff8000080f9220, 0xd34afc21, "lsr x1, x1, #0xa"
+0, 0xffff8000080f9224, 0xd2800043, "mov x3, #2"
+0, 0xffff8000080f9228, 0xeb03003f, "cmp x1, x3"
+0, 0xffff8000080f922c, 0x9a832021, "csel x1, x1, x3, hs"
+0, 0xffff8000080f9230, 0xf9405003, "ldr x3, [x0, #0xa0]", load, 0x100158ea0, RAM
+0, 0xffff8000080f9234, 0xf9408084, "ldr x4, [x4, #0x100]", load, 0x1009ed280, RAM
+0, 0xffff8000080f9238, 0xeb01007f, "cmp x3, x1"
+0, 0xffff8000080f923c, 0xf9408000, "ldr x0, [x0, #0x100]", load, 0x100158f00, RAM
+0, 0xffff8000080f9240, 0x9a812063, "csel x3, x3, x1, hs"
+0, 0xffff8000080f9244, 0xcb000080, "sub x0, x4, x0"
+0, 0xffff8000080f9248, 0xab000060, "adds x0, x3, x0"
+0, 0xffff8000080f924c, 0x9b037c43, "mul x3, x2, x3"
+0, 0xffff8000080f9250, 0x54000040, "b.eq #0xffff8000080f9258"
+0, 0xffff8000080f9254, 0x9ac00c63, "sdiv x3, x3, x0"
+0, 0xffff8000080f9258, 0xf100087f, "cmp x3, #2"
+0, 0xffff8000080f925c, 0xd2800041, "mov x1, #2"
+0, 0xffff8000080f9260, 0xf9403e60, "ldr x0, [x19, #0x78]", load, 0x100158278, RAM
+0, 0xffff8000080f9264, 0x9a81a063, "csel x3, x3, x1, ge"
+0, 0xffff8000080f9268, 0xeb02007f, "cmp x3, x2"
+0, 0xffff8000080f926c, 0xaa1303e1, "mov x1, x19"
+0, 0xffff8000080f9270, 0x9a82d062, "csel x2, x3, x2, le"
+0, 0xffff8000080f9274, 0x97ffff7f, "bl #0xffff8000080f9070"
+0, 0xffff8000080f9070, 0xd503233f, "paciasp "
+0, 0xffff8000080f9074, 0xa9bd7bfd, "stp x29, x30, [sp, #-0x30]!", store, 0x1000b8d60, RAM
+0, 0xffff8000080f9078, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080f907c, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8d70, RAM
+0, 0xffff8000080f9080, 0xaa0103f3, "mov x19, x1"
+0, 0xffff8000080f9084, 0xaa0003f4, "mov x20, x0"
+0, 0xffff8000080f9088, 0xf90013f5, "str x21, [sp, #0x20]", store, 0x1000b8d80, RAM
+0, 0xffff8000080f908c, 0xaa0203f5, "mov x21, x2"
+0, 0xffff8000080f9090, 0xb9403a60, "ldr w0, [x19, #0x38]", load, 0x100158238, RAM
+0, 0xffff8000080f9094, 0x34000120, "cbz w0, #0xffff8000080f90b8"
+0, 0xffff8000080f90b8, 0xf9405280, "ldr x0, [x20, #0xa0]", load, 0x1037843ae0, RAM
+0, 0xffff8000080f90bc, 0xf9407261, "ldr x1, [x19, #0xe0]", load, 0x1001582e0, RAM
+0, 0xffff8000080f90c0, 0xeb010000, "subs x0, x0, x1"
+0, 0xffff8000080f90c4, 0x54000883, "b.lo #0xffff8000080f91d4"
+0, 0xffff8000080f90c8, 0x5296cfc1, "mov w1, #0xb67e"
+0, 0xffff8000080f90cc, 0x1b007c21, "mul w1, w1, w0"
+0, 0xffff8000080f90d0, 0xf9005280, "str x0, [x20, #0xa0]", store, 0x1037843ae0, RAM
+0, 0xffff8000080f90d4, 0xf9400260, "ldr x0, [x19]", load, 0x100158200, RAM
+0, 0xffff8000080f90d8, 0xb4000760, "cbz x0, #0xffff8000080f91c4"
+0, 0xffff8000080f90dc, 0xf9406663, "ldr x3, [x19, #0xc8]", load, 0x1001582c8, RAM
+0, 0xffff8000080f90e0, 0xf11ffc1f, "cmp x0, #0x7ff"
+0, 0xffff8000080f90e4, 0xd34afc00, "lsr x0, x0, #0xa"
+0, 0xffff8000080f90e8, 0xd2800042, "mov x2, #2"
+0, 0xffff8000080f90ec, 0x9a828000, "csel x0, x0, x2, hi"
+0, 0xffff8000080f90f0, 0xf9404682, "ldr x2, [x20, #0x88]", load, 0x1037843ac8, RAM
+0, 0xffff8000080f90f4, 0x9b037c00, "mul x0, x0, x3"
+0, 0xffff8000080f90f8, 0xeb000040, "subs x0, x2, x0"
+0, 0xffff8000080f90fc, 0x54000662, "b.hs #0xffff8000080f91c8"
+0, 0xffff8000080f91c8, 0x6b00003f, "cmp w1, w0"
+0, 0xffff8000080f91cc, 0x1a802021, "csel w1, w1, w0, hs"
+0, 0xffff8000080f91d0, 0x17ffffcd, "b #0xffff8000080f9104"
+0, 0xffff8000080f9104, 0xf9004680, "str x0, [x20, #0x88]", store, 0x1037843ac8, RAM
+0, 0xffff8000080f9108, 0x2a0103e1, "mov w1, w1"
+0, 0xffff8000080f910c, 0xf9004681, "str x1, [x20, #0x88]", store, 0x1037843ac8, RAM
+0, 0xffff8000080f9110, 0x5296cfc0, "mov w0, #0xb67e"
+0, 0xffff8000080f9114, 0xf9000275, "str x21, [x19]", store, 0x100158200, RAM
+0, 0xffff8000080f9118, 0xb940de61, "ldr w1, [x19, #0xdc]", load, 0x1001582dc, RAM
+0, 0xffff8000080f911c, 0xb9000a7f, "str wzr, [x19, #8]", store, 0x100158208, RAM
+0, 0xffff8000080f9120, 0xb000021, "add w1, w1, w0"
+0, 0xffff8000080f9124, 0xb40000b5, "cbz x21, #0xffff8000080f9138"
+0, 0xffff8000080f9128, 0xd34afeb5, "lsr x21, x21, #0xa"
+0, 0xffff8000080f912c, 0xd2800040, "mov x0, #2"
+0, 0xffff8000080f9130, 0xeb0002bf, "cmp x21, x0"
+0, 0xffff8000080f9134, 0x9a8022b5, "csel x21, x21, x0, hs"
+0, 0xffff8000080f9138, 0xf9406660, "ldr x0, [x19, #0xc8]", load, 0x1001582c8, RAM
+0, 0xffff8000080f913c, 0x9b007ea0, "mul x0, x21, x0"
+0, 0xffff8000080f9140, 0x9ac10800, "udiv x0, x0, x1"
+0, 0xffff8000080f9144, 0xf9007260, "str x0, [x19, #0xe0]", store, 0x1001582e0, RAM
+0, 0xffff8000080f9148, 0xf9405281, "ldr x1, [x20, #0xa0]", load, 0x1037843ae0, RAM
+0, 0xffff8000080f914c, 0x8b000020, "add x0, x1, x0"
+0, 0xffff8000080f9150, 0xf9005280, "str x0, [x20, #0xa0]", store, 0x1037843ae0, RAM
+0, 0xffff8000080f9154, 0xf9400260, "ldr x0, [x19]", load, 0x100158200, RAM
+0, 0xffff8000080f9158, 0xb40000a0, "cbz x0, #0xffff8000080f916c"
+0, 0xffff8000080f915c, 0xd34afc00, "lsr x0, x0, #0xa"
+0, 0xffff8000080f9160, 0xd2800041, "mov x1, #2"
+0, 0xffff8000080f9164, 0xeb01001f, "cmp x0, x1"
+0, 0xffff8000080f9168, 0x9a812000, "csel x0, x0, x1, hs"
+0, 0xffff8000080f916c, 0xf9404681, "ldr x1, [x20, #0x88]", load, 0x1037843ac8, RAM
+0, 0xffff8000080f9170, 0xf9406662, "ldr x2, [x19, #0xc8]", load, 0x1001582c8, RAM
+0, 0xffff8000080f9174, 0x9b020400, "madd x0, x0, x2, x1"
+0, 0xffff8000080f9178, 0xf9004680, "str x0, [x20, #0x88]", store, 0x1037843ac8, RAM
+0, 0xffff8000080f917c, 0xb9403a60, "ldr w0, [x19, #0x38]", load, 0x100158238, RAM
+0, 0xffff8000080f9180, 0x340000c0, "cbz w0, #0xffff8000080f9198"
+0, 0xffff8000080f9198, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8d70, RAM
+0, 0xffff8000080f919c, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1000b8d80, RAM
+0, 0xffff8000080f91a0, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8d60, RAM
+0, 0xffff8000080f91a4, 0xd50323bf, "autiasp "
+0, 0xffff8000080f91a8, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080f91ac, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f91b0, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f91b4, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080f91b8, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f91bc, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f91c0, 0xd65f03c0, "ret "
+0, 0xffff8000080f9278, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1000b8da0, RAM
+0, 0xffff8000080f927c, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8d90, RAM
+0, 0xffff8000080f9280, 0xd50323bf, "autiasp "
+0, 0xffff8000080f9284, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080f9288, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f928c, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f9290, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080f9294, 0xd2800004, "mov x4, #0"
+0, 0xffff8000080f9298, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f929c, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f92a0, 0xd65f03c0, "ret "
+0, 0xffff8000080fdfa8, 0xf9400261, "ldr x1, [x19]", load, 0x100158200, RAM
+0, 0xffff8000080fdfac, 0xb9000a9f, "str wzr, [x20, #8]", store, 0x1037843a48, RAM
+0, 0xffff8000080fdfb0, 0xf9400280, "ldr x0, [x20]", load, 0x1037843a40, RAM
+0, 0xffff8000080fdfb4, 0x8b010000, "add x0, x0, x1"
+0, 0xffff8000080fdfb8, 0xf9000280, "str x0, [x20]", store, 0x1037843a40, RAM
+0, 0xffff8000080fdfbc, 0xf9404260, "ldr x0, [x19, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000080fdfc0, 0xb4001280, "cbz x0, #0xffff8000080fe210"
+0, 0xffff8000080fdfc4, 0xb9401280, "ldr w0, [x20, #0x10]", load, 0x1037843a50, RAM
+0, 0xffff8000080fdfc8, 0x11000400, "add w0, w0, #1"
+0, 0xffff8000080fdfcc, 0xb9001280, "str w0, [x20, #0x10]", store, 0x1037843a50, RAM
+0, 0xffff8000080fdfd0, 0xf9404260, "ldr x0, [x19, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000080fdfd4, 0xb4001620, "cbz x0, #0xffff8000080fe298"
+0, 0xffff8000080fdfd8, 0xb9415800, "ldr w0, [x0, #0x158]", load, 0x100158f58, RAM
+0, 0xffff8000080fdfdc, 0x7100001f, "cmp w0, #0"
+0, 0xffff8000080fdfe0, 0x1a9fd7e0, "cset w0, gt"
+0, 0xffff8000080fdfe4, 0x34000080, "cbz w0, #0xffff8000080fdff4"
+0, 0xffff8000080fdff4, 0x120002b7, "and w23, w21, #1"
+0, 0xffff8000080fdff8, 0x37000af5, "tbnz w21, #0, #0xffff8000080fe154"
+0, 0xffff8000080fe154, 0xaa1303e1, "mov x1, x19"
+0, 0xffff8000080fe158, 0xaa1403e0, "mov x0, x20"
+0, 0xffff8000080fe15c, 0x52800002, "mov w2, #0"
+0, 0xffff8000080fe160, 0x97ffece0, "bl #0xffff8000080f94e0"
+0, 0xffff8000080f94e0, 0xd503233f, "paciasp "
+0, 0xffff8000080f94e4, 0xa9bd7bfd, "stp x29, x30, [sp, #-0x30]!", store, 0x1000b8d80, RAM
+0, 0xffff8000080f94e8, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080f94ec, 0xa9025bf5, "stp x21, x22, [sp, #0x20]", store, 0x1000b8da0, RAM
+0, 0xffff8000080f94f0, 0xaa0003f5, "mov x21, x0"
+0, 0xffff8000080f94f4, 0x2a0203f6, "mov w22, w2"
+0, 0xffff8000080f94f8, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8d90, RAM
+0, 0xffff8000080f94fc, 0xaa0103f3, "mov x19, x1"
+0, 0xffff8000080f9500, 0xf94016b4, "ldr x20, [x21, #0x28]", load, 0x1037843a68, RAM
+0, 0xffff8000080f9504, 0x34000656, "cbz w22, #0xffff8000080f95cc"
+0, 0xffff8000080f95cc, 0xf9404260, "ldr x0, [x19, #0x80]", load, 0x100158280, RAM
+0, 0xffff8000080f95d0, 0xb4000140, "cbz x0, #0xffff8000080f95f8"
+0, 0xffff8000080f95d4, 0xb9415800, "ldr w0, [x0, #0x158]", load, 0x100158f58, RAM
+0, 0xffff8000080f95d8, 0x7100001f, "cmp w0, #0"
+0, 0xffff8000080f95dc, 0x540001ad, "b.le #0xffff8000080f9610"
+0, 0xffff8000080f9610, 0xb0009420, "adrp x0, #0xffff80000937e000"
+0, 0xffff8000080f9614, 0xb945d800, "ldr w0, [x0, #0x5d8]", load, 0xfd457e5d8, RAM
+0, 0xffff8000080f9618, 0x17fffff4, "b #0xffff8000080f95e8"
+0, 0xffff8000080f95e8, 0xd503201f, "nop "
+0, 0xffff8000080f95ec, 0xd341fc00, "lsr x0, x0, #1"
+0, 0xffff8000080f95f0, 0xcb000294, "sub x20, x20, x0"
+0, 0xffff8000080f95f4, 0x17ffffce, "b #0xffff8000080f952c"
+0, 0xffff8000080f952c, 0xf9402260, "ldr x0, [x19, #0x40]", load, 0x100158240, RAM
+0, 0xffff8000080f9530, 0xb5000200, "cbnz x0, #0xffff8000080f9570"
+0, 0xffff8000080f9570, 0xf9403e61, "ldr x1, [x19, #0x78]", load, 0x100158278, RAM
+0, 0xffff8000080f9574, 0xf9409835, "ldr x21, [x1, #0x130]", load, 0x1037843b70, RAM
+0, 0xffff8000080f9578, 0xb9498aa1, "ldr w1, [x21, #0x988]", load, 0x1037844348, RAM
+0, 0xffff8000080f957c, 0x7100043f, "cmp w1, #1"
+0, 0xffff8000080f9580, 0x540005a9, "b.ls #0xffff8000080f9634"
+0, 0xffff8000080f9584, 0xf944e2a1, "ldr x1, [x21, #0x9c0]", load, 0x1037844380, RAM
+0, 0xffff8000080f9588, 0xeb00003f, "cmp x1, x0"
+0, 0xffff8000080f958c, 0x54fffd49, "b.ls #0xffff8000080f9534"
+0, 0xffff8000080f9590, 0xcb000021, "sub x1, x1, x0"
+0, 0xffff8000080f9594, 0xd2e00400, "mov x0, #0x20000000000000"
+0, 0xffff8000080f9598, 0xeb00003f, "cmp x1, x0"
+0, 0xffff8000080f959c, 0x54fffcc9, "b.ls #0xffff8000080f9534"
+0, 0xffff8000080f9534, 0xf9402a60, "ldr x0, [x19, #0x50]", load, 0x100158250, RAM
+0, 0xffff8000080f9538, 0xcb000281, "sub x1, x20, x0"
+0, 0xffff8000080f953c, 0xf100003f, "cmp x1, #0"
+0, 0xffff8000080f9540, 0x9a80c294, "csel x20, x20, x0, gt"
+0, 0xffff8000080f9544, 0xf9002a74, "str x20, [x19, #0x50]", store, 0x100158250, RAM
+0, 0xffff8000080f9548, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8d90, RAM
+0, 0xffff8000080f954c, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8da0, RAM
+0, 0xffff8000080f9550, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8d80, RAM
+0, 0xffff8000080f9554, 0xd50323bf, "autiasp "
+0, 0xffff8000080f9558, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080f955c, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f9560, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f9564, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f9568, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f956c, 0xd65f03c0, "ret "
+0, 0xffff8000080fe164, 0x17ffffa6, "b #0xffff8000080fdffc"
+0, 0xffff8000080fdffc, 0x36300055, "tbz w21, #6, #0xffff8000080fe004"
+0, 0xffff8000080fe004, 0xd503201f, "nop "
+0, 0xffff8000080fe008, 0xd503201f, "nop "
+0, 0xffff8000080fe00c, 0xd503201f, "nop "
+0, 0xffff8000080fe010, 0xd503201f, "nop "
+0, 0xffff8000080fe014, 0xd503201f, "nop "
+0, 0xffff8000080fe018, 0xd503201f, "nop "
+0, 0xffff8000080fe01c, 0xd503201f, "nop "
+0, 0xffff8000080fe020, 0xd503201f, "nop "
+0, 0xffff8000080fe024, 0xf9402a61, "ldr x1, [x19, #0x50]", load, 0x100158250, RAM
+0, 0xffff8000080fe028, 0xaa1403e0, "mov x0, x20"
+0, 0xffff8000080fe02c, 0x97ffe07e, "bl #0xffff8000080f6224"
+0, 0xffff8000080f6224, 0xd503233f, "paciasp "
+0, 0xffff8000080f6228, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8d90, RAM
+0, 0xffff8000080f622c, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080f6230, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8da0, RAM
+0, 0xffff8000080f6234, 0xaa0003f4, "mov x20, x0"
+0, 0xffff8000080f6238, 0xaa0103f3, "mov x19, x1"
+0, 0xffff8000080f623c, 0x90009440, "adrp x0, #0xffff80000937e000"
+0, 0xffff8000080f6240, 0xf9401682, "ldr x2, [x20, #0x28]", load, 0x1037843a68, RAM
+0, 0xffff8000080f6244, 0xb945d801, "ldr w1, [x0, #0x5d8]", load, 0xfd457e5d8, RAM
+0, 0xffff8000080f6248, 0xeb020273, "subs x19, x19, x2"
+0, 0xffff8000080f624c, 0xda935673, "cneg x19, x19, mi"
+0, 0xffff8000080f6250, 0xb010421, "add w1, w1, w1, lsl #1"
+0, 0xffff8000080f6254, 0xeb01027f, "cmp x19, x1"
+0, 0xffff8000080f6258, 0x5400004d, "b.le #0xffff8000080f6260"
+0, 0xffff8000080f6260, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8da0, RAM
+0, 0xffff8000080f6264, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8d90, RAM
+0, 0xffff8000080f6268, 0xd50323bf, "autiasp "
+0, 0xffff8000080f626c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080f6270, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f6274, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f6278, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f627c, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f6280, 0xd65f03c0, "ret "
+0, 0xffff8000080fe030, 0xeb1302df, "cmp x22, x19"
+0, 0xffff8000080fe034, 0x54000300, "b.eq #0xffff8000080fe094"
+0, 0xffff8000080fe038, 0xf9402282, "ldr x2, [x20, #0x40]", load, 0x1037843a80, RAM
+0, 0xffff8000080fe03c, 0x91004260, "add x0, x19, #0x10"
+0, 0xffff8000080fe040, 0x91010281, "add x1, x20, #0x40"
+0, 0xffff8000080fe044, 0xb4000922, "cbz x2, #0xffff8000080fe168"
+0, 0xffff8000080fe168, 0xf9000a7f, "str xzr, [x19, #0x10]", store, 0x100158210, RAM
+0, 0xffff8000080fe16c, 0xa900fc1f, "stp xzr, xzr, [x0, #8]", store, 0x100158218, RAM
+0, 0xffff8000080fe170, 0xf9002280, "str x0, [x20, #0x40]", store, 0x1037843a80, RAM
+0, 0xffff8000080fe174, 0xf9002680, "str x0, [x20, #0x48]", store, 0x1037843a88, RAM
+0, 0xffff8000080fe178, 0x942480d2, "bl #0xffff800008a1e4c0"
+0, 0xffff800008a1e4c0, 0xd503233f, "paciasp "
+0, 0xffff800008a1e4c4, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8d90, RAM
+0, 0xffff800008a1e4c8, 0x910003fd, "mov x29, sp"
+0, 0xffff800008a1e4cc, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8da0, RAM
+0, 0xffff800008a1e4d0, 0xaa0003f3, "mov x19, x0"
+0, 0xffff800008a1e4d4, 0xaa0103f4, "mov x20, x1"
+0, 0xffff800008a1e4d8, 0xf9400262, "ldr x2, [x19]", load, 0x100158210, RAM
+0, 0xffff800008a1e4dc, 0xb4000922, "cbz x2, #0xffff800008a1e600"
+0, 0xffff800008a1e600, 0xd2800020, "mov x0, #1"
+0, 0xffff800008a1e604, 0xf9000260, "str x0, [x19]", store, 0x100158210, RAM
+0, 0xffff800008a1e608, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8da0, RAM
+0, 0xffff800008a1e60c, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8d90, RAM
+0, 0xffff800008a1e610, 0xd50323bf, "autiasp "
+0, 0xffff800008a1e614, 0xd2800000, "mov x0, #0"
+0, 0xffff800008a1e618, 0xd2800001, "mov x1, #0"
+0, 0xffff800008a1e61c, 0xd2800002, "mov x2, #0"
+0, 0xffff800008a1e620, 0xd2800003, "mov x3, #0"
+0, 0xffff800008a1e624, 0xd2800010, "mov x16, #0"
+0, 0xffff800008a1e628, 0xd2800011, "mov x17, #0"
+0, 0xffff800008a1e62c, 0xd65f03c0, "ret "
+0, 0xffff8000080fe17c, 0x17ffffc6, "b #0xffff8000080fe094"
+0, 0xffff8000080fe094, 0x52800020, "mov w0, #1"
+0, 0xffff8000080fe098, 0xb9003a60, "str w0, [x19, #0x38]", store, 0x100158238, RAM
+0, 0xffff8000080fe09c, 0xb9401280, "ldr w0, [x20, #0x10]", load, 0x1037843a50, RAM
+0, 0xffff8000080fe0a0, 0x7100041f, "cmp w0, #1"
+0, 0xffff8000080fe0a4, 0x540006e0, "b.eq #0xffff8000080fe180"
+0, 0xffff8000080fe180, 0xd503201f, "nop "
+0, 0xffff8000080fe184, 0xd503201f, "nop "
+0, 0xffff8000080fe188, 0xaa1403e0, "mov x0, x20"
+0, 0xffff8000080fe18c, 0x97ffe181, "bl #0xffff8000080f6790"
+0, 0xffff8000080f6790, 0xd503233f, "paciasp "
+0, 0xffff8000080f6794, 0xa9bc7bfd, "stp x29, x30, [sp, #-0x40]!", store, 0x1000b8d70, RAM
+0, 0xffff8000080f6798, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080f679c, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8d80, RAM
+0, 0xffff8000080f67a0, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080f67a4, 0xb9413a60, "ldr w0, [x19, #0x138]", load, 0x1037843b78, RAM
+0, 0xffff8000080f67a8, 0xf9409a74, "ldr x20, [x19, #0x130]", load, 0x1037843b70, RAM
+0, 0xffff8000080f67ac, 0x350004a0, "cbnz w0, #0xffff8000080f6840"
+0, 0xffff8000080f6840, 0xf944aa80, "ldr x0, [x20, #0x950]", load, 0x1037844310, RAM
+0, 0xffff8000080f6844, 0x91250294, "add x20, x20, #0x940"
+0, 0xffff8000080f6848, 0xeb14001f, "cmp x0, x20"
+0, 0xffff8000080f684c, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8d80, RAM
+0, 0xffff8000080f6850, 0x1a9f17e0, "cset w0, eq"
+0, 0xffff8000080f6854, 0xa8c47bfd, "ldp x29, x30, [sp], #0x40", load, 0x1000b8d70, RAM
+0, 0xffff8000080f6858, 0xd50323bf, "autiasp "
+0, 0xffff8000080f685c, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f6860, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f6864, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f6868, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f686c, 0xd65f03c0, "ret "
+0, 0xffff8000080fe190, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8dc0, RAM
+0, 0xffff8000080fe194, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8dd0, RAM
+0, 0xffff8000080fe198, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1000b8de0, RAM
+0, 0xffff8000080fe19c, 0xa8c57bfd, "ldp x29, x30, [sp], #0x50", load, 0x1000b8db0, RAM
+0, 0xffff8000080fe1a0, 0xd50323bf, "autiasp "
+0, 0xffff8000080fe1a4, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080fe1a8, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080fe1ac, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080fe1b0, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080fe1b4, 0xd2800004, "mov x4, #0"
+0, 0xffff8000080fe1b8, 0xd2800005, "mov x5, #0"
+0, 0xffff8000080fe1bc, 0xd2800006, "mov x6, #0"
+0, 0xffff8000080fe1c0, 0xd2800007, "mov x7, #0"
+0, 0xffff8000080fe1c4, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080fe1c8, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080fe1cc, 0xd65f03c0, "ret "
+0, 0xffff8000080ff9e4, 0xb9415a80, "ldr w0, [x20, #0x158]", load, 0x1037843b98, RAM
+0, 0xffff8000080ff9e8, 0xb9401683, "ldr w3, [x20, #0x14]", load, 0x1037843a54, RAM
+0, 0xffff8000080ff9ec, 0xb9401e81, "ldr w1, [x20, #0x1c]", load, 0x1037843a5c, RAM
+0, 0xffff8000080ff9f0, 0x7100001f, "cmp w0, #0"
+0, 0xffff8000080ff9f4, 0x11000463, "add w3, w3, #1"
+0, 0xffff8000080ff9f8, 0xb9001683, "str w3, [x20, #0x14]", store, 0x1037843a54, RAM
+0, 0xffff8000080ff9fc, 0xb150021, "add w1, w1, w21"
+0, 0xffff8000080ffa00, 0x1a98d2b5, "csel w21, w21, w24, le"
+0, 0xffff8000080ffa04, 0xb9001e81, "str w1, [x20, #0x1c]", store, 0x1037843a5c, RAM
+0, 0xffff8000080ffa08, 0xd503201f, "nop "
+0, 0xffff8000080ffa0c, 0xf9403a73, "ldr x19, [x19, #0x70]", load, 0x100158270, RAM
+0, 0xffff8000080ffa10, 0x52800022, "mov w2, #1"
+0, 0xffff8000080ffa14, 0xb4000393, "cbz x19, #0xffff8000080ffa84"
+0, 0xffff8000080ffa84, 0xb94006d3, "ldr w19, [x22, #4]", load, 0x10378439c4, RAM
+0, 0xffff8000080ffa88, 0x11000660, "add w0, w19, #1"
+0, 0xffff8000080ffa8c, 0xb90006c0, "str w0, [x22, #4]", store, 0x10378439c4, RAM
+0, 0xffff8000080ffa90, 0xd503201f, "nop "
+0, 0xffff8000080ffa94, 0x7100067f, "cmp w19, #1"
+0, 0xffff8000080ffa98, 0x540011e9, "b.ls #0xffff8000080ffcd4"
+0, 0xffff8000080ffcd4, 0xb94006c0, "ldr w0, [x22, #4]", load, 0x10378439c4, RAM
+0, 0xffff8000080ffcd8, 0x7100041f, "cmp w0, #1"
+0, 0xffff8000080ffcdc, 0x54ffee09, "b.ls #0xffff8000080ffa9c"
+0, 0xffff8000080ffa9c, 0xd503201f, "nop "
+0, 0xffff8000080ffaa0, 0x36000457, "tbz w23, #0, #0xffff8000080ffb28"
+0, 0xffff8000080ffaa4, 0xf94502c2, "ldr x2, [x22, #0xa00]", load, 0x10378443c0, RAM
+0, 0xffff8000080ffaa8, 0xb9441c40, "ldr w0, [x2, #0x41c]", load, 0x10095041c, RAM
+0, 0xffff8000080ffaac, 0x350003e0, "cbnz w0, #0xffff8000080ffb28"
+0, 0xffff8000080ffb28, 0xf944aac1, "ldr x1, [x22, #0x950]", load, 0x1037844310, RAM
+0, 0xffff8000080ffb2c, 0x912502c0, "add x0, x22, #0x940"
+0, 0xffff8000080ffb30, 0xeb00003f, "cmp x1, x0"
+0, 0xffff8000080ffb34, 0x540006c1, "b.ne #0xffff8000080ffc0c"
+0, 0xffff8000080ffb38, 0xaa1603e0, "mov x0, x22"
+0, 0xffff8000080ffb3c, 0x97ffe17a, "bl #0xffff8000080f8124"
+0, 0xffff8000080f8124, 0xd503233f, "paciasp "
+0, 0xffff8000080f8128, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8de0, RAM
+0, 0xffff8000080f812c, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080f8130, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1000b8df0, RAM
+0, 0xffff8000080f8134, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080f8138, 0xd503201f, "nop "
+0, 0xffff8000080f813c, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1000b8df0, RAM
+0, 0xffff8000080f8140, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8de0, RAM
+0, 0xffff8000080f8144, 0xd50323bf, "autiasp "
+0, 0xffff8000080f8148, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080f814c, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f8150, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f8154, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f8158, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f815c, 0xd65f03c0, "ret "
+0, 0xffff8000080ffb40, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8e10, RAM
+0, 0xffff8000080ffb44, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8e20, RAM
+0, 0xffff8000080ffb48, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1000b8e30, RAM
+0, 0xffff8000080ffb4c, 0xa8c47bfd, "ldp x29, x30, [sp], #0x40", load, 0x1000b8e00, RAM
+0, 0xffff8000080ffb50, 0xd50323bf, "autiasp "
+0, 0xffff8000080ffb54, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ffb58, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080ffb5c, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080ffb60, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080ffb64, 0xd2800004, "mov x4, #0"
+0, 0xffff8000080ffb68, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ffb6c, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ffb70, 0xd65f03c0, "ret "
+0, 0xffff8000080ead10, 0xd503201f, "nop "
+0, 0xffff8000080ead14, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8e50, RAM
+0, 0xffff8000080ead18, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8e60, RAM
+0, 0xffff8000080ead1c, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8e40, RAM
+0, 0xffff8000080ead20, 0xd50323bf, "autiasp "
+0, 0xffff8000080ead24, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ead28, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080ead2c, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080ead30, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080ead34, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ead38, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ead3c, 0xd65f03c0, "ret "
+0, 0xffff8000080ed9ac, 0x52800020, "mov w0, #1"
+0, 0xffff8000080ed9b0, 0xb9006a60, "str w0, [x19, #0x68]", store, 0x1059d12a8, RAM
+0, 0xffff8000080ed9b4, 0xaa1603e3, "mov x3, x22"
+0, 0xffff8000080ed9b8, 0x2a1503e2, "mov w2, w21"
+0, 0xffff8000080ed9bc, 0xaa1303e1, "mov x1, x19"
+0, 0xffff8000080ed9c0, 0xaa1403e0, "mov x0, x20"
+0, 0xffff8000080ed9c4, 0x97ffff6f, "bl #0xffff8000080ed780"
+0, 0xffff8000080ed780, 0xd503233f, "paciasp "
+0, 0xffff8000080ed784, 0xa9bd7bfd, "stp x29, x30, [sp, #-0x30]!", store, 0x1000b8e40, RAM
+0, 0xffff8000080ed788, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080ed78c, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8e50, RAM
+0, 0xffff8000080ed790, 0xaa0103f4, "mov x20, x1"
+0, 0xffff8000080ed794, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080ed798, 0xa9025bf5, "stp x21, x22, [sp, #0x20]", store, 0x1000b8e60, RAM
+0, 0xffff8000080ed79c, 0x2a0203f5, "mov w21, w2"
+0, 0xffff8000080ed7a0, 0xaa0303f6, "mov x22, x3"
+0, 0xffff8000080ed7a4, 0x2a1503e2, "mov w2, w21"
+0, 0xffff8000080ed7a8, 0xaa1403e1, "mov x1, x20"
+0, 0xffff8000080ed7ac, 0xaa1303e0, "mov x0, x19"
+0, 0xffff8000080ed7b0, 0x97ffffc4, "bl #0xffff8000080ed6c0"
+0, 0xffff8000080ed6c0, 0xd503233f, "paciasp "
+0, 0xffff8000080ed6c4, 0xa9bd7bfd, "stp x29, x30, [sp, #-0x30]!", store, 0x1000b8e10, RAM
+0, 0xffff8000080ed6c8, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080ed6cc, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1000b8e20, RAM
+0, 0xffff8000080ed6d0, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080ed6d4, 0xaa0103f4, "mov x20, x1"
+0, 0xffff8000080ed6d8, 0xf90013f5, "str x21, [sp, #0x20]", store, 0x1000b8e30, RAM
+0, 0xffff8000080ed6dc, 0x2a0203f5, "mov w21, w2"
+0, 0xffff8000080ed6e0, 0xf944b260, "ldr x0, [x19, #0x960]", load, 0x1037844320, RAM
+0, 0xffff8000080ed6e4, 0xf9414a81, "ldr x1, [x20, #0x290]", load, 0x1059d14d0, RAM
+0, 0xffff8000080ed6e8, 0xf9414802, "ldr x2, [x0, #0x290]", load, 0xfd455aed0, RAM
+0, 0xffff8000080ed6ec, 0xeb02003f, "cmp x1, x2"
+0, 0xffff8000080ed6f0, 0x540003a0, "b.eq #0xffff8000080ed764"
+0, 0xffff8000080ed6f4, 0x540001e3, "b.lo #0xffff8000080ed730"
+0, 0xffff8000080ed730, 0xaa1303e0, "mov x0, x19"
+0, 0xffff8000080ed734, 0x97fff8c3, "bl #0xffff8000080eba40"
+0, 0xffff8000080eba40, 0xd503233f, "paciasp "
+0, 0xffff8000080eba44, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8df0, RAM
+0, 0xffff8000080eba48, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080eba4c, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1000b8e00, RAM
+0, 0xffff8000080eba50, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080eba54, 0xf944b262, "ldr x2, [x19, #0x960]", load, 0x1037844320, RAM
+0, 0xffff8000080eba58, 0xf9400040, "ldr x0, [x2]", load, 0xfd455ac40, RAM
+0, 0xffff8000080eba5c, 0x721f001f, "tst w0, #2"
+0, 0xffff8000080eba60, 0x54000181, "b.ne #0xffff8000080eba90"
+0, 0xffff8000080eba64, 0xd0008621, "adrp x1, #0xffff8000091b1000"
+0, 0xffff8000080eba68, 0xb94a7a60, "ldr w0, [x19, #0xa78]", load, 0x1037844438, RAM
+0, 0xffff8000080eba6c, 0x91002021, "add x1, x1, #8"
+0, 0xffff8000080eba70, 0xd538d083, "mrs x3, tpidr_el1"
+0, 0xffff8000080eba74, 0xb8636821, "ldr w1, [x1, x3]", load, 0x1037831008, RAM
+0, 0xffff8000080eba78, 0x6b00003f, "cmp w1, w0"
+0, 0xffff8000080eba7c, 0x540002c0, "b.eq #0xffff8000080ebad4"
+0, 0xffff8000080ebad4, 0xd503201f, "nop "
+0, 0xffff8000080ebad8, 0xd2800040, "mov x0, #2"
+0, 0xffff8000080ebadc, 0xf820305f, "stset x0, [x2]", load, 0xfd455ac40, RAM, store, 0xfd455ac40, RAM
+0, 0xffff8000080ebae0, 0xd5384100, "mrs x0, sp_el0"
+0, 0xffff8000080ebae4, 0xb9000c1f, "str wzr, [x0, #0xc]", store, 0xfd455ac4c, RAM
+0, 0xffff8000080ebae8, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1000b8e00, RAM
+0, 0xffff8000080ebaec, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8df0, RAM
+0, 0xffff8000080ebaf0, 0xd50323bf, "autiasp "
+0, 0xffff8000080ebaf4, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ebaf8, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080ebafc, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080ebb00, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080ebb04, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ebb08, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ebb0c, 0xd65f03c0, "ret "
+0, 0xffff8000080ed738, 0xf944b260, "ldr x0, [x19, #0x960]", load, 0x1037844320, RAM
+0, 0xffff8000080ed73c, 0xb9406801, "ldr w1, [x0, #0x68]", load, 0xfd455aca8, RAM
+0, 0xffff8000080ed740, 0x7100043f, "cmp w1, #1"
+0, 0xffff8000080ed744, 0x54fffe01, "b.ne #0xffff8000080ed704"
+0, 0xffff8000080ed748, 0xf9400000, "ldr x0, [x0]", load, 0xfd455ac40, RAM
+0, 0xffff8000080ed74c, 0x721f001f, "tst w0, #2"
+0, 0xffff8000080ed750, 0x54fffda0, "b.eq #0xffff8000080ed704"
+0, 0xffff8000080ed754, 0xb9498a60, "ldr w0, [x19, #0x988]", load, 0x1037844348, RAM
+0, 0xffff8000080ed758, 0x32000000, "orr w0, w0, #1"
+0, 0xffff8000080ed75c, 0xb9098a60, "str w0, [x19, #0x988]", store, 0x1037844348, RAM
+0, 0xffff8000080ed760, 0x17ffffe9, "b #0xffff8000080ed704"
+0, 0xffff8000080ed704, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8e20, RAM
+0, 0xffff8000080ed708, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1000b8e30, RAM
+0, 0xffff8000080ed70c, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8e10, RAM
+0, 0xffff8000080ed710, 0xd50323bf, "autiasp "
+0, 0xffff8000080ed714, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ed718, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080ed71c, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080ed720, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080ed724, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ed728, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ed72c, 0xd65f03c0, "ret "
+0, 0xffff8000080ed7b4, 0xb9001a9f, "str wzr, [x20, #0x18]", store, 0x1059d1258, RAM
+0, 0xffff8000080ed7b8, 0xd503201f, "nop "
+0, 0xffff8000080ed7bc, 0xf9414a80, "ldr x0, [x20, #0x290]", load, 0x1059d14d0, RAM
+0, 0xffff8000080ed7c0, 0xf9403002, "ldr x2, [x0, #0x60]", load, 0xfd3ecc010, RAM
+0, 0xffff8000080ed7c4, 0xb4000162, "cbz x2, #0xffff8000080ed7f0"
+0, 0xffff8000080ed7f0, 0xf945a260, "ldr x0, [x19, #0xb40]", load, 0x1037844500, RAM
+0, 0xffff8000080ed7f4, 0xb50004c0, "cbnz x0, #0xffff8000080ed88c"
+0, 0xffff8000080ed88c, 0xb9498a61, "ldr w1, [x19, #0x988]", load, 0x1037844348, RAM
+0, 0xffff8000080ed890, 0x7100043f, "cmp w1, #1"
+0, 0xffff8000080ed894, 0x54000429, "b.ls #0xffff8000080ed918"
+0, 0xffff8000080ed898, 0xf944ca61, "ldr x1, [x19, #0x990]", load, 0x1037844350, RAM
+0, 0xffff8000080ed89c, 0xf945a663, "ldr x3, [x19, #0xb48]", load, 0x1037844508, RAM
+0, 0xffff8000080ed8a0, 0xf945b262, "ldr x2, [x19, #0xb60]", load, 0x1037844520, RAM
+0, 0xffff8000080ed8a4, 0xcb030021, "sub x1, x1, x3"
+0, 0xffff8000080ed8a8, 0xeb000021, "subs x1, x1, x0"
+0, 0xffff8000080ed8ac, 0x91001c20, "add x0, x1, #7"
+0, 0xffff8000080ed8b0, 0x9a814000, "csel x0, x0, x1, mi"
+0, 0xffff8000080ed8b4, 0xd37ff841, "lsl x1, x2, #1"
+0, 0xffff8000080ed8b8, 0x8b800c60, "add x0, x3, x0, asr #3"
+0, 0xffff8000080ed8bc, 0xeb00003f, "cmp x1, x0"
+0, 0xffff8000080ed8c0, 0x54000263, "b.lo #0xffff8000080ed90c"
+0, 0xffff8000080ed8c4, 0xf905a660, "str x0, [x19, #0xb48]", store, 0x1037844508, RAM
+0, 0xffff8000080ed8c8, 0xd00092c1, "adrp x1, #0xffff800009347000"
+0, 0xffff8000080ed8cc, 0xd341fc00, "lsr x0, x0, #1"
+0, 0xffff8000080ed8d0, 0xf905a27f, "str xzr, [x19, #0xb40]", store, 0x1037844500, RAM
+0, 0xffff8000080ed8d4, 0xf944e021, "ldr x1, [x1, #0x9c0]", load, 0xfd45479c0, RAM
+0, 0xffff8000080ed8d8, 0xf905aa61, "str x1, [x19, #0xb50]", store, 0x1037844510, RAM
+0, 0xffff8000080ed8dc, 0xf905ae60, "str x0, [x19, #0xb58]", store, 0x1037844518, RAM
+0, 0xffff8000080ed8e0, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8e50, RAM
+0, 0xffff8000080ed8e4, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8e60, RAM
+0, 0xffff8000080ed8e8, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8e40, RAM
+0, 0xffff8000080ed8ec, 0xd50323bf, "autiasp "
+0, 0xffff8000080ed8f0, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ed8f4, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080ed8f8, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080ed8fc, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080ed900, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ed904, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ed908, 0xd65f03c0, "ret "
+0, 0xffff8000080ed9c8, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8e80, RAM
+0, 0xffff8000080ed9cc, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8e90, RAM
+0, 0xffff8000080ed9d0, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8e70, RAM
+0, 0xffff8000080ed9d4, 0xd50323bf, "autiasp "
+0, 0xffff8000080ed9d8, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ed9dc, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080ed9e0, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080ed9e4, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080ed9e8, 0xd2800004, "mov x4, #0"
+0, 0xffff8000080ed9ec, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ed9f0, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ed9f4, 0xd65f03c0, "ret "
+0, 0xffff8000080f062c, 0xb100e29f, "cmn x20, #0x38"
+0, 0xffff8000080f0630, 0x54fffe01, "b.ne #0xffff8000080f05f0"
+0, 0xffff8000080f0634, 0xb9498aa0, "ldr w0, [x21, #0x988]", load, 0x1037844348, RAM
+0, 0xffff8000080f0638, 0x7100081f, "cmp w0, #2"
+0, 0xffff8000080f063c, 0x54000568, "b.hi #0xffff8000080f06e8"
+0, 0xffff8000080f06e8, 0x52800080, "mov w0, #4"
+0, 0xffff8000080f06ec, 0xb90043e0, "str w0, [sp, #0x40]", store, 0x1000b8ee0, RAM
+0, 0xffff8000080f06f0, 0x17ffffd4, "b #0xffff8000080f0640"
+0, 0xffff8000080f0640, 0xf9401fe1, "ldr x1, [sp, #0x38]", load, 0x1000b8ed8, RAM
+0, 0xffff8000080f0644, 0xaa1503e0, "mov x0, x21"
+0, 0xffff8000080f0648, 0x97ffe6aa, "bl #0xffff8000080ea0f0"
+0, 0xffff8000080ea0f0, 0xd503233f, "paciasp "
+0, 0xffff8000080ea0f4, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8e80, RAM
+0, 0xffff8000080ea0f8, 0x910003fd, "mov x29, sp"
+0, 0xffff8000080ea0fc, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1000b8e90, RAM
+0, 0xffff8000080ea100, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000080ea104, 0xd503201f, "nop "
+0, 0xffff8000080ea108, 0x52800000, "mov w0, #0"
+0, 0xffff8000080ea10c, 0x89ffe60, "stlrb w0, [x19]", store, 0x10378439c0, RAM
+0, 0xffff8000080ea110, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1000b8e90, RAM
+0, 0xffff8000080ea114, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8e80, RAM
+0, 0xffff8000080ea118, 0xd50323bf, "autiasp "
+0, 0xffff8000080ea11c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080ea120, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080ea124, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080ea128, 0xd65f03c0, "ret "
+0, 0xffff8000080f064c, 0xaa0103e0, "mov x0, x1"
+0, 0xffff8000080f0650, 0x97ffc63c, "bl #0xffff8000080e1f40"
+0, 0xffff8000080e1f40, 0xd503233f, "paciasp "
+0, 0xffff8000080e1f44, 0xd51b4220, "msr daif, x0"
+0, 0xffff8000080e1f48, 0xd50323bf, "autiasp "
+0, 0xffff8000080e1f4c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080e1f50, 0xd65f03c0, "ret "
+0, 0xffff8000080f0654, 0xd5384100, "mrs x0, sp_el0"
+0, 0xffff8000080f0658, 0xf94027e2, "ldr x2, [sp, #0x48]", load, 0x1000b8ee8, RAM
+0, 0xffff8000080f065c, 0xf943b401, "ldr x1, [x0, #0x768]", load, 0xfd455b3a8, RAM
+0, 0xffff8000080f0660, 0xeb010042, "subs x2, x2, x1"
+0, 0xffff8000080f0664, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f0668, 0x54000601, "b.ne #0xffff8000080f0728"
+0, 0xffff8000080f066c, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8eb0, RAM
+0, 0xffff8000080f0670, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1000b8ec0, RAM
+0, 0xffff8000080f0674, 0xa8c57bfd, "ldp x29, x30, [sp], #0x50", load, 0x1000b8ea0, RAM
+0, 0xffff8000080f0678, 0xd50323bf, "autiasp "
+0, 0xffff8000080f067c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000080f0680, 0xd2800001, "mov x1, #0"
+0, 0xffff8000080f0684, 0xd2800002, "mov x2, #0"
+0, 0xffff8000080f0688, 0xd2800003, "mov x3, #0"
+0, 0xffff8000080f068c, 0xd2800010, "mov x16, #0"
+0, 0xffff8000080f0690, 0xd2800011, "mov x17, #0"
+0, 0xffff8000080f0694, 0xd65f03c0, "ret "
+0, 0xffff8000081a35dc, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8f10, RAM
+0, 0xffff8000081a35e0, 0xf9401bf7, "ldr x23, [sp, #0x30]", load, 0x1000b8f20, RAM
+0, 0xffff8000081a35e4, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8f00, RAM
+0, 0xffff8000081a35e8, 0xa8c47bfd, "ldp x29, x30, [sp], #0x40", load, 0x1000b8ef0, RAM
+0, 0xffff8000081a35ec, 0xd50323bf, "autiasp "
+0, 0xffff8000081a35f0, 0xd2800000, "mov x0, #0"
+0, 0xffff8000081a35f4, 0xd2800001, "mov x1, #0"
+0, 0xffff8000081a35f8, 0xd2800002, "mov x2, #0"
+0, 0xffff8000081a35fc, 0xd2800003, "mov x3, #0"
+0, 0xffff8000081a3600, 0xd2800004, "mov x4, #0"
+0, 0xffff8000081a3604, 0xd2800010, "mov x16, #0"
+0, 0xffff8000081a3608, 0xd2800011, "mov x17, #0"
+0, 0xffff8000081a360c, 0xd65f03c0, "ret "
+0, 0xffff8000081a3974, 0xa8c17bfd, "ldp x29, x30, [sp], #0x10", load, 0x1000b8f30, RAM
+0, 0xffff8000081a3978, 0xd50323bf, "autiasp "
+0, 0xffff8000081a397c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000081a3980, 0xd2800010, "mov x16, #0"
+0, 0xffff8000081a3984, 0xd2800011, "mov x17, #0"
+0, 0xffff8000081a3988, 0xd65f03c0, "ret "
+0, 0xffff80000802b220, 0xd503201f, "nop "
+0, 0xffff80000802b224, 0x17fffff0, "b #0xffff80000802b1e4"
+0, 0xffff80000802b1e4, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8f50, RAM
+0, 0xffff80000802b1e8, 0x52800020, "mov w0, #1"
+0, 0xffff80000802b1ec, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8f60, RAM
+0, 0xffff80000802b1f0, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1000b8f70, RAM
+0, 0xffff80000802b1f4, 0xa8c57bfd, "ldp x29, x30, [sp], #0x50", load, 0x1000b8f40, RAM
+0, 0xffff80000802b1f8, 0xd50323bf, "autiasp "
+0, 0xffff80000802b1fc, 0xd2800001, "mov x1, #0"
+0, 0xffff80000802b200, 0xd2800002, "mov x2, #0"
+0, 0xffff80000802b204, 0xd2800003, "mov x3, #0"
+0, 0xffff80000802b208, 0xd2800010, "mov x16, #0"
+0, 0xffff80000802b20c, 0xd2800011, "mov x17, #0"
+0, 0xffff80000802b210, 0xd65f03c0, "ret "
+0, 0xffff800008146248, 0x2a0003e3, "mov w3, w0"
+0, 0xffff80000814624c, 0xd503201f, "nop "
+0, 0xffff800008146250, 0xf94026c1, "ldr x1, [x22, #0x48]", load, 0xfd46180a0, RAM
+0, 0xffff800008146254, 0xb4000061, "cbz x1, #0xffff800008146260"
+0, 0xffff800008146258, 0x91108260, "add x0, x19, #0x420"
+0, 0xffff80000814625c, 0xd63f0020, "blr x1"
+0, 0xffff8000085f9b50, 0xd503233f, "paciasp "
+0, 0xffff8000085f9b54, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1000b8f70, RAM
+0, 0xffff8000085f9b58, 0x910003fd, "mov x29, sp"
+0, 0xffff8000085f9b5c, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1000b8f80, RAM
+0, 0xffff8000085f9b60, 0xaa0003f3, "mov x19, x0"
+0, 0xffff8000085f9b64, 0xb9400a60, "ldr w0, [x19, #8]", load, 0x100015c28, RAM
+0, 0xffff8000085f9b68, 0xd518cc20, "msr icc_eoir1_el1, x0"
+0, 0xffff8000085f9b6c, 0xd5033fdf, "isb "
+0, 0xffff8000085f9b70, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1000b8f80, RAM
+0, 0xffff8000085f9b74, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8f70, RAM
+0, 0xffff8000085f9b78, 0xd50323bf, "autiasp "
+0, 0xffff8000085f9b7c, 0xd2800000, "mov x0, #0"
+0, 0xffff8000085f9b80, 0xd2800010, "mov x16, #0"
+0, 0xffff8000085f9b84, 0xd2800011, "mov x17, #0"
+0, 0xffff8000085f9b88, 0xd65f03c0, "ret "
+0, 0xffff800008146260, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8fa0, RAM
+0, 0xffff800008146264, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1000b8fb0, RAM
+0, 0xffff800008146268, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1000b8f90, RAM
+0, 0xffff80000814626c, 0xd50323bf, "autiasp "
+0, 0xffff800008146270, 0xd2800000, "mov x0, #0"
+0, 0xffff800008146274, 0xd2800001, "mov x1, #0"
+0, 0xffff800008146278, 0xd2800002, "mov x2, #0"
+0, 0xffff80000814627c, 0xd2800003, "mov x3, #0"
+0, 0xffff800008146280, 0xd2800004, "mov x4, #0"
+0, 0xffff800008146284, 0xd2800005, "mov x5, #0"
+0, 0xffff800008146288, 0xd2800010, "mov x16, #0"
+0, 0xffff80000814628c, 0xd2800011, "mov x17, #0"
+0, 0xffff800008146290, 0xd65f03c0, "ret "
+0, 0xffff80000813c48c, 0x52800000, "mov w0, #0"
+0, 0xffff80000813c490, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8fd0, RAM
+0, 0xffff80000813c494, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8fc0, RAM
+0, 0xffff80000813c498, 0xd50323bf, "autiasp "
+0, 0xffff80000813c49c, 0xd2800001, "mov x1, #0"
+0, 0xffff80000813c4a0, 0xd2800002, "mov x2, #0"
+0, 0xffff80000813c4a4, 0xd2800010, "mov x16, #0"
+0, 0xffff80000813c4a8, 0xd2800011, "mov x17, #0"
+0, 0xffff80000813c4ac, 0xd65f03c0, "ret "
+0, 0xffff800008a50d20, 0x34000180, "cbz w0, #0xffff800008a50d50"
+0, 0xffff800008a50d50, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1000b8ff0, RAM
+0, 0xffff800008a50d54, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1000b8fe0, RAM
+0, 0xffff800008a50d58, 0xd50323bf, "autiasp "
+0, 0xffff800008a50d5c, 0xd2800000, "mov x0, #0"
+0, 0xffff800008a50d60, 0xd2800001, "mov x1, #0"
+0, 0xffff800008a50d64, 0xd2800002, "mov x2, #0"
+0, 0xffff800008a50d68, 0xd2800003, "mov x3, #0"
+0, 0xffff800008a50d6c, 0xd2800010, "mov x16, #0"
+0, 0xffff800008a50d70, 0xd2800011, "mov x17, #0"
+0, 0xffff800008a50d74, 0xd65f03c0, "ret "
+0, 0xffff800008016dc0, 0x910003bf, "mov sp, x29"
+0, 0xffff800008016dc4, 0xa8c17bfd, "ldp x29, x30, [sp], #0x10", load, 0xfd4543b80, RAM
+0, 0xffff800008016dc8, 0xd65f03c0, "ret "
+0, 0xffff800008019dd4, 0x17ffffec, "b #0xffff800008019d84"
+0, 0xffff800008019d84, 0xd538d081, "mrs x1, tpidr_el1"
+0, 0xffff800008019d88, 0xaa1303e0, "mov x0, x19"
+1, 0xffff80000817b398, 0x540001a8, "b.hi #0xffff80000817b3cc"
+1, 0xffff80000817b39c, 0x91000674, "add x20, x19, #1"
+1, 0xffff80000817b3a0, 0x12001680, "and w0, w20, #0x3f"
+1, 0xffff80000817b3a4, 0xf90002b4, "str x20, [x21]", store, 0x1041a5808, RAM
+1, 0xffff80000817b3a8, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5780, RAM
+1, 0xffff80000817b3ac, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5790, RAM
+1, 0xffff80000817b3b0, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5770, RAM
+1, 0xffff80000817b3b4, 0xd50323bf, "autiasp "
+1, 0xffff80000817b3b8, 0xd2800001, "mov x1, #0"
+1, 0xffff80000817b3bc, 0xd2800002, "mov x2, #0"
+1, 0xffff80000817b3c0, 0xd2800010, "mov x16, #0"
+1, 0xffff80000817b3c4, 0xd2800011, "mov x17, #0"
+1, 0xffff80000817b3c8, 0xd65f03c0, "ret "
+1, 0xffff80000817e5dc, 0xb9402261, "ldr w1, [x19, #0x20]", load, 0x10580d320, RAM
+1, 0xffff80000817e5e0, 0x2a0003f8, "mov w24, w0"
+1, 0xffff80000817e5e4, 0x6b41581f, "cmp w0, w1, lsr #22"
+1, 0xffff80000817e5e8, 0x54001520, "b.eq #0xffff80000817e88c"
+1, 0xffff80000817e5ec, 0xf9402bfb, "ldr x27, [sp, #0x50]", load, 0x1041a57f0, RAM
+1, 0xffff80000817e5f0, 0x14000013, "b #0xffff80000817e63c"
+1, 0xffff80000817e63c, 0xaa1403e1, "mov x1, x20"
+1, 0xffff80000817e640, 0xaa1303e0, "mov x0, x19"
+1, 0xffff80000817e644, 0x52800002, "mov w2, #0"
+1, 0xffff80000817e648, 0x97fffe7b, "bl #0xffff80000817e034"
+1, 0xffff80000817e034, 0xd503233f, "paciasp "
+1, 0xffff80000817e038, 0xa9bd7bfd, "stp x29, x30, [sp, #-0x30]!", store, 0x1041a5770, RAM
+1, 0xffff80000817e03c, 0x910003fd, "mov x29, sp"
+1, 0xffff80000817e040, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1041a5780, RAM
+1, 0xffff80000817e044, 0xaa0003f3, "mov x19, x0"
+1, 0xffff80000817e048, 0xaa0103f4, "mov x20, x1"
+1, 0xffff80000817e04c, 0xf90013f5, "str x21, [sp, #0x20]", store, 0x1041a5790, RAM
+1, 0xffff80000817e050, 0x12001c55, "and w21, w2, #0xff"
+1, 0xffff80000817e054, 0xf9400660, "ldr x0, [x19, #8]", load, 0x10580d308, RAM
+1, 0xffff80000817e058, 0xb4000820, "cbz x0, #0xffff80000817e15c"
+1, 0xffff80000817e05c, 0xf9400260, "ldr x0, [x19]", load, 0x10580d300, RAM
+1, 0xffff80000817e060, 0xb40005a0, "cbz x0, #0xffff80000817e114"
+1, 0xffff80000817e114, 0xb9402261, "ldr w1, [x19, #0x20]", load, 0x10580d320, RAM
+1, 0xffff80000817e118, 0x9101a280, "add x0, x20, #0x68"
+1, 0xffff80000817e11c, 0xf9400663, "ldr x3, [x19, #8]", load, 0x10580d308, RAM
+1, 0xffff80000817e120, 0x53167c22, "lsr w2, w1, #0x16"
+1, 0xffff80000817e124, 0x53167c21, "lsr w1, w1, #0x16"
+1, 0xffff80000817e128, 0x8b020c00, "add x0, x0, x2, lsl #3"
+1, 0xffff80000817e12c, 0xeb00007f, "cmp x3, x0"
+1, 0xffff80000817e130, 0x54fff9a1, "b.ne #0xffff80000817e064"
+1, 0xffff80000817e134, 0xd346fc42, "lsr x2, x2, #6"
+1, 0xffff80000817e138, 0x9100a283, "add x3, x20, #0x28"
+1, 0xffff80000817e13c, 0xd2800020, "mov x0, #1"
+1, 0xffff80000817e140, 0x9ac12001, "lsl x1, x0, x1"
+1, 0xffff80000817e144, 0xf8627864, "ldr x4, [x3, x2, lsl #3]", load, 0x1037852728, RAM
+1, 0xffff80000817e148, 0x8a210081, "bic x1, x4, x1"
+1, 0xffff80000817e14c, 0xf8227861, "str x1, [x3, x2, lsl #3]", store, 0x1037852728, RAM
+1, 0xffff80000817e150, 0x39009280, "strb w0, [x20, #0x24]", store, 0x1037852724, RAM
+1, 0xffff80000817e154, 0xd503201f, "nop "
+1, 0xffff80000817e158, 0x17ffffc4, "b #0xffff80000817e068"
+1, 0xffff80000817e068, 0xa9400660, "ldp x0, x1, [x19]", load, 0x10580d300, RAM
+1, 0xffff80000817e06c, 0xf9000020, "str x0, [x1]", store, 0x1037852960, RAM
+1, 0xffff80000817e070, 0xb4000040, "cbz x0, #0xffff80000817e078"
+1, 0xffff80000817e078, 0x35000215, "cbnz w21, #0xffff80000817e0b8"
+1, 0xffff80000817e07c, 0xd2802441, "mov x1, #0x122"
+1, 0xffff80000817e080, 0x52800020, "mov w0, #1"
+1, 0xffff80000817e084, 0xf2fbd5a1, "movk x1, #0xdead, lsl #48"
+1, 0xffff80000817e088, 0xf9000261, "str x1, [x19]", store, 0x10580d300, RAM
+1, 0xffff80000817e08c, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5780, RAM
+1, 0xffff80000817e090, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5790, RAM
+1, 0xffff80000817e094, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5770, RAM
+1, 0xffff80000817e098, 0xd50323bf, "autiasp "
+1, 0xffff80000817e09c, 0xd2800001, "mov x1, #0"
+1, 0xffff80000817e0a0, 0xd2800002, "mov x2, #0"
+1, 0xffff80000817e0a4, 0xd2800003, "mov x3, #0"
+1, 0xffff80000817e0a8, 0xd2800004, "mov x4, #0"
+1, 0xffff80000817e0ac, 0xd2800010, "mov x16, #0"
+1, 0xffff80000817e0b0, 0xd2800011, "mov x17, #0"
+1, 0xffff80000817e0b4, 0xd65f03c0, "ret "
+1, 0xffff80000817e64c, 0x2a0003fa, "mov w26, w0"
+1, 0xffff80000817e650, 0x35000040, "cbnz w0, #0xffff80000817e658"
+1, 0xffff80000817e658, 0xf9002bfb, "str x27, [sp, #0x50]", store, 0x1041a57f0, RAM
+1, 0xffff80000817e65c, 0xb940227b, "ldr w27, [x19, #0x20]", load, 0x10580d320, RAM
+1, 0xffff80000817e660, 0xd503201f, "nop "
+1, 0xffff80000817e664, 0x36a00c1b, "tbz w27, #0x14, #0xffff80000817e7e4"
+1, 0xffff80000817e7e4, 0x97fdba03, "bl #0xffff8000080ecff0"
+1, 0xffff8000080ecff0, 0xd503233f, "paciasp "
+1, 0xffff8000080ecff4, 0xa9bb7bfd, "stp x29, x30, [sp, #-0x50]!", store, 0x1041a5750, RAM
+1, 0xffff8000080ecff8, 0x910003fd, "mov x29, sp"
+1, 0xffff8000080ecffc, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1041a5760, RAM
+1, 0xffff8000080ed000, 0xa9025bf5, "stp x21, x22, [sp, #0x20]", store, 0x1041a5770, RAM
+1, 0xffff8000080ed004, 0xa90363f7, "stp x23, x24, [sp, #0x30]", store, 0x1041a5780, RAM
+1, 0xffff8000080ed008, 0xa9046bf9, "stp x25, x26, [sp, #0x40]", store, 0x1041a5790, RAM
+1, 0xffff8000080ed00c, 0x90008620, "adrp x0, #0xffff8000091b1000"
+1, 0xffff8000080ed010, 0xd538d081, "mrs x1, tpidr_el1"
+1, 0xffff8000080ed014, 0x91002000, "add x0, x0, #8"
+1, 0xffff8000080ed018, 0xb8616814, "ldr w20, [x0, x1]", load, 0x103784f008, RAM
+1, 0xffff8000080ed01c, 0xd503201f, "nop "
+1, 0xffff8000080ed020, 0x93407e96, "sxtw x22, w20"
+1, 0xffff8000080ed024, 0xb0009318, "adrp x24, #0xffff80000934e000"
+1, 0xffff8000080ed028, 0x910fa318, "add x24, x24, #0x3e8"
+1, 0xffff8000080ed02c, 0xd00086b3, "adrp x19, #0xffff8000091c3000"
+1, 0xffff8000080ed030, 0x91270273, "add x19, x19, #0x9c0"
+1, 0xffff8000080ed034, 0xaa1303e0, "mov x0, x19"
+1, 0xffff8000080ed038, 0xf8767b01, "ldr x1, [x24, x22, lsl #3]", load, 0xfd454e3f0, RAM
+1, 0xffff8000080ed03c, 0x8b010000, "add x0, x0, x1"
+1, 0xffff8000080ed040, 0xf944b002, "ldr x2, [x0, #0x960]", load, 0x1037862320, RAM
+1, 0xffff8000080ed044, 0xf944b401, "ldr x1, [x0, #0x968]", load, 0x1037862328, RAM
+1, 0xffff8000080ed048, 0xeb01005f, "cmp x2, x1"
+1, 0xffff8000080ed04c, 0x540009c0, "b.eq #0xffff8000080ed184"
+1, 0xffff8000080ed050, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a5770, RAM
+1, 0xffff8000080ed054, 0x2a1403e0, "mov w0, w20"
+1, 0xffff8000080ed058, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5760, RAM
+1, 0xffff8000080ed05c, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1041a5780, RAM
+1, 0xffff8000080ed060, 0xa9446bf9, "ldp x25, x26, [sp, #0x40]", load, 0x1041a5790, RAM
+1, 0xffff8000080ed064, 0xa8c57bfd, "ldp x29, x30, [sp], #0x50", load, 0x1041a5750, RAM
+1, 0xffff8000080ed068, 0xd50323bf, "autiasp "
+1, 0xffff8000080ed06c, 0xd2800001, "mov x1, #0"
+1, 0xffff8000080ed070, 0xd2800002, "mov x2, #0"
+1, 0xffff8000080ed074, 0xd2800003, "mov x3, #0"
+1, 0xffff8000080ed078, 0xd2800004, "mov x4, #0"
+1, 0xffff8000080ed07c, 0xd2800005, "mov x5, #0"
+1, 0xffff8000080ed080, 0xd2800010, "mov x16, #0"
+1, 0xffff8000080ed084, 0xd2800011, "mov x17, #0"
+1, 0xffff8000080ed088, 0xd65f03c0, "ret "
+1, 0xffff80000817e7e8, 0x90008e82, "adrp x2, #0xffff80000934e000"
+1, 0xffff80000817e7ec, 0x910fa042, "add x2, x2, #0x3e8"
+1, 0xffff80000817e7f0, 0xd00081a1, "adrp x1, #0xffff8000091b4000"
+1, 0xffff80000817e7f4, 0x911c0021, "add x1, x1, #0x700"
+1, 0xffff80000817e7f8, 0xf8605855, "ldr x21, [x2, w0, uxtw #3]", load, 0xfd454e3f0, RAM
+1, 0xffff80000817e7fc, 0x3698045b, "tbz w27, #0x13, #0xffff80000817e884"
+1, 0xffff80000817e884, 0x8b150035, "add x21, x1, x21"
+1, 0xffff80000817e888, 0x17ffff7d, "b #0xffff80000817e67c"
+1, 0xffff80000817e67c, 0xeb15029f, "cmp x20, x21"
+1, 0xffff80000817e680, 0x54000ca0, "b.eq #0xffff80000817e814"
+1, 0xffff80000817e814, 0xaa1503f4, "mov x20, x21"
+1, 0xffff80000817e818, 0x17ffffbc, "b #0xffff80000817e708"
+1, 0xffff80000817e708, 0xf9000a76, "str x22, [x19, #0x10]", store, 0x10580d310, RAM
+1, 0xffff80000817e70c, 0xf9400aa1, "ldr x1, [x21, #0x10]", load, 0x1037852710, RAM
+1, 0xffff80000817e710, 0x3100071f, "cmn w24, #1"
+1, 0xffff80000817e714, 0x54000060, "b.eq #0xffff80000817e720"
+1, 0xffff80000817e718, 0xeb19003f, "cmp x1, x25"
+1, 0xffff80000817e71c, 0x540009e0, "b.eq #0xffff80000817e858"
+1, 0xffff80000817e858, 0xf94037e3, "ldr x3, [sp, #0x68]", load, 0x1041a5808, RAM
+1, 0xffff80000817e85c, 0x2a1803e2, "mov w2, w24"
+1, 0xffff80000817e860, 0xaa1303e1, "mov x1, x19"
+1, 0xffff80000817e864, 0xaa1503e0, "mov x0, x21"
+1, 0xffff80000817e868, 0x97fffeb7, "bl #0xffff80000817e344"
+1, 0xffff80000817e344, 0xd503233f, "paciasp "
+1, 0xffff80000817e348, 0xa9bc7bfd, "stp x29, x30, [sp, #-0x40]!", store, 0x1041a5760, RAM
+1, 0xffff80000817e34c, 0x910003fd, "mov x29, sp"
+1, 0xffff80000817e350, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1041a5770, RAM
+1, 0xffff80000817e354, 0x2a0203f4, "mov w20, w2"
+1, 0xffff80000817e358, 0xaa0103f3, "mov x19, x1"
+1, 0xffff80000817e35c, 0xa9025bf5, "stp x21, x22, [sp, #0x20]", store, 0x1041a5780, RAM
+1, 0xffff80000817e360, 0xaa0003f5, "mov x21, x0"
+1, 0xffff80000817e364, 0xa90363f7, "stp x23, x24, [sp, #0x30]", store, 0x1041a5790, RAM
+1, 0xffff80000817e368, 0xaa0303f7, "mov x23, x3"
+1, 0xffff80000817e36c, 0x9101a2a0, "add x0, x21, #0x68"
+1, 0xffff80000817e370, 0x2a1403e1, "mov w1, w20"
+1, 0xffff80000817e374, 0x8b344c04, "add x4, x0, w20, uxtw #3"
+1, 0xffff80000817e378, 0xf8617802, "ldr x2, [x0, x1, lsl #3]", load, 0x10378528d0, RAM
+1, 0xffff80000817e37c, 0xf9000262, "str x2, [x19]", store, 0x10580d300, RAM
+1, 0xffff80000817e380, 0xb4000042, "cbz x2, #0xffff80000817e388"
+1, 0xffff80000817e388, 0xd346fc23, "lsr x3, x1, #6"
+1, 0xffff80000817e38c, 0x9100a2a2, "add x2, x21, #0x28"
+1, 0xffff80000817e390, 0xf8217813, "str x19, [x0, x1, lsl #3]", store, 0x10378528d0, RAM
+1, 0xffff80000817e394, 0xd2800021, "mov x1, #1"
+1, 0xffff80000817e398, 0xf9000664, "str x4, [x19, #8]", store, 0x10580d308, RAM
+1, 0xffff80000817e39c, 0x9ad42021, "lsl x1, x1, x20"
+1, 0xffff80000817e3a0, 0xf8637840, "ldr x0, [x2, x3, lsl #3]", load, 0x1037852728, RAM
+1, 0xffff80000817e3a4, 0xaa010000, "orr x0, x0, x1"
+1, 0xffff80000817e3a8, 0xf8237840, "str x0, [x2, x3, lsl #3]", store, 0x1037852728, RAM
+1, 0xffff80000817e3ac, 0xb9402276, "ldr w22, [x19, #0x20]", load, 0x10580d320, RAM
+1, 0xffff80000817e3b0, 0x330a2696, "bfi w22, w20, #0x16, #0xa"
+1, 0xffff80000817e3b4, 0xb9002276, "str w22, [x19, #0x20]", store, 0x10580d320, RAM
+1, 0xffff80000817e3b8, 0xd503201f, "nop "
+1, 0xffff80000817e3bc, 0xf9400ea0, "ldr x0, [x21, #0x18]", load, 0x1037852718, RAM
+1, 0xffff80000817e3c0, 0xeb0002ff, "cmp x23, x0"
+1, 0xffff80000817e3c4, 0x54000504, "b.mi #0xffff80000817e464"
+1, 0xffff80000817e3c8, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5770, RAM
+1, 0xffff80000817e3cc, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a5780, RAM
+1, 0xffff80000817e3d0, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1041a5790, RAM
+1, 0xffff80000817e3d4, 0xa8c47bfd, "ldp x29, x30, [sp], #0x40", load, 0x1041a5760, RAM
+1, 0xffff80000817e3d8, 0xd50323bf, "autiasp "
+1, 0xffff80000817e3dc, 0xd2800000, "mov x0, #0"
+1, 0xffff80000817e3e0, 0xd2800001, "mov x1, #0"
+1, 0xffff80000817e3e4, 0xd2800002, "mov x2, #0"
+1, 0xffff80000817e3e8, 0xd2800003, "mov x3, #0"
+1, 0xffff80000817e3ec, 0xd2800004, "mov x4, #0"
+1, 0xffff80000817e3f0, 0xd2800010, "mov x16, #0"
+1, 0xffff80000817e3f4, 0xd2800011, "mov x17, #0"
+1, 0xffff80000817e3f8, 0xd65f03c0, "ret "
+1, 0xffff80000817e86c, 0xf9402bfb, "ldr x27, [sp, #0x50]", load, 0x1041a57f0, RAM
+1, 0xffff80000817e870, 0x17ffffb6, "b #0xffff80000817e748"
+1, 0xffff80000817e748, 0x52800001, "mov w1, #0"
+1, 0xffff80000817e74c, 0xf94033e0, "ldr x0, [sp, #0x60]", load, 0x1041a5800, RAM
+1, 0xffff80000817e750, 0x89ffe81, "stlrb w1, [x20]", store, 0x1037852700, RAM
+1, 0xffff80000817e754, 0xd51b4220, "msr daif, x0"
+1, 0xffff80000817e758, 0xd5384101, "mrs x1, sp_el0"
+1, 0xffff80000817e75c, 0xf9403fe0, "ldr x0, [sp, #0x78]", load, 0x1041a5818, RAM
+1, 0xffff80000817e760, 0xf943b422, "ldr x2, [x1, #0x768]", load, 0x105aad068, RAM
+1, 0xffff80000817e764, 0xeb020000, "subs x0, x0, x2"
+1, 0xffff80000817e768, 0xd2800002, "mov x2, #0"
+1, 0xffff80000817e76c, 0x54000c01, "b.ne #0xffff80000817e8ec"
+1, 0xffff80000817e770, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a57b0, RAM
+1, 0xffff80000817e774, 0x2a1a03e0, "mov w0, w26"
+1, 0xffff80000817e778, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a57c0, RAM
+1, 0xffff80000817e77c, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1041a57d0, RAM
+1, 0xffff80000817e780, 0xa9446bf9, "ldp x25, x26, [sp, #0x40]", load, 0x1041a57e0, RAM
+1, 0xffff80000817e784, 0xa8c87bfd, "ldp x29, x30, [sp], #0x80", load, 0x1041a57a0, RAM
+1, 0xffff80000817e788, 0xd50323bf, "autiasp "
+1, 0xffff80000817e78c, 0xd2800001, "mov x1, #0"
+1, 0xffff80000817e790, 0xd2800002, "mov x2, #0"
+1, 0xffff80000817e794, 0xd2800003, "mov x3, #0"
+1, 0xffff80000817e798, 0xd2800010, "mov x16, #0"
+1, 0xffff80000817e79c, 0xd2800011, "mov x17, #0"
+1, 0xffff80000817e7a0, 0xd65f03c0, "ret "
+1, 0xffff80000817e968, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5830, RAM
+1, 0xffff80000817e96c, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1041a5820, RAM
+1, 0xffff80000817e970, 0xd50323bf, "autiasp "
+1, 0xffff80000817e974, 0xd2800001, "mov x1, #0"
+1, 0xffff80000817e978, 0xd2800002, "mov x2, #0"
+1, 0xffff80000817e97c, 0xd2800010, "mov x16, #0"
+1, 0xffff80000817e980, 0xd2800011, "mov x17, #0"
+1, 0xffff80000817e984, 0xd65f03c0, "ret "
+1, 0xffff80000884ffec, 0x340001a0, "cbz w0, #0xffff800008850020"
+1, 0xffff80000884fff0, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5850, RAM
+1, 0xffff80000884fff4, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5860, RAM
+1, 0xffff80000884fff8, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5840, RAM
+1, 0xffff80000884fffc, 0xd50323bf, "autiasp "
+1, 0xffff800008850000, 0xd2800000, "mov x0, #0"
+1, 0xffff800008850004, 0xd2800001, "mov x1, #0"
+1, 0xffff800008850008, 0xd2800002, "mov x2, #0"
+1, 0xffff80000885000c, 0xd2800003, "mov x3, #0"
+1, 0xffff800008850010, 0xd2800004, "mov x4, #0"
+1, 0xffff800008850014, 0xd2800010, "mov x16, #0"
+1, 0xffff800008850018, 0xd2800011, "mov x17, #0"
+1, 0xffff80000885001c, 0xd65f03c0, "ret "
+1, 0xffff8000089621b0, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5880, RAM
+1, 0xffff8000089621b4, 0x52800020, "mov w0, #1"
+1, 0xffff8000089621b8, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5890, RAM
+1, 0xffff8000089621bc, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5870, RAM
+1, 0xffff8000089621c0, 0xd50323bf, "autiasp "
+1, 0xffff8000089621c4, 0xd2800001, "mov x1, #0"
+1, 0xffff8000089621c8, 0xd2800002, "mov x2, #0"
+1, 0xffff8000089621cc, 0xd2800003, "mov x3, #0"
+1, 0xffff8000089621d0, 0xd2800004, "mov x4, #0"
+1, 0xffff8000089621d4, 0xd2800005, "mov x5, #0"
+1, 0xffff8000089621d8, 0xd2800010, "mov x16, #0"
+1, 0xffff8000089621dc, 0xd2800011, "mov x17, #0"
+1, 0xffff8000089621e0, 0xd65f03c0, "ret "
+1, 0xffff8000089642cc, 0xa9446bf9, "ldp x25, x26, [sp, #0x40]", load, 0x1041a58e0, RAM
+1, 0xffff8000089642d0, 0x52800000, "mov w0, #0"
+1, 0xffff8000089642d4, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a58b0, RAM
+1, 0xffff8000089642d8, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a58c0, RAM
+1, 0xffff8000089642dc, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1041a58d0, RAM
+1, 0xffff8000089642e0, 0xa94573fb, "ldp x27, x28, [sp, #0x50]", load, 0x1041a58f0, RAM
+1, 0xffff8000089642e4, 0xa8c97bfd, "ldp x29, x30, [sp], #0x90", load, 0x1041a58a0, RAM
+1, 0xffff8000089642e8, 0xd50323bf, "autiasp "
+1, 0xffff8000089642ec, 0xd2800001, "mov x1, #0"
+1, 0xffff8000089642f0, 0xd2800002, "mov x2, #0"
+1, 0xffff8000089642f4, 0xd2800003, "mov x3, #0"
+1, 0xffff8000089642f8, 0xd2800004, "mov x4, #0"
+1, 0xffff8000089642fc, 0xd2800005, "mov x5, #0"
+1, 0xffff800008964300, 0xd2800006, "mov x6, #0"
+1, 0xffff800008964304, 0xd2800007, "mov x7, #0"
+1, 0xffff800008964308, 0xd2800008, "mov x8, #0"
+1, 0xffff80000896430c, 0xd2800009, "mov x9, #0"
+1, 0xffff800008964310, 0xd280000a, "mov x10, #0"
+1, 0xffff800008964314, 0xd280000b, "mov x11, #0"
+1, 0xffff800008964318, 0xd2800010, "mov x16, #0"
+1, 0xffff80000896431c, 0xd2800011, "mov x17, #0"
+1, 0xffff800008964320, 0xd65f03c0, "ret "
+1, 0xffff800008965218, 0x72001c1f, "tst w0, #0xff"
+1, 0xffff80000896521c, 0x540001c1, "b.ne #0xffff800008965254"
+1, 0xffff800008965220, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5940, RAM
+1, 0xffff800008965224, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5950, RAM
+1, 0xffff800008965228, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5930, RAM
+1, 0xffff80000896522c, 0xd50323bf, "autiasp "
+1, 0xffff800008965230, 0xd2800000, "mov x0, #0"
+1, 0xffff800008965234, 0xd2800001, "mov x1, #0"
+1, 0xffff800008965238, 0xd2800002, "mov x2, #0"
+1, 0xffff80000896523c, 0xd2800003, "mov x3, #0"
+1, 0xffff800008965240, 0xd2800004, "mov x4, #0"
+1, 0xffff800008965244, 0xd2800005, "mov x5, #0"
+1, 0xffff800008965248, 0xd2800010, "mov x16, #0"
+1, 0xffff80000896524c, 0xd2800011, "mov x17, #0"
+1, 0xffff800008965250, 0xd65f03c0, "ret "
+1, 0xffff80000894be94, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5970, RAM
+1, 0xffff80000894be98, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a5980, RAM
+1, 0xffff80000894be9c, 0xf9401bf7, "ldr x23, [sp, #0x30]", load, 0x1041a5990, RAM
+1, 0xffff80000894bea0, 0xa8c47bfd, "ldp x29, x30, [sp], #0x40", load, 0x1041a5960, RAM
+1, 0xffff80000894bea4, 0xd50323bf, "autiasp "
+1, 0xffff80000894bea8, 0xd2800000, "mov x0, #0"
+1, 0xffff80000894beac, 0xd2800001, "mov x1, #0"
+1, 0xffff80000894beb0, 0xd2800002, "mov x2, #0"
+1, 0xffff80000894beb4, 0xd2800003, "mov x3, #0"
+1, 0xffff80000894beb8, 0xd2800004, "mov x4, #0"
+1, 0xffff80000894bebc, 0xd2800005, "mov x5, #0"
+1, 0xffff80000894bec0, 0xd2800006, "mov x6, #0"
+1, 0xffff80000894bec4, 0xd2800010, "mov x16, #0"
+1, 0xffff80000894bec8, 0xd2800011, "mov x17, #0"
+1, 0xffff80000894becc, 0xd65f03c0, "ret "
+1, 0xffff80000894cf2c, 0xf9403be1, "ldr x1, [sp, #0x70]", load, 0x1041a5a10, RAM
+1, 0xffff80000894cf30, 0xb40023e1, "cbz x1, #0xffff80000894d3ac"
+1, 0xffff80000894d3ac, 0xd5384100, "mrs x0, sp_el0"
+1, 0xffff80000894d3b0, 0xf94067e2, "ldr x2, [sp, #0xc8]", load, 0x1041a5a68, RAM
+1, 0xffff80000894d3b4, 0xf943b401, "ldr x1, [x0, #0x768]", load, 0x105aad068, RAM
+1, 0xffff80000894d3b8, 0xeb010042, "subs x2, x2, x1"
+1, 0xffff80000894d3bc, 0xd2800001, "mov x1, #0"
+1, 0xffff80000894d3c0, 0x54001f41, "b.ne #0xffff80000894d7a8"
+1, 0xffff80000894d3c4, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a59c0, RAM
+1, 0xffff80000894d3c8, 0x2a1403e0, "mov w0, w20"
+1, 0xffff80000894d3cc, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a59b0, RAM
+1, 0xffff80000894d3d0, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1041a59d0, RAM
+1, 0xffff80000894d3d4, 0xa9446bf9, "ldp x25, x26, [sp, #0x40]", load, 0x1041a59e0, RAM
+1, 0xffff80000894d3d8, 0xa94573fb, "ldp x27, x28, [sp, #0x50]", load, 0x1041a59f0, RAM
+1, 0xffff80000894d3dc, 0xa8cd7bfd, "ldp x29, x30, [sp], #0xd0", load, 0x1041a59a0, RAM
+1, 0xffff80000894d3e0, 0xd50323bf, "autiasp "
+1, 0xffff80000894d3e4, 0xd2800001, "mov x1, #0"
+1, 0xffff80000894d3e8, 0xd2800002, "mov x2, #0"
+1, 0xffff80000894d3ec, 0xd2800003, "mov x3, #0"
+1, 0xffff80000894d3f0, 0xd2800004, "mov x4, #0"
+1, 0xffff80000894d3f4, 0xd2800006, "mov x6, #0"
+1, 0xffff80000894d3f8, 0xd2800007, "mov x7, #0"
+1, 0xffff80000894d3fc, 0xd2800008, "mov x8, #0"
+1, 0xffff80000894d400, 0xd2800009, "mov x9, #0"
+1, 0xffff80000894d404, 0xd2800010, "mov x16, #0"
+1, 0xffff80000894d408, 0xd2800011, "mov x17, #0"
+1, 0xffff80000894d40c, 0xd65f03c0, "ret "
+1, 0xffff80000894d7ec, 0x2a0003f4, "mov w20, w0"
+1, 0xffff80000894d7f0, 0xaa1303e0, "mov x0, x19"
+1, 0xffff80000894d7f4, 0x97fc1680, "bl #0xffff8000088531f4"
+1, 0xffff8000088531f4, 0xd503233f, "paciasp "
+1, 0xffff8000088531f8, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1041a5a50, RAM
+1, 0xffff8000088531fc, 0x910003fd, "mov x29, sp"
+1, 0xffff800008853200, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1041a5a60, RAM
+1, 0xffff800008853204, 0xaa0003f3, "mov x19, x0"
+1, 0xffff800008853208, 0xaa1e03f4, "mov x20, x30"
+1, 0xffff80000885320c, 0xd5384101, "mrs x1, sp_el0"
+1, 0xffff800008853210, 0xb9400820, "ldr w0, [x1, #8]", load, 0x105aac908, RAM
+1, 0xffff800008853214, 0x11080000, "add w0, w0, #0x200"
+1, 0xffff800008853218, 0xb9000820, "str w0, [x1, #8]", store, 0x105aac908, RAM
+1, 0xffff80000885321c, 0x91026263, "add x3, x19, #0x98"
+1, 0xffff800008853220, 0xd503201f, "nop "
+1, 0xffff800008853224, 0xaa0303e0, "mov x0, x3"
+1, 0xffff800008853228, 0x52800001, "mov w1, #0"
+1, 0xffff80000885322c, 0x52800022, "mov w2, #1"
+1, 0xffff800008853230, 0x2a0103e5, "mov w5, w1"
+1, 0xffff800008853234, 0x88e57c62, "casa w5, w2, [x3]", load, 0x10580cf58, RAM, store, 0x10580cf58, RAM
+1, 0xffff800008853238, 0x2a0503e0, "mov w0, w5"
+1, 0xffff80000885323c, 0x350006c0, "cbnz w0, #0xffff800008853314"
+1, 0xffff800008853240, 0xf9408260, "ldr x0, [x19, #0x100]", load, 0x10580cfc0, RAM
+1, 0xffff800008853244, 0xb4000060, "cbz x0, #0xffff800008853250"
+1, 0xffff800008853250, 0xf9401660, "ldr x0, [x19, #0x28]", load, 0x10580cee8, RAM
+1, 0xffff800008853254, 0xf9405001, "ldr x1, [x0, #0xa0]", load, 0xfd4653840, RAM
+1, 0xffff800008853258, 0xb4000061, "cbz x1, #0xffff800008853264"
+1, 0xffff80000885325c, 0xaa1303e0, "mov x0, x19"
+1, 0xffff800008853260, 0xd63f0020, "blr x1"
+1, 0xffff8000089662a0, 0xd503233f, "paciasp "
+1, 0xffff8000089662a4, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1041a5a30, RAM
+1, 0xffff8000089662a8, 0x910003fd, "mov x29, sp"
+1, 0xffff8000089662ac, 0xa90153f3, "stp x19, x20, [sp, #0x10]", store, 0x1041a5a40, RAM
+1, 0xffff8000089662b0, 0xaa0003f4, "mov x20, x0"
+1, 0xffff8000089662b4, 0x91056283, "add x3, x20, #0x158"
+1, 0xffff8000089662b8, 0x1400000a, "b #0xffff8000089662e0"
+1, 0xffff8000089662e0, 0xf940ae93, "ldr x19, [x20, #0x158]", load, 0x10580d018, RAM
+1, 0xffff8000089662e4, 0xf27e0e7f, "tst x19, #0x3c"
+1, 0xffff8000089662e8, 0x54fffea1, "b.ne #0xffff8000089662bc"
+1, 0xffff8000089662ec, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5a40, RAM
+1, 0xffff8000089662f0, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1041a5a30, RAM
+1, 0xffff8000089662f4, 0xd50323bf, "autiasp "
+1, 0xffff8000089662f8, 0xd2800000, "mov x0, #0"
+1, 0xffff8000089662fc, 0xd2800001, "mov x1, #0"
+1, 0xffff800008966300, 0xd2800002, "mov x2, #0"
+1, 0xffff800008966304, 0xd2800003, "mov x3, #0"
+1, 0xffff800008966308, 0xd2800004, "mov x4, #0"
+1, 0xffff80000896630c, 0xd2800005, "mov x5, #0"
+1, 0xffff800008966310, 0xd2800010, "mov x16, #0"
+1, 0xffff800008966314, 0xd2800011, "mov x17, #0"
+1, 0xffff800008966318, 0xd65f03c0, "ret "
+1, 0xffff800008853264, 0xb9409e60, "ldr w0, [x19, #0x9c]", load, 0x10580cf5c, RAM
+1, 0xffff800008853268, 0x34000040, "cbz w0, #0xffff800008853270"
+1, 0xffff80000885326c, 0xb9009e7f, "str wzr, [x19, #0x9c]", store, 0x10580cf5c, RAM
+1, 0xffff800008853270, 0xf9405662, "ldr x2, [x19, #0xa8]", load, 0x10580cf68, RAM
+1, 0xffff800008853274, 0x9102a261, "add x1, x19, #0xa8"
+1, 0xffff800008853278, 0x91028260, "add x0, x19, #0xa0"
+1, 0xffff80000885327c, 0xeb01005f, "cmp x2, x1"
+1, 0xffff800008853280, 0x540000a0, "b.eq #0xffff800008853294"
+1, 0xffff800008853294, 0x91026261, "add x1, x19, #0x98"
+1, 0xffff800008853298, 0x52800000, "mov w0, #0"
+1, 0xffff80000885329c, 0x89ffc20, "stlrb w0, [x1]", store, 0x10580cf58, RAM
+1, 0xffff8000088532a0, 0xaa1403fe, "mov x30, x20"
+1, 0xffff8000088532a4, 0xd50320ff, "xpaclri "
+1, 0xffff8000088532a8, 0x9249e3c0, "and x0, x30, #0xff80ffffffffffff"
+1, 0xffff8000088532ac, 0xb6b8005e, "tbz x30, #0x37, #0xffff8000088532b4"
+1, 0xffff8000088532b0, 0xb2503fc0, "orr x0, x30, #0xffff000000000000"
+1, 0xffff8000088532b4, 0x52804001, "mov w1, #0x200"
+1, 0xffff8000088532b8, 0x97e15826, "bl #0xffff8000080a9350"
+1, 0xffff8000080a9350, 0xd503233f, "paciasp "
+1, 0xffff8000080a9354, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1041a5a30, RAM
+1, 0xffff8000080a9358, 0x910003fd, "mov x29, sp"
+1, 0xffff8000080a935c, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1041a5a40, RAM
+1, 0xffff8000080a9360, 0x2a0103f3, "mov w19, w1"
+1, 0xffff8000080a9364, 0xd5384100, "mrs x0, sp_el0"
+1, 0xffff8000080a9368, 0xb9400800, "ldr w0, [x0, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a936c, 0x72100c1f, "tst w0, #0xf0000"
+1, 0xffff8000080a9370, 0x540003c1, "b.ne #0xffff8000080a93e8"
+1, 0xffff8000080a9374, 0xd5384102, "mrs x2, sp_el0"
+1, 0xffff8000080a9378, 0xb9400840, "ldr w0, [x2, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a937c, 0xb9400840, "ldr w0, [x2, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a9380, 0x4b130000, "sub w0, w0, w19"
+1, 0xffff8000080a9384, 0x11000400, "add w0, w0, #1"
+1, 0xffff8000080a9388, 0xb9000840, "str w0, [x2, #8]", store, 0x105aac908, RAM
+1, 0xffff8000080a938c, 0xb9400840, "ldr w0, [x2, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a9390, 0xb9400843, "ldr w3, [x2, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a9394, 0xb9400841, "ldr w1, [x2, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a9398, 0x120c0c00, "and w0, w0, #0xf00000"
+1, 0xffff8000080a939c, 0x12100c62, "and w2, w3, #0xf0000"
+1, 0xffff8000080a93a0, 0x2a020000, "orr w0, w0, w2"
+1, 0xffff8000080a93a4, 0x12181c21, "and w1, w1, #0xff00"
+1, 0xffff8000080a93a8, 0x2a010000, "orr w0, w0, w1"
+1, 0xffff8000080a93ac, 0x34000220, "cbz w0, #0xffff8000080a93f0"
+1, 0xffff8000080a93f0, 0xd00088c0, "adrp x0, #0xffff8000091c3000"
+1, 0xffff8000080a93f4, 0x910e0000, "add x0, x0, #0x380"
+1, 0xffff8000080a93f8, 0xd538d081, "mrs x1, tpidr_el1"
+1, 0xffff8000080a93fc, 0xb8616800, "ldr w0, [x0, x1]", load, 0x1037861380, RAM
+1, 0xffff8000080a9400, 0x34fffd80, "cbz w0, #0xffff8000080a93b0"
+1, 0xffff8000080a93b0, 0xd5384101, "mrs x1, sp_el0"
+1, 0xffff8000080a93b4, 0xb9400820, "ldr w0, [x1, #8]", load, 0x105aac908, RAM
+1, 0xffff8000080a93b8, 0x51000400, "sub w0, w0, #1"
+1, 0xffff8000080a93bc, 0xb9000820, "str w0, [x1, #8]", store, 0x105aac908, RAM
+1, 0xffff8000080a93c0, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1041a5a40, RAM
+1, 0xffff8000080a93c4, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1041a5a30, RAM
+1, 0xffff8000080a93c8, 0xd50323bf, "autiasp "
+1, 0xffff8000080a93cc, 0xd2800000, "mov x0, #0"
+1, 0xffff8000080a93d0, 0xd2800001, "mov x1, #0"
+1, 0xffff8000080a93d4, 0xd2800002, "mov x2, #0"
+1, 0xffff8000080a93d8, 0xd2800003, "mov x3, #0"
+1, 0xffff8000080a93dc, 0xd2800010, "mov x16, #0"
+1, 0xffff8000080a93e0, 0xd2800011, "mov x17, #0"
+1, 0xffff8000080a93e4, 0xd65f03c0, "ret "
+1, 0xffff8000088532bc, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5a60, RAM
+1, 0xffff8000088532c0, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1041a5a50, RAM
+1, 0xffff8000088532c4, 0xd50323bf, "autiasp "
+1, 0xffff8000088532c8, 0xd2800000, "mov x0, #0"
+1, 0xffff8000088532cc, 0xd2800001, "mov x1, #0"
+1, 0xffff8000088532d0, 0xd2800002, "mov x2, #0"
+1, 0xffff8000088532d4, 0xd2800003, "mov x3, #0"
+1, 0xffff8000088532d8, 0xd2800004, "mov x4, #0"
+1, 0xffff8000088532dc, 0xd2800005, "mov x5, #0"
+1, 0xffff8000088532e0, 0xd2800010, "mov x16, #0"
+1, 0xffff8000088532e4, 0xd2800011, "mov x17, #0"
+1, 0xffff8000088532e8, 0xd65f03c0, "ret "
+1, 0xffff80000894d7f8, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5a90, RAM
+1, 0xffff80000894d7fc, 0x2a1403e0, "mov w0, w20"
+1, 0xffff80000894d800, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5a80, RAM
+1, 0xffff80000894d804, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5a70, RAM
+1, 0xffff80000894d808, 0xd50323bf, "autiasp "
+1, 0xffff80000894d80c, 0xd2800001, "mov x1, #0"
+1, 0xffff80000894d810, 0xd2800002, "mov x2, #0"
+1, 0xffff80000894d814, 0xd2800010, "mov x16, #0"
+1, 0xffff80000894d818, 0xd2800011, "mov x17, #0"
+1, 0xffff80000894d81c, 0xd65f03c0, "ret "
+1, 0xffff80000899293c, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5ab0, RAM
+1, 0xffff800008992940, 0xf94013f5, "ldr x21, [sp, #0x20]", load, 0x1041a5ac0, RAM
+1, 0xffff800008992944, 0xa8c37bfd, "ldp x29, x30, [sp], #0x30", load, 0x1041a5aa0, RAM
+1, 0xffff800008992948, 0xd50323bf, "autiasp "
+1, 0xffff80000899294c, 0xd2800001, "mov x1, #0"
+1, 0xffff800008992950, 0xd2800002, "mov x2, #0"
+1, 0xffff800008992954, 0xd2800003, "mov x3, #0"
+1, 0xffff800008992958, 0xd2800010, "mov x16, #0"
+1, 0xffff80000899295c, 0xd2800011, "mov x17, #0"
+1, 0xffff800008992960, 0xd65f03c0, "ret "
+1, 0xffff80000884ad88, 0x2a0003f3, "mov w19, w0"
+1, 0xffff80000884ad8c, 0x3108441f, "cmn w0, #0x211"
+1, 0xffff80000884ad90, 0x540003a0, "b.eq #0xffff80000884ae04"
+1, 0xffff80000884ad94, 0xb9404fe0, "ldr w0, [sp, #0x4c]", load, 0x1041a5b1c, RAM
+1, 0xffff80000884ad98, 0x350002c0, "cbnz w0, #0xffff80000884adf0"
+1, 0xffff80000884adf0, 0xf9400a80, "ldr x0, [x20, #0x10]", load, 0x104f7dd50, RAM
+1, 0xffff80000884adf4, 0x97edd754, "bl #0xffff8000083c0b44"
+1, 0xffff8000083c0b44, 0xd503233f, "paciasp "
+1, 0xffff8000083c0b48, 0xa9be7bfd, "stp x29, x30, [sp, #-0x20]!", store, 0x1041a5ab0, RAM
+1, 0xffff8000083c0b4c, 0x910003fd, "mov x29, sp"
+1, 0xffff8000083c0b50, 0xf9000bf3, "str x19, [sp, #0x10]", store, 0x1041a5ac0, RAM
+1, 0xffff8000083c0b54, 0xaa0003f3, "mov x19, x0"
+1, 0xffff8000083c0b58, 0xd503201f, "nop "
+1, 0xffff8000083c0b5c, 0x92800000, "mov x0, #-1"
+1, 0xffff8000083c0b60, 0x9100e261, "add x1, x19, #0x38"
+1, 0xffff8000083c0b64, 0xf8e00020, "ldaddal x0, x0, [x1]", load, 0x1021ccb38, RAM, store, 0x1021ccb38, RAM
+1, 0xffff8000083c0b68, 0xd1000400, "sub x0, x0, #1"
+1, 0xffff8000083c0b6c, 0xb5000360, "cbnz x0, #0xffff8000083c0bd8"
+1, 0xffff8000083c0bd8, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1041a5ac0, RAM
+1, 0xffff8000083c0bdc, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1041a5ab0, RAM
+1, 0xffff8000083c0be0, 0xd50323bf, "autiasp "
+1, 0xffff8000083c0be4, 0xd2800000, "mov x0, #0"
+1, 0xffff8000083c0be8, 0xd2800001, "mov x1, #0"
+1, 0xffff8000083c0bec, 0xd2800002, "mov x2, #0"
+1, 0xffff8000083c0bf0, 0xd2800003, "mov x3, #0"
+1, 0xffff8000083c0bf4, 0xd2800010, "mov x16, #0"
+1, 0xffff8000083c0bf8, 0xd2800011, "mov x17, #0"
+1, 0xffff8000083c0bfc, 0xd65f03c0, "ret "
+1, 0xffff80000884adf8, 0x17ffffe9, "b #0xffff80000884ad9c"
+1, 0xffff80000884ad9c, 0xd5384100, "mrs x0, sp_el0"
+1, 0xffff80000884ada0, 0xf940a7e2, "ldr x2, [sp, #0x148]", load, 0x1041a5c18, RAM
+1, 0xffff80000884ada4, 0xf943b401, "ldr x1, [x0, #0x768]", load, 0x105aad068, RAM
+1, 0xffff80000884ada8, 0xeb010042, "subs x2, x2, x1"
+1, 0xffff80000884adac, 0xd2800001, "mov x1, #0"
+1, 0xffff80000884adb0, 0x540002c1, "b.ne #0xffff80000884ae08"
+1, 0xffff80000884adb4, 0xa9425bf5, "ldp x21, x22, [sp, #0x20]", load, 0x1041a5af0, RAM
+1, 0xffff80000884adb8, 0x2a1303e0, "mov w0, w19"
+1, 0xffff80000884adbc, 0xa94153f3, "ldp x19, x20, [sp, #0x10]", load, 0x1041a5ae0, RAM
+1, 0xffff80000884adc0, 0xa94363f7, "ldp x23, x24, [sp, #0x30]", load, 0x1041a5b00, RAM
+1, 0xffff80000884adc4, 0xa8d57bfd, "ldp x29, x30, [sp], #0x150", load, 0x1041a5ad0, RAM
+1, 0xffff80000884adc8, 0xd50323bf, "autiasp "
+1, 0xffff80000884adcc, 0xd2800001, "mov x1, #0"
+1, 0xffff80000884add0, 0xd2800002, "mov x2, #0"
+1, 0xffff80000884add4, 0xd2800003, "mov x3, #0"
+1, 0xffff80000884add8, 0xd2800004, "mov x4, #0"
+1, 0xffff80000884addc, 0xd2800005, "mov x5, #0"
+1, 0xffff80000884ade0, 0xd2800006, "mov x6, #0"
+1, 0xffff80000884ade4, 0xd2800010, "mov x16, #0"
+1, 0xffff80000884ade8, 0xd2800011, "mov x17, #0"
+1, 0xffff80000884adec, 0xd65f03c0, "ret "
+1, 0xffff80000884ae3c, 0x93407c00, "sxtw x0, w0"
+1, 0xffff80000884ae40, 0xf9400bf3, "ldr x19, [sp, #0x10]", load, 0x1041a5c30, RAM
+1, 0xffff80000884ae44, 0xa8c27bfd, "ldp x29, x30, [sp], #0x20", load, 0x1041a5c20, RAM
+1, 0xffff80000884ae48, 0xd50323bf, "autiasp "
