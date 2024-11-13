@@ -1,6 +1,11 @@
-f = open("trace_output.log", "r")
+import time
+
+t = time.time()
+f = open("python/trace_output2.log", "r")
 lines = f.readlines()
 f.close()
+print("Time to read file: " + str(time.time()-t))
+t = time.time()
 
 dict_block = {}
 inst = {}
@@ -13,7 +18,9 @@ LENGTH = 0
 previous = ""
 
 #ARM branch instructions
-jumps = ("b ", "bl ", "bx ", "cbz ", "cbnz ", "tbz ", "tbnz ", "br ", "blr ", "ret", "b.") #may need to add more or remove some
+jumps = ("b ", "bl ", "cbz ", "cbnz ", "tbz ", "tbnz ", "b.", "br", "blr", "ret", "bx") #may need to add more or remove some
+#removed 
+#removed "b ", "bl ", "cbz ", "cbnz ", "tbz ", "tbnz ", "b."
 
 def incr(str, dict):
     if str in dict:
@@ -24,24 +31,29 @@ def incr(str, dict):
 for i, line in enumerate(lines):
     LENGTH += 1
     if line.split("\"")[1].startswith(jumps):
-        s = lines[i+1].split(", ")
-        if len(s) > 1:
-            if previous in dict_block and dict_block[previous][3] == 0:
-                dict_block[previous] = (dict_block[previous][0], dict_block[previous][1], dict_block[previous][2], LENGTH)
-            LENGTH = 0
-            incr(s[1], dict_block)
-            previous = s[1]
+        if(i+1 < len(lines)):
+            s = lines[i+1].split(", ")
+            if len(s) > 1:
+                if previous in dict_block:
+                    dict_block[previous] = (dict_block[previous][0], dict_block[previous][1], dict_block[previous][2], dict_block[previous][3]+LENGTH)
+                LENGTH = 0
+                incr(s[1], dict_block)
+                previous = s[1]
     s = line.split(", ")
     if len(s) > 1:
         incr(s[1], inst)
     PC += 1
+
+print("Time to parse file: " + str(time.time()-t))
+t = time.time()
 
 result = [{"key": key, "value": (value[0], value[1]/value[0], value[3])} for key, value in dict_block.items()]
 result_inst = [{"key": key, "value": (value[0])} for key, value in inst.items()]
 result_sorted = sorted(result, key=lambda x: x["value"][0])
 
 for item in result_sorted:
-    print(item["key"] + ": " + str(item["value"]))
+    if item["value"][0] > 10000:
+        print(item["key"] + ": " + str(item["value"]))
 
 #total = sum(item["value"] for item in result_sorted)
 
@@ -62,3 +74,21 @@ print("Median distance: " + str(median["value"][1]))
 #print("Number of jump destinations executed more than once: " + str(len(superior_to_1)))
 
 print("Trace coverage: " + str(len([item["value"] for item in result_inst if item["value"] > 1])/len(result_inst))) 
+print("Average Trace Length: " + str(sum(item["value"][2] for item in superior_to_1)/sum(item["value"][0] for item in superior_to_1)))
+#median
+sorted_by_length = sorted(superior_to_1, key=lambda x: x["value"][2])
+median = sorted_by_length[len(sorted_by_length)//2]
+print("Median length: " + str(median["value"][2]/median["value"][0]))
+
+#find and print max distance, only distance
+max_distance = 0
+max_distance_key = ""
+for item in superior_to_1:
+    if item["value"][2]/item["value"][0] > max_distance:
+        max_distance = item["value"][2]/item["value"][0]
+        max_distance_key = item["key"]
+print("Max distance: " + str(max_distance))
+print("Max distance key: " + max_distance_key)
+print("max distance key: " + str(dict_block[max_distance_key]))
+
+print("Time to print results: " + str(time.time()-t))
