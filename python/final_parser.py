@@ -18,7 +18,7 @@ LENGTH = 0
 previous = ""
 
 #ARM branch instructions
-jumps = ("b ", "bl ", "cbz ", "cbnz ", "tbz ", "tbnz ", "b.", "br", "blr", "ret", "bx") #may need to add more or remove some
+jumps = ("br", "blr", "ret", "bx") #may need to add more or remove some
 #removed 
 #removed "b ", "bl ", "cbz ", "cbnz ", "tbz ", "tbnz ", "b."
 
@@ -28,21 +28,25 @@ def incr(str, dict):
     else:
         dict[str] = (1, 0, PC, 0)
 
+prev_br = False
+
 for i, line in enumerate(lines):
-    LENGTH += 1
-    if line.split("\"")[1].startswith(jumps):
-        if(i+1 < len(lines)):
-            s = lines[i+1].split(", ")
+    if line.split(", ")[0] == "0":
+        LENGTH += 1
+        s = line.split(", ")
+        if prev_br:
             if len(s) > 1:
                 if previous in dict_block:
                     dict_block[previous] = (dict_block[previous][0], dict_block[previous][1], dict_block[previous][2], dict_block[previous][3]+LENGTH)
                 LENGTH = 0
                 incr(s[1], dict_block)
                 previous = s[1]
-    s = line.split(", ")
-    if len(s) > 1:
-        incr(s[1], inst)
-    PC += 1
+            prev_br = False
+        if line.split("\"")[1].startswith(jumps):
+            prev_br = True
+        if len(s) > 1:
+            incr(s[1], inst)
+        PC += 1
 
 print("Time to parse file: " + str(time.time()-t))
 t = time.time()
@@ -76,7 +80,7 @@ print("Median distance: " + str(median["value"][1]))
 print("Trace coverage: " + str(len([item["value"] for item in result_inst if item["value"] > 1])/len(result_inst))) 
 print("Average Trace Length: " + str(sum(item["value"][2] for item in superior_to_1)/sum(item["value"][0] for item in superior_to_1)))
 #median
-sorted_by_length = sorted(superior_to_1, key=lambda x: x["value"][2])
+sorted_by_length = sorted(superior_to_1, key=lambda x: x["value"][2]/x["value"][0])
 median = sorted_by_length[len(sorted_by_length)//2]
 print("Median length: " + str(median["value"][2]/median["value"][0]))
 
@@ -90,5 +94,15 @@ for item in superior_to_1:
 print("Max distance: " + str(max_distance))
 print("Max distance key: " + max_distance_key)
 print("max distance key: " + str(dict_block[max_distance_key]))
+
+
+#write in a file "output.csv" results from superior_to_1
+f = open("python/output.csv", "w")
+for item in superior_to_1:
+    if item["value"][1] < 50000:
+        f.write(str(item["value"][0]) + ";" + str(item["value"][1]).replace(".", ",") + ";" + str(item["value"][2]) + "\n")
+
+print(len([item for item in superior_to_1 if item["value"][1] < 50000])/len(superior_to_1))
+f.close()
 
 print("Time to print results: " + str(time.time()-t))
