@@ -1,15 +1,13 @@
 /*
  * File: parser.c
- * Author: Your Name
- * Date: YYYY-MM-DD
+ * Author: Robert William
+ * Date: 2024-11-26
  * Description: This file contains the implementation of the parser for the project.
+ * 
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "trace-selection/datatype.h"
-#include "trace-selection/parser.h"
+
+#include "parser.h"
 
 inst_t parse_inst(FILE *file, int index) {
     inst_t inst = {0};
@@ -27,28 +25,50 @@ block_t *parse_block(FILE *file, int start_index, int remaining) {
         return NULL;
     }
     block->start_index = start_index;
-    short length = 0;
     inst_t inst = {0};
-    do
+    inst = parse_inst(file, start_index);
+    while ((inst.metadata & 0x03) == 0 && ((start_index - block->start_index + 1) < remaining))
     {
-        inst = parse_inst(file, start_index);
-        if (inst.metadata & 0x01 == 0)
-        {
-            block->end_index = start_index;
-        }
-        start_index++;
-        length++;
-    } while (inst.metadata & 0x01 == 0 && length < remaining);
-    if (length == remaining)
+        inst = parse_inst(file, ++start_index);
+    }
+    block->end_index = start_index;
+    if (block->end_index - block->start_index == remaining)
     {
         block->metadata = 0x02;
     }
     else
     {
-        block->metadata = 0x00;
+        block->metadata = inst.metadata & 0x03;
     }
-    
     return block;
+}
+
+block_t** parse_block_terminating(FILE *file, int start_index, int remaining, size_t* size_o) {
+    // Allocate memory for the block
+    block_t **blocks = malloc(sizeof(block_t*) * MAX_BLOCKS);
+    if (!blocks) {
+        perror("Error allocating memory");
+        return NULL;
+    }
+    size_t i = 0;
+    size_t curr_index = start_index;
+    blocks[i] = parse_block(file, curr_index, MAX_INSTRUCTIONS);
+    curr_index = blocks[i]->end_index + 1;
+    while((blocks[i]->metadata & 0x02) == 0) {
+        blocks[++i] = parse_block(file, curr_index + 1, MAX_INSTRUCTIONS);
+        curr_index = blocks[i]->end_index + 1;
+    }
+    *size_o = i;
+    return blocks;
+}
+
+void free_blocks(block_t** blocks, size_t size) {
+    for (size_t i = 0; i < size; i++)
+    {
+        free(blocks[i]);
+    }
+    free(blocks);
+    return;
 }
 
 void print_block(FILE* file, block_t *block) {
@@ -57,7 +77,7 @@ void print_block(FILE* file, block_t *block) {
     for (size_t i = block->start_index; i <= block->end_index; i++)
     {
         inst = parse_inst(file, i);
-        printf("Instruction %zu: Address: %ld, Metadata: %d\n", i, inst.address, inst.metadata);
+        printf("Instruction index %3zu: Address: %lx, Metadata: %x\n", i, inst.address, inst.metadata);
     }
     return;
 }
