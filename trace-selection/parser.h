@@ -5,6 +5,8 @@
  * Description: This file contains the header of the parser for the project.
  * 
  */
+#ifndef PARSER_H
+#define PARSER_H
 
 #include <stdio.h>
 #include <datatype.h>
@@ -26,7 +28,7 @@ inst_t parse_inst(FILE* file, int index);
  * @return The block of instructions read from the file.
  * @note The caller is responsible for freeing the memory allocated by this function.
  */
-block_t *parse_block(FILE* file, int start_index, int remaining);
+block_t *parse_block(FILE* file, int* start_index, int* remaining);
 
 
 /**
@@ -39,7 +41,7 @@ block_t *parse_block(FILE* file, int start_index, int remaining);
  * @return The block of instructions read from the file.
  * @note The caller is responsible for freeing the memory allocated by this function.
  */
-block_t** parse_block_terminating(FILE* file, int start_index, int remaining, size_t* size_o);
+block_t** parse_block_terminating(FILE* file, int* start_index, int* remaining, unsigned int* size_o);
 
 void free_blocks(block_t** blocks, size_t size);
 
@@ -51,7 +53,7 @@ void free_blocks(block_t** blocks, size_t size);
  */
 void print_block(FILE* file, block_t *block);
 
-
+#endif
 
 
 

@@ -10,7 +10,7 @@
 
 void print_trace(FILE* file, Trace *trace, size_t FLAGS) {
     if (FLAGS & PRINT_TRACE) 
-        printf("Trace: %d    blocks,    %d instructions,    start address: %llu,    end address: %llu\n", trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
+        printf("\n\nTrace: %d blocks,    %d instructions,    start address: %llu,    end address: %llu\n", trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
     
     if (FLAGS & PRINT_BLOCK)
     {
@@ -32,19 +32,16 @@ void print_trace(FILE* file, Trace *trace, size_t FLAGS) {
 */
 
 Trace* trace_selection(FILE *file, int* start_index) {
-    int* nb_blocks = calloc(1, sizeof(int));
-    if (!nb_blocks) {
-        perror("Error allocating memory");
-        return NULL;
-    }
-    block_t** blocks = parse_block_terminating(file, start_index, MAX_INSTRUCTIONS, nb_blocks);
+    int nb_blocks = 0;
+    int remaining = MAX_INSTRUCTIONS;
+    block_t** blocks = parse_block_terminating(file, start_index, &remaining, &nb_blocks);
     if (!blocks) {
         perror("Error parsing blocks");
         return NULL;
     }
     // add logic to check if trace already exists (need the map structure)
-    *start_index = blocks[*nb_blocks - 1]->end_index + 1;
-    return trace_builder(file, blocks, *nb_blocks);
+    //*start_index = blocks[*nb_blocks - 1]->end_index + 1;
+    return trace_builder(file, blocks, nb_blocks);
 }
 
 
@@ -61,16 +58,17 @@ Trace* trace_selection(FILE *file, int* start_index) {
 */
 
 
-Trace* trace_builder(FILE *file, block_t** blocks, size_t size) {
+Trace* trace_builder(FILE *file, block_t** blocks, int size) {
     Trace* trace = malloc(sizeof(Trace));
     if (!trace) {
         perror("Error allocating memory");
         return NULL;
     }
+    trace->id = 0;
     trace->nb_blocks = size;
     trace->nb_instructions = blocks[size - 1]->end_index - blocks[0]->start_index + 1;
-    trace->start_address = blocks[0]->start_index;
-    trace->end_address = blocks[size - 1]->end_index;
+    trace->start_address = parse_inst(file, blocks[0]->start_index).address;
+    trace->end_address = parse_inst(file, blocks[size - 1]->end_index).address;
     trace->blocks_p = blocks;
     trace->reuse = 0;
     trace->distance = 0;

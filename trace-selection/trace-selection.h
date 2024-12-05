@@ -6,6 +6,9 @@
  * 
  */
 
+#ifndef TRACE_H
+#define TRACE_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,6 +17,8 @@
 
 // Traces structure
 typedef struct {
+    // ID of the trace
+    int id;
     // Number of blocks in the trace
     int nb_blocks;
     // Number of instructions in the trace
@@ -27,7 +32,7 @@ typedef struct {
     // Number of reuse
     size_t reuse;
     // Distance
-    u_int64_t distance;
+    long int distance;
     // index of the last execution
     size_t last_used;
 } Trace;
@@ -62,7 +67,7 @@ void print_trace(FILE* file, Trace *trace, size_t FLAGS);
     * @param start_index The index of the first instruction in the trace. Updated for the next trace.
     * @return The trace read from the file.
 */
-void trace_selection(FILE *file, int* start_index);
+Trace* trace_selection(FILE *file, int* start_index);
 
 /**
     * @brief Builds a trace from the blocks.
@@ -72,6 +77,6 @@ void trace_selection(FILE *file, int* start_index);
     * @param size The size of the blocks array.
     * @return The trace built from the blocks.
  */
-Trace* trace_builder(FILE *file, block_t** blocks, size_t size);
+Trace* trace_builder(FILE *file, block_t** blocks, int size);
 
-
+#endif

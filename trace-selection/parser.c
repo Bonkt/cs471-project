@@ -17,22 +17,24 @@ inst_t parse_inst(FILE *file, int index) {
     return inst;
 }
 
-block_t *parse_block(FILE *file, int start_index, int remaining) {
+block_t *parse_block(FILE *file, int* start_index, int* remaining) {
     // Allocate memory for the block
     block_t *block = malloc(sizeof(block_t));
     if (!block) {
         perror("Error allocating memory");
         return NULL;
     }
-    block->start_index = start_index;
+    block->start_index = *start_index;
     inst_t inst = {0};
-    inst = parse_inst(file, start_index);
-    while ((inst.metadata & 0x03) == 0 && ((start_index - block->start_index + 1) < remaining))
+    inst = parse_inst(file, *start_index);
+    while (((inst.metadata & 0x03) == 0) && ((*start_index - block->start_index + 1) <= *remaining))
     {
-        inst = parse_inst(file, ++start_index);
+        *start_index += 1;
+        inst = parse_inst(file, *start_index);
+        *remaining -= 1;
     }
-    block->end_index = start_index;
-    if (block->end_index - block->start_index == remaining)
+    block->end_index = *start_index;
+    if (*remaining == 0)
     {
         block->metadata = 0x02;
     }
@@ -40,10 +42,11 @@ block_t *parse_block(FILE *file, int start_index, int remaining) {
     {
         block->metadata = inst.metadata & 0x03;
     }
+    *start_index += 1;
     return block;
 }
 
-block_t** parse_block_terminating(FILE *file, int start_index, int remaining, int* size_o) {
+block_t** parse_block_terminating(FILE *file, int* start_index, int* remaining, unsigned int* size_o) {
     // Allocate memory for the block
     block_t **blocks = malloc(sizeof(block_t*) * MAX_BLOCKS);
     if (!blocks) {
@@ -51,12 +54,11 @@ block_t** parse_block_terminating(FILE *file, int start_index, int remaining, in
         return NULL;
     }
     size_t i = 0;
-    size_t curr_index = start_index;
-    blocks[i] = parse_block(file, curr_index, MAX_INSTRUCTIONS);
-    curr_index = blocks[i]->end_index + 1;
-    while((blocks[i]->metadata & 0x02) == 0) {
-        blocks[++i] = parse_block(file, curr_index + 1, MAX_INSTRUCTIONS);
-        curr_index = blocks[i]->end_index + 1;
+    //size_t curr_index = *start_index;
+    blocks[i++] = parse_block(file, start_index, remaining);
+    //curr_index = blocks[i++]->end_index + 1;
+    while((blocks[i-1]->metadata & 0x02) == 0) {
+        blocks[i++] = parse_block(file, start_index, remaining);
     }
     *size_o = i;
     /* if we want to optimize memory usage, we can realloc the blocks array to the correct size
@@ -87,5 +89,22 @@ void print_block(FILE* file, block_t *block) {
         inst = parse_inst(file, i);
         printf("Instruction index %3zu: Address: %lx, Metadata: %x\n", i, inst.address, inst.metadata);
     }
+    printf("\n");
     return;
+}
+
+int compare_block(FILE *file, const block_t *a, const block_t *b) {
+    inst_t inst_a = parse_inst(file, a->start_index);
+    inst_t inst_b = parse_inst(file, b->start_index);
+    if (inst_a.address != inst_b.address)
+    {
+        return 0;
+    }
+    inst_a = parse_inst(file, a->end_index);
+    inst_b = parse_inst(file, b->end_index);
+    if (inst_a.address != inst_b.address)
+    {
+        return 0;
+    }
+    return 1;
 }

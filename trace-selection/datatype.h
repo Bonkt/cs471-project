@@ -1,3 +1,6 @@
+#ifndef DATATYPE_H
+#define DATATYPE_H
+
 #include <stdlib.h>
 
 // Flags
@@ -30,3 +33,5 @@ typedef struct {
     size_t end_index;
     char metadata;
 } block_t;
+
+#endif
