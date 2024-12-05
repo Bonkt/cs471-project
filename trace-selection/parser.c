@@ -43,7 +43,7 @@ block_t *parse_block(FILE *file, int start_index, int remaining) {
     return block;
 }
 
-block_t** parse_block_terminating(FILE *file, int start_index, int remaining, size_t* size_o) {
+block_t** parse_block_terminating(FILE *file, int start_index, int remaining, int* size_o) {
     // Allocate memory for the block
     block_t **blocks = malloc(sizeof(block_t*) * MAX_BLOCKS);
     if (!blocks) {
@@ -59,6 +59,14 @@ block_t** parse_block_terminating(FILE *file, int start_index, int remaining, si
         curr_index = blocks[i]->end_index + 1;
     }
     *size_o = i;
+    /* if we want to optimize memory usage, we can realloc the blocks array to the correct size
+    // currently losing up to 8Kb of memory for each trace, way too much
+    blocks = realloc(blocks, sizeof(block_t*) * (i + 1));
+    if (!blocks) {
+        perror("Error reallocating memory");
+        return NULL;
+    }
+    */ 
     return blocks;
 }
 

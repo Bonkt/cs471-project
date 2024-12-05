@@ -44,10 +44,34 @@ typedef Trace* Map;
 */
 
 // Function prototypes
-void print_trace(Trace *trace);
 
-void trace_selection(FILE *file);
+/**
+    * @brief Prints the trace to the console.
+    * 
+    * @param file The file to read from.
+    * @param trace The trace to print.
+    * @param FLAGS The flags to determine what to print.
+*/
+void print_trace(FILE* file, Trace *trace, size_t FLAGS);
 
-Trace* build_trace(FILE *file, int start_index);
+
+/**
+    * @brief Parses a trace from the file.
+    * 
+    * @param file The file to read from.
+    * @param start_index The index of the first instruction in the trace. Updated for the next trace.
+    * @return The trace read from the file.
+*/
+void trace_selection(FILE *file, int* start_index);
+
+/**
+    * @brief Builds a trace from the blocks.
+    * 
+    * @param file The file to read from.
+    * @param blocks The blocks of the trace.
+    * @param size The size of the blocks array.
+    * @return The trace built from the blocks.
+ */
+Trace* trace_builder(FILE *file, block_t** blocks, size_t size);
 
 

@@ -1,7 +1,16 @@
+/*
+ * File: main.c
+ * Author: Robert William
+ * Date: 2024-12-05
+ * Description: This file contains the entry point for the project.
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <parser.h>
+#include <trace-selection.h>
 
 
 // Your code here
@@ -18,14 +27,19 @@ int main(int argc, char *argv[]) {
     }
     // Start ------------------
 
-    // array of blocks
-    size_t start_index = 0;
-    for (int i = 0; i < 10; i++) {
-        block_t* block = parse_block(file, start_index, 5);
-        start_index = block->end_index + 1;
-        print_block(file, block);
+    // Parse the trace
+    int* index = malloc(sizeof(int));
+    Trace *trace = NULL;
+    for (size_t i = 0; i < 3; i++)
+    {
+        trace = trace_selection(file, index);
+        if (!trace) {
+            fprintf(stderr, "Error parsing trace\n");
+            return EXIT_FAILURE;
+        }
+        print_trace(file, trace, PRINT_TRACE | PRINT_BLOCK);
     }
-    
+    free(trace);
 
     // End --------------------
     fclose(file);

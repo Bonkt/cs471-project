@@ -8,7 +8,19 @@
 
 #include <trace-selection.h>
 
-void print_trace(Trace *trace) {}
+void print_trace(FILE* file, Trace *trace, size_t FLAGS) {
+    if (FLAGS & PRINT_TRACE) 
+        printf("Trace: %d    blocks,    %d instructions,    start address: %llu,    end address: %llu\n", trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
+    
+    if (FLAGS & PRINT_BLOCK)
+    {
+        for (int i = 0; i < trace->nb_blocks; i++) {
+            print_block(file, trace->blocks_p[i]);
+        }
+    }
+    
+    
+}
 
 
 /* How to identify a trace
@@ -19,7 +31,24 @@ void print_trace(Trace *trace) {}
     - If all block start address and end address are the same
 */
 
-void trace_selection(FILE *file) 
+Trace* trace_selection(FILE *file, int* start_index) {
+    int* nb_blocks = calloc(1, sizeof(int));
+    if (!nb_blocks) {
+        perror("Error allocating memory");
+        return NULL;
+    }
+    block_t** blocks = parse_block_terminating(file, start_index, MAX_INSTRUCTIONS, nb_blocks);
+    if (!blocks) {
+        perror("Error parsing blocks");
+        return NULL;
+    }
+    // add logic to check if trace already exists (need the map structure)
+    *start_index = blocks[*nb_blocks - 1]->end_index + 1;
+    return trace_builder(file, blocks, *nb_blocks);
+}
+
+
+/*
 {
     size_t curr_index = 0;
     Map* map = malloc(sizeof(Map) * MAX_TRACES);
@@ -29,8 +58,10 @@ void trace_selection(FILE *file)
     }
     
 }
+*/
 
-Trace* build_trace(FILE *file, block_t** blocks, size_t size) {
+
+Trace* trace_builder(FILE *file, block_t** blocks, size_t size) {
     Trace* trace = malloc(sizeof(Trace));
     if (!trace) {
         perror("Error allocating memory");

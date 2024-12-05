@@ -1,8 +1,11 @@
 #include <stdlib.h>
 
-#define BLOCK_LENGTH(x) (x.end_index - x.start_index + 1)
-#define IS_BRANCH(x) (x.metadata & 0x01)
-#define IS_TERMINATING(x) (x.metadata & 0x02)
+// Flags
+#define PRINT_TRACE 0x01
+#define PRINT_BLOCK 0x02
+
+#define BRANCH 0x01
+#define TERMINATING 0x02
 
 // Define the maximum number of blocks in a trace
 #define MAX_BLOCKS 1000
@@ -12,6 +15,10 @@
 
 // Define the maximum number of traces
 #define MAX_TRACES 1000
+
+#define BLOCK_LENGTH(x) (x.end_index - x.start_index + 1)
+#define IS_BRANCH(x) (x.metadata & BRANCH)
+#define IS_TERMINATING(x) (x.metadata & TERMINATING)
 
 typedef struct {
     long int address;
