@@ -2,6 +2,7 @@
 #define DATATYPE_H
 
 #include <stdlib.h>
+#include <glib.h>
 
 // Flags
 #define PRINT_TRACE 0x01
@@ -12,10 +13,8 @@
 
 // Define the maximum number of blocks in a trace
 #define MAX_BLOCKS 1000
-
 // Define the maximum number of instructions in trace
 #define MAX_INSTRUCTIONS 1000
-
 // Define the maximum number of traces
 #define MAX_TRACES 1000
 
@@ -33,5 +32,20 @@ typedef struct {
     size_t end_index;
     char metadata;
 } block_t;
+
+// Structure for storing values
+typedef struct {
+    unsigned int key1;
+    unsigned int key2;
+    char *value;
+} BTreeValue;
+
+typedef struct {
+    block_t** blocks_p;
+    unsigned int nb_blocks;
+    unsigned int size;
+    FILE* file;
+    GTree *tree;
+} data_t;
 
 #endif

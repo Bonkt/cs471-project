@@ -1,3 +1,7 @@
 python/trace_output2.log
 python/.idea/
+python/*
 processed_trace
+.vscode/*
+*.o
+main

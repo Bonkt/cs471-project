@@ -9,31 +9,44 @@
 
 #include "parser.h"
 
-inst_t parse_inst(FILE *file, int index) {
+inst_t parse_inst(data_t* data, int index) {
     inst_t inst = {0};
-    fseek(file, index * 9, SEEK_SET);
-    fread(&inst, 1, 9, file);
+    fseek(data->file, index * 9, SEEK_SET);
+    fread(&inst, 1, 9, data->file);
     
     return inst;
 }
 
-block_t *parse_block(FILE *file, int* start_index, int* remaining) {
+unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* remaining) {
     // Allocate memory for the block
     block_t *block = malloc(sizeof(block_t));
     if (!block) {
         perror("Error allocating memory");
-        return NULL;
+        return -1;
     }
     block->start_index = *start_index;
     inst_t inst = {0};
-    inst = parse_inst(file, *start_index);
+    inst = parse_inst(data, *start_index);
     while (((inst.metadata & 0x03) == 0) && ((*start_index - block->start_index + 1) <= *remaining))
     {
         *start_index += 1;
-        inst = parse_inst(file, *start_index);
+        inst = parse_inst(data, *start_index);
         *remaining -= 1;
     }
     block->end_index = *start_index;
+    *start_index += 1;
+
+    // check if block already exists
+    for (size_t i = 0; i < data->nb_blocks; i++)
+    {
+        if (compare_block(data, block, data->blocks_p[i]))
+        {
+            free(block);
+            return i;
+        }
+    }
+
+    // Set the metadata of the block if the block does not exist
     if (*remaining == 0)
     {
         block->metadata = 0x02;
@@ -42,23 +55,25 @@ block_t *parse_block(FILE *file, int* start_index, int* remaining) {
     {
         block->metadata = inst.metadata & 0x03;
     }
-    *start_index += 1;
-    return block;
+
+    // Add the block to the data structure
+    data->blocks_p[data->nb_blocks++] = block;
+    return data->nb_blocks - 1;
 }
 
-block_t** parse_block_terminating(FILE *file, int* start_index, int* remaining, unsigned int* size_o) {
+unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* remaining, unsigned int* size_o) {
     // Allocate memory for the block
-    block_t **blocks = malloc(sizeof(block_t*) * MAX_BLOCKS);
+    unsigned int *blocks = malloc(sizeof(unsigned int) * MAX_BLOCKS);
     if (!blocks) {
         perror("Error allocating memory");
         return NULL;
     }
     size_t i = 0;
     //size_t curr_index = *start_index;
-    blocks[i++] = parse_block(file, start_index, remaining);
+    blocks[i++] = parse_block(data, start_index, remaining);
     //curr_index = blocks[i++]->end_index + 1;
-    while((blocks[i-1]->metadata & 0x02) == 0) {
-        blocks[i++] = parse_block(file, start_index, remaining);
+    while((data->blocks_p[blocks[i-1]]->metadata & 0x02) == 0) {
+        blocks[i++] = parse_block(data, start_index, remaining);
     }
     *size_o = i;
     /* if we want to optimize memory usage, we can realloc the blocks array to the correct size
@@ -72,6 +87,7 @@ block_t** parse_block_terminating(FILE *file, int* start_index, int* remaining, 
     return blocks;
 }
 
+// Shouldn't be used I think... remnant of a previous implementation
 void free_blocks(block_t** blocks, size_t size) {
     for (size_t i = 0; i < size; i++)
     {
@@ -81,30 +97,52 @@ void free_blocks(block_t** blocks, size_t size) {
     return;
 }
 
-void print_block(FILE* file, block_t *block) {
-    printf("Block: [%zu, %zu], Metadata: %d\n", block->start_index, block->end_index, block->metadata);
+void print_block(data_t* data, unsigned int block) {
+    block_t *block_p = data->blocks_p[block];
+    printf("Block: [%zu, %zu], Metadata: %d, Block index: %d\n", block_p->start_index,block_p->end_index, block_p->metadata, block);
     inst_t inst = {0};
-    for (size_t i = block->start_index; i <= block->end_index; i++)
+    for (size_t i = block_p->start_index; i <= block_p->end_index; i++)
     {
-        inst = parse_inst(file, i);
+        inst = parse_inst(data, i);
         printf("Instruction index %3zu: Address: %lx, Metadata: %x\n", i, inst.address, inst.metadata);
     }
     printf("\n");
     return;
 }
 
-int compare_block(FILE *file, const block_t *a, const block_t *b) {
-    inst_t inst_a = parse_inst(file, a->start_index);
-    inst_t inst_b = parse_inst(file, b->start_index);
+int compare_block(data_t* data, const block_t *a, const block_t *b) {
+    inst_t inst_a = parse_inst(data, a->start_index);
+    inst_t inst_b = parse_inst(data, b->start_index);
     if (inst_a.address != inst_b.address)
     {
         return 0;
     }
-    inst_a = parse_inst(file, a->end_index);
-    inst_b = parse_inst(file, b->end_index);
+    inst_a = parse_inst(data, a->end_index);
+    inst_b = parse_inst(data, b->end_index);
     if (inst_a.address != inst_b.address)
     {
         return 0;
     }
     return 1;
+}
+
+int realloc_blocks(data_t* data) {
+    unsigned int new_size = data->size << 1;
+    if(new_size < data->size) {
+        perror("Error reallocating memory");
+        return -1;
+    }
+    // check if new_size * sizeof(block_t*) is too big
+    if(new_size * sizeof(block_t*) < new_size) {
+        perror("Error reallocating memory");
+        return -1;
+    }
+    block_t** new_blocks = realloc(data->blocks_p, sizeof(block_t*) * new_size);
+    if (!new_blocks) {
+        perror("Error reallocating memory");
+        return -1;
+    }
+    data->blocks_p = new_blocks;
+    data->size = new_size;
+    return data->size;
 }
