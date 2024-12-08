@@ -68,7 +68,7 @@ void print_trace(data_t* data, Trace *trace, size_t FLAGS);
     * @param start_index The index of the first instruction in the trace. Updated for the next trace.
     * @return The trace read from the file.
 */
-Trace* trace_selection(data_t* data, unsigned int* start_index);
+Trace* trace_parser(data_t* data, unsigned int* start_index);
 
 /**
     * @brief Builds a trace from the blocks.
@@ -78,7 +78,7 @@ Trace* trace_selection(data_t* data, unsigned int* start_index);
     * @param size The size of the blocks array.
     * @return The trace built from the blocks.
  */
-Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size);
+Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsigned int start_index);
 
 
 /**
@@ -98,5 +98,22 @@ void insert_trace(data_t* data, Trace* trace);
     * @return NULL if the trace is not found, the trace otherwise.
  */
 Trace* find_trace(data_t* data, Trace* trace);
+
+
+/**
+    * @brief Increment a trace reuse count and updates the distance
+    * 
+    * @param trace The trace to find.
+    * @param start_index Current index of the program
+ */
+void update_trace(Trace* trace, unsigned int start_index);
+
+
+/**
+    * @brief Free a trace and its block list
+    * 
+    * @param trace The trace to find.
+ */
+void free_trace(Trace* trace);
 
 #endif

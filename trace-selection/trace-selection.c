@@ -28,7 +28,7 @@ void print_trace(data_t* data, Trace *trace, size_t FLAGS) {
     - If all block start address and end address are the same
 */
 
-Trace* trace_selection(data_t* data, unsigned int* start_index) {
+Trace* trace_parser(data_t* data, unsigned int* start_index) {
     unsigned int nb_blocks = 0;
     unsigned int remaining = MAX_INSTRUCTIONS;
     unsigned int* blocks = parse_block_terminating(data, start_index, &remaining, &nb_blocks);
@@ -36,13 +36,21 @@ Trace* trace_selection(data_t* data, unsigned int* start_index) {
         perror("Error parsing blocks");
         return NULL;
     }
-    // add logic to check if trace already exists (need the map structure)
-    //*start_index = blocks[*nb_blocks - 1]->end_index + 1;
-    return trace_builder(data, blocks, nb_blocks);
+
+    Trace* trace = trace_builder(data, blocks, nb_blocks, *start_index);
+    Trace* lookup = find_trace(data, trace);
+    if(lookup == NULL) {
+        insert_trace(data, trace);
+        return trace;
+    } else {
+        free_trace(trace);
+        update_trace(lookup, *start_index);
+        return lookup;
+    }
 }
 
 
-Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size) {
+Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsigned int start_index) {
     Trace* trace = malloc(sizeof(Trace));
     if (!trace) {
         perror("Error allocating memory");
@@ -54,9 +62,9 @@ Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size) {
     trace->start_address = parse_inst(data, data->blocks_p[blocks[0]]->start_index).address;
     trace->end_address = parse_inst(data, data->blocks_p[blocks[size - 1]]->end_index).address;
     trace->blocks_p = blocks;
-    trace->reuse = 0;
+    trace->reuse = 1;
     trace->distance = 0;
-    trace->last_used = 0;
+    trace->last_used = start_index;
     return trace; // maybe return un index de la map plutôt qu'un pointeur et faire les checks directement dans la fonction
 }
 
@@ -66,6 +74,7 @@ void insert_trace(data_t* data, Trace* trace) {
         perror("Error allocating memory");
         return;
     }
+    trace->id = data->trace_count++;
     value->key1 = (unsigned int) trace->start_address;
     value->key2 = (unsigned int) trace->end_address;
     value->value = (char*) trace;
@@ -95,4 +104,17 @@ Trace* find_trace(data_t* data, Trace* trace) {
     }
     
     return (Trace*) result->value;
+}
+
+void update_trace(Trace* trace, unsigned int index)
+{
+    trace->distance += index - trace->last_used;
+    trace->last_used = index;
+    trace->reuse++;
+}
+
+void free_trace(Trace* trace)
+{
+    free(trace->blocks_p);
+    free(trace);
 }

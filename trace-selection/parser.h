@@ -18,6 +18,8 @@
  * @param data The global data structure.
  * @param index The index of the instruction to read.
  * @return The instruction read from the file.
+ * 
+ * @exception On reading error, write -1 in the instruction's address.
  */
 inst_t parse_inst(data_t* data, int index);
 

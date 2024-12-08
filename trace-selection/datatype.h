@@ -12,7 +12,7 @@
 #define TERMINATING 0x02
 
 // Define the maximum number of blocks in a trace
-#define MAX_BLOCKS 1000
+#define MAX_BLOCKS 5
 // Define the maximum number of instructions in trace
 #define MAX_INSTRUCTIONS 1000
 // Define the maximum number of traces
@@ -44,6 +44,7 @@ typedef struct {
     block_t** blocks_p;
     unsigned int nb_blocks;
     unsigned int size;
+    unsigned int trace_count;
     FILE* file;
     GTree *tree;
 } data_t;

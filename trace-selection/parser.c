@@ -11,9 +11,18 @@
 
 inst_t parse_inst(data_t* data, int index) {
     inst_t inst = {0};
-    fseek(data->file, index * 9, SEEK_SET);
-    fread(&inst, 1, 9, data->file);
-    
+    if(fseek(data->file, index * 9, SEEK_SET))
+    {
+        inst.address = -1;
+        return inst;
+    }
+    if(fread(&inst, 1, 9, data->file) != 9)
+    {
+        if(feof(data->file)) printf("Reached EOF\n");
+        else printf("Error while reading inst at index : %d\n", index);
+        inst.address = -1;
+        return inst;
+    }
     return inst;
 }
 
@@ -27,10 +36,12 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
     block->start_index = *start_index;
     inst_t inst = {0};
     inst = parse_inst(data, *start_index);
+    if(inst.address == -1) return -1;
     while (((inst.metadata & 0x03) == 0) && ((*start_index - block->start_index + 1) <= *remaining))
     {
         *start_index += 1;
         inst = parse_inst(data, *start_index);
+        if(inst.address == -1) return -1;
         *remaining -= 1;
     }
     block->end_index = *start_index;
@@ -72,7 +83,7 @@ unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, u
     //size_t curr_index = *start_index;
     blocks[i++] = parse_block(data, start_index, remaining);
     //curr_index = blocks[i++]->end_index + 1;
-    while((data->blocks_p[blocks[i-1]]->metadata & 0x02) == 0) {
+    while((data->blocks_p[blocks[i-1]]->metadata & 0x02) == 0 && i < MAX_BLOCKS) {
         blocks[i++] = parse_block(data, start_index, remaining);
     }
     *size_o = i;

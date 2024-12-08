@@ -85,18 +85,28 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     data.tree = tree;
-
+/*
     // Parse the trace
     unsigned int index = 0;
     Trace *trace = NULL;
     for (size_t i = 0; i < 5; i++)
     {
-        trace = trace_selection(&data, &index);
+        trace = trace_parser(&data, &index);
         if (!trace) {
             fprintf(stderr, "Error parsing trace\n");
             return EXIT_FAILURE;
         }
         print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK);
+    }
+    free(trace);
+*/
+    // Parse the trace
+    unsigned int index = 0;
+    Trace *trace = trace_parser(&data, &index);
+    while(trace)
+    {
+        trace = trace_parser(&data, &index);
+        print_trace(&data, trace, PRINT_TRACE);
     }
     free(trace);
 
