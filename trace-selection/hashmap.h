@@ -33,22 +33,33 @@ GHashTable* create_hash_table(void);
     * @param end_address The end address of the trace.
     * @return The hash of the key.
 */
-unsigned int hash_key(unsigned int start_address, unsigned int end_address);
+guint hash_key(gconstpointer start_address, gconstpointer end_address);
+
+/**
+    * @brief Checks if two keys are equal.
+    * 
+    * @param key1 The first key.
+    * @param key2 The second key.
+    * @return TRUE if the keys are equal, FALSE otherwise.
+*/
+gboolean hash_equal(gconstpointer key1, gconstpointer key2);
 
 /**
     * @brief Finds a trace in the hashmap.
     * 
     * @param data The global data structure.
-    * @param trace The trace to find.
+    * @param start_address The start address of the trace.
+    * @param end_address The end address of the trace.
     * @return The trace found.
 */
 Trace* find_value(data_t* data, unsigned int start_address, unsigned int end_address);
-
 
 /**
     * @brief Inserts a trace into the hashmap.
     * 
     * @param data The global data structure.
+    * @param start_address The start address of the trace.
+    * @param end_address The end address of the trace.
     * @param trace The trace to insert.
 */
 void insert_value(data_t* data, unsigned int start_address, unsigned int end_address, Trace* trace);
