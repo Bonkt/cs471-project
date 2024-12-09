@@ -10,7 +10,7 @@
 
 void print_trace(data_t* data, Trace *trace, size_t FLAGS) {
     if (FLAGS & PRINT_TRACE) 
-        printf("\n\nTrace: %d blocks,    %d instructions,    start address: %llu,    end address: %llu\n", trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
+        printf("\n\nTrace: %d,   %d blocks,    %d instructions,    start address: %llu,    end address: %llu\n", trace->id, trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
     
     if (FLAGS & PRINT_BLOCK)
     {
@@ -69,41 +69,25 @@ Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsi
 }
 
 void insert_trace(data_t* data, Trace* trace) {
-    BTreeValue* value = malloc(sizeof(BTreeValue));
-    if (!value) {
-        perror("Error allocating memory");
-        return;
-    }
     trace->id = data->trace_count++;
-    value->key1 = (unsigned int) trace->start_address;
-    value->key2 = (unsigned int) trace->end_address;
-    value->value = (char*) trace;
-    g_tree_insert(data->tree, value, value);
+    insert_value(data, (unsigned int) trace->start_address, (unsigned int) trace->end_address, trace);
 }
 
 Trace* find_trace(data_t* data, Trace* trace) {
-    BTreeValue* value = malloc(sizeof(BTreeValue));
-    if (!value) {
-        perror("Error allocating memory");
-        return NULL;
-    }
-    value->key1 = (unsigned int) trace->start_address;
-    value->key2 = (unsigned int) trace->end_address;
-    BTreeValue* result = g_tree_lookup(data->tree, value);
-    if (!result || ((Trace*) result->value)->id != trace->id 
-                || ((Trace*) result->value)->nb_blocks != trace->nb_blocks 
-                || ((Trace*) result->value)->nb_instructions != trace->nb_instructions) {
+    Trace* result = find_value(data, (unsigned int) trace->start_address, (unsigned int) trace->end_address);
+    if (!result || result->nb_blocks != trace->nb_blocks 
+                || result->nb_instructions != trace->nb_instructions) {
         return NULL;
     }
     for (size_t i = 0; i < trace->nb_blocks; i++)
     {
-        if(compare_block(data, data->blocks_p[trace->blocks_p[i]], data->blocks_p[((Trace*) result->value)->blocks_p[i]]))
+        if(compare_block(data, data->blocks_p[trace->blocks_p[i]], data->blocks_p[result->blocks_p[i]]))
             continue;
         else
             return NULL;
     }
     
-    return (Trace*) result->value;
+    return result;
 }
 
 void update_trace(Trace* trace, unsigned int index)

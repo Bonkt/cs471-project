@@ -15,31 +15,7 @@
 #include <parser.h>
 #include <glib.h>
 #include <datatype.h>
-
-// Traces structure
-typedef struct {
-    // ID of the trace
-    unsigned int id;
-    // Number of blocks in the trace
-    unsigned int nb_blocks;
-    // Number of instructions in the trace
-    unsigned int nb_instructions;
-    // Start address of the trace
-    unsigned long long start_address;
-    // End address of the trace
-    unsigned long long end_address;
-    // Array of pointers to the blocks in the trace
-    unsigned int* blocks_p;
-    // Number of reuse
-    size_t reuse;
-    // Distance
-    long int distance;
-    // index of the last execution
-    size_t last_used;
-} Trace;
-
-typedef Trace* Map;
-
+#include <tree.h>
 
 /* How to identify a trace
     - Look for the first instruction of the trace

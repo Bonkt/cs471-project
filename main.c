@@ -10,28 +10,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <parser.h>
+#include <tree.h>
 #include <glib.h>
 #include <trace-selection.h>
-
-gint composite_key_compare(gconstpointer a, gconstpointer b, gpointer user_data) {
-    user_data = user_data; // to remove warning, currently holding data_t to reference the address, maybe... This is faster but less precise
-    const int *key_a = a;
-    const int *key_b = b;
-
-    // Compare first key
-    if (key_a[0] < key_b[0])
-        return -1;
-    if (key_a[0] > key_b[0])
-        return 1;
-
-    // Compare second key if first keys are equal
-    if (key_a[1] < key_b[1])
-        return -1;
-    if (key_a[1] > key_b[1])
-        return 1;
-
-    return 0; // Keys are equal
-}
 
 // Your code here
 int main(int argc, char *argv[]) {
@@ -79,7 +60,7 @@ int main(int argc, char *argv[]) {
     }
     data.size = MAX_BLOCKS;
     data.nb_blocks = 0;
-    GTree *tree = g_tree_new_full(composite_key_compare, (gpointer)&data, free, free);
+    GTree *tree = create_tree(data);
     if (!tree) {
         perror("Error creating tree");
         return EXIT_FAILURE;
@@ -103,6 +84,7 @@ int main(int argc, char *argv[]) {
     // Parse the trace
     unsigned int index = 0;
     Trace *trace = trace_parser(&data, &index);
+    print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK);
     while(trace)
     {
         trace = trace_parser(&data, &index);
