@@ -38,6 +38,10 @@ Trace* trace_parser(data_t* data, unsigned int* start_index) {
     }
 
     Trace* trace = trace_builder(data, blocks, nb_blocks, *start_index);
+    if(!trace) {
+        perror("Error building trace");
+        return NULL;
+    }
     Trace* lookup = find_trace(data, trace);
     if(lookup == NULL) {
         insert_trace(data, trace);

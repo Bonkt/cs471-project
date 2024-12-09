@@ -10,6 +10,7 @@
 
 #define BRANCH 0x01
 #define TERMINATING 0x02
+#define _EOF 0x04
 
 // Define the maximum number of blocks in a trace
 #define MAX_BLOCKS 1000
@@ -35,10 +36,9 @@ typedef struct {
 
 // Structure for storing values
 typedef struct {
-    unsigned int key1;
-    unsigned int key2;
-    char *value;
-} BTreeValue;
+    unsigned int key; // hash of start address + end address
+    char *value; // Trace structure
+} hash_t_value;
 
 typedef struct {
     block_t** blocks_p;
@@ -46,7 +46,8 @@ typedef struct {
     unsigned int size;
     unsigned int trace_count;
     FILE* file;
-    GTree *tree;
+    unsigned int file_size;
+    GHashTable *hash_table; // Hash table for storing the traces structure
 } data_t;
 
 // Traces structure
@@ -61,7 +62,7 @@ typedef struct {
     unsigned long long start_address;
     // End address of the trace
     unsigned long long end_address;
-    // Array of pointers to the blocks in the trace
+    // Array of index to the blocks in the trace
     unsigned int* blocks_p;
     // Number of reuse
     size_t reuse;

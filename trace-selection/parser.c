@@ -11,6 +11,15 @@
 
 inst_t parse_inst(data_t* data, int index) {
     inst_t inst = {0};
+    if (index < 0 || index >= (data->file_size/9)) {
+        inst.address = -1;
+        return inst;
+    }
+    fseek(data->file, index * 9, SEEK_SET);
+    fread(&inst, 1, 9, data->file);
+
+    /*
+    
     if(fseek(data->file, index * 9, SEEK_SET))
     {
         inst.address = -1;
@@ -23,6 +32,8 @@ inst_t parse_inst(data_t* data, int index) {
         inst.address = -1;
         return inst;
     }
+    */
+
     return inst;
 }
 
@@ -36,17 +47,19 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
     block->start_index = *start_index;
     inst_t inst = {0};
     inst = parse_inst(data, *start_index);
-    if(inst.address == -1) return -1;
-    while (((inst.metadata & 0x03) == 0) && ((*start_index - block->start_index + 1) <= *remaining))
+    while (((inst.metadata & 0x03) == 0) && ((*start_index - block->start_index + 1) <= *remaining) && inst.address != -1)
     {
         *start_index += 1;
         inst = parse_inst(data, *start_index);
-        if(inst.address == -1) return -1;
         *remaining -= 1;
     }
     block->end_index = *start_index;
     *start_index += 1;
-
+    if (inst.address == -1) {
+        block->metadata = _EOF;
+        insert_block(data, block);
+        return data->nb_blocks - 1;
+    }
     // check if block already exists
     for (size_t i = 0; i < data->nb_blocks; i++)
     {
@@ -68,7 +81,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
     }
 
     // Add the block to the data structure
-    data->blocks_p[data->nb_blocks++] = block;
+    insert_block(data, block);
     return data->nb_blocks - 1;
 }
 
@@ -83,8 +96,16 @@ unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, u
     //size_t curr_index = *start_index;
     blocks[i++] = parse_block(data, start_index, remaining);
     //curr_index = blocks[i++]->end_index + 1;
+    if(data->blocks_p[blocks[i-1]]->metadata & 0x04) {
+        *size_o = i;
+        return blocks;
+    }
     while((data->blocks_p[blocks[i-1]]->metadata & 0x02) == 0 && i < MAX_BLOCKS) {
         blocks[i++] = parse_block(data, start_index, remaining);
+        if(data->blocks_p[blocks[i-1]]->metadata & 0x04) {
+            *size_o = i;
+            return blocks;
+        }
     }
     *size_o = i;
     /* if we want to optimize memory usage, we can realloc the blocks array to the correct size
@@ -135,6 +156,16 @@ int compare_block(data_t* data, const block_t *a, const block_t *b) {
         return 0;
     }
     return 1;
+}
+
+void insert_block(data_t* data, block_t* block) {
+    if(data->nb_blocks == data->size) {
+        if(realloc_blocks(data) == -1) {
+            return;
+        }
+    }
+    data->blocks_p[data->nb_blocks++] = block;
+    return;
 }
 
 int realloc_blocks(data_t* data) {

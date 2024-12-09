@@ -15,7 +15,7 @@
 #include <parser.h>
 #include <glib.h>
 #include <datatype.h>
-#include <tree.h>
+#include <hashmap.h>
 
 /* How to identify a trace
     - Look for the first instruction of the trace
