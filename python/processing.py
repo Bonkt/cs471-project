@@ -1,7 +1,7 @@
 import time
 
 t = time.time()
-f = open("python/trace_output.log", "r")
+f = open("python/trace_output2.log", "r")
 lines = f.readlines()
 f.close()
 print("Time to read file: " + str(time.time()-t))
@@ -12,7 +12,7 @@ jumps_t = ("br", "blr", "ret", "bx") #may need to add more or remove some
 #removed 
 jumps = ("b ", "bl ", "cbz ", "cbnz ", "tbz ", "tbnz ", "b.")
 
-f = open("processed_trace", "wb")
+f = open("processed_trace2", "wb")
 
 for i, line in enumerate(lines):
     s = line.split(", ")
