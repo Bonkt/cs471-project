@@ -21,7 +21,7 @@
  * 
  * @exception On reading error, write -1 in the instruction's address.
  */
-inst_t parse_inst(data_t* data, int index);
+inst_t parse_inst(data_t* data, unsigned int index);
 
 /**
  * Parses a block of instructions from the file.
@@ -67,6 +67,8 @@ void print_block(data_t* data, unsigned int block);
  */
 int compare_block(data_t* data, const block_t *a, const block_t *b);
 
+void insert_block(data_t* data, block_t* block);
+
 /**
  * Reallocates the memory for the blocks array.
  * 
@@ -74,6 +76,9 @@ int compare_block(data_t* data, const block_t *a, const block_t *b);
  * @return new size if successful, -1 otherwise.
  */
 int realloc_blocks(data_t* data);
+
+unsigned int count_inst(data_t* data, unsigned int* blocks, size_t size);
+
 #endif
 
 

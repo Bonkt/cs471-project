@@ -3,30 +3,28 @@
  * Author: Robert William
  * Date: 2024-11-26
  * Description: This file contains the implementation of the trace selection for the project.
- * 
  */
 
 #include <trace-selection.h>
 
 void print_trace(data_t* data, Trace *trace, size_t FLAGS) {
-    if (FLAGS & PRINT_TRACE) 
-        printf("\n\nTrace: %d,   %d blocks,    %d instructions,    start address: %llu,    end address: %llu\n", trace->id, trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
+    if (FLAGS & PRINT_TRACE) {
+        printf("Trace: %d,   %d blocks,    %d instructions,    start address: 0x%llx,    end address: 0x%llx\n",
+               trace->id, trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
+        }
     
-    if (FLAGS & PRINT_BLOCK)
-    {
+    if (FLAGS & PRINT_BLOCK) {
         for (unsigned int i = 0; i < trace->nb_blocks; i++) {
             print_block(data, trace->blocks_p[i]);
         }
     }
 }
 
-/* How to identify a trace
-    - Look for the first instruction of the trace
-    - If the instruction is not in the trace list, create a new trace
-    - If the instruction is in the trace list, continue reading the trace
-    - At the end of the trace, look at the blocks in the trace
-    - If all block start address and end address are the same
-*/
+/*
+ * Approach 2: Once we find a candidate trace using find_value, we know it's exact.
+ * No need to re-check nb_blocks, nb_instructions, or block sequences here.
+ * The hashing and equality checks in the hash table already guarantee uniqueness.
+ */
 
 Trace* trace_parser(data_t* data, unsigned int* start_index) {
     unsigned int nb_blocks = 0;
@@ -42,17 +40,20 @@ Trace* trace_parser(data_t* data, unsigned int* start_index) {
         perror("Error building trace");
         return NULL;
     }
+
+    // Now we use the find_trace function which fully relies on approach 2:
     Trace* lookup = find_trace(data, trace);
-    if(lookup == NULL) {
+    if (lookup == NULL) {
+        // Trace not found, insert it
         insert_trace(data, trace);
         return trace;
     } else {
+        // Trace already exists, free the newly built one and update the existing one
         free_trace(trace);
         update_trace(lookup, *start_index);
         return lookup;
     }
 }
-
 
 Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsigned int start_index) {
     Trace* trace = malloc(sizeof(Trace));
@@ -60,49 +61,47 @@ Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsi
         perror("Error allocating memory");
         return NULL;
     }
+
     trace->id = 0;
     trace->nb_blocks = size;
-    trace->nb_instructions = data->blocks_p[blocks[size - 1]]->end_index - data->blocks_p[blocks[0]]->start_index + 1;
+    trace->nb_instructions = count_inst(data, blocks, size);
     trace->start_address = parse_inst(data, data->blocks_p[blocks[0]]->start_index).address;
     trace->end_address = parse_inst(data, data->blocks_p[blocks[size - 1]]->end_index).address;
     trace->blocks_p = blocks;
     trace->reuse = 1;
     trace->distance = 0;
     trace->last_used = start_index;
-    return trace; // maybe return un index de la map plutôt qu'un pointeur et faire les checks directement dans la fonction
+    return trace;
 }
 
 void insert_trace(data_t* data, Trace* trace) {
     trace->id = data->trace_count++;
-    insert_value(data, (unsigned int) trace->start_address, (unsigned int) trace->end_address, trace);
+    // Approach 2: insert_value now takes the entire Trace and computes its unique key internally.
+    insert_value(data, trace);
 }
 
 Trace* find_trace(data_t* data, Trace* trace) {
-    Trace* result = find_value(data, (unsigned int) trace->start_address, (unsigned int) trace->end_address);
-    if (!result || result->nb_blocks != trace->nb_blocks 
-                || result->nb_instructions != trace->nb_instructions) {
+    // With approach 2, if find_value returns non-NULL, it's guaranteed identical.
+    Trace* lookup = find_value(data, trace);
+    /*if(!lookup)
+    {
         return NULL;
     }
-    for (size_t i = 0; i < trace->nb_blocks; i++)
-    {
-        if(compare_block(data, data->blocks_p[trace->blocks_p[i]], data->blocks_p[result->blocks_p[i]]))
-            continue;
-        else
-            return NULL;
+    if(data->trace_count < 50){
+        print_trace(data, lookup, PRINT_TRACE | PRINT_BLOCK);
+        print_trace(data, trace, PRINT_TRACE | PRINT_BLOCK);
     }
-    
-    return result;
+    */
+    return lookup;
 }
 
-void update_trace(Trace* trace, unsigned int index)
-{
+void update_trace(Trace* trace, unsigned int index) {
     trace->distance += index - trace->last_used;
     trace->last_used = index;
     trace->reuse++;
 }
 
-void free_trace(Trace* trace)
-{
+void free_trace(Trace* trace) {
     free(trace->blocks_p);
     free(trace);
 }

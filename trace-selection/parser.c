@@ -9,9 +9,9 @@
 
 #include "parser.h"
 
-inst_t parse_inst(data_t* data, int index) {
+inst_t parse_inst(data_t* data, unsigned int index) {
     inst_t inst = {0};
-    if (index < 0 || index >= (data->file_size/9)) {
+    if (index >= (data->file_size/9)) {
         inst.address = -1;
         return inst;
     }
@@ -46,13 +46,10 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
     }
     block->start_index = *start_index;
     inst_t inst = {0};
-    inst = parse_inst(data, *start_index);
-    while (((inst.metadata & 0x03) == 0) && ((*start_index - block->start_index + 1) <= *remaining) && inst.address != -1)
-    {
-        *start_index += 1;
-        inst = parse_inst(data, *start_index);
+    do {
+        inst = parse_inst(data, (*start_index)++);
         *remaining -= 1;
-    }
+    } while (((inst.metadata & 0x03) == 0) && (*remaining) != 0 && inst.address != -1);
     block->end_index = *start_index;
     *start_index += 1;
     if (inst.address == -1) {
@@ -187,4 +184,16 @@ int realloc_blocks(data_t* data) {
     data->blocks_p = new_blocks;
     data->size = new_size;
     return data->size;
+
+}
+
+unsigned int count_inst(data_t* data, unsigned int* blocks, size_t size)
+{
+    size_t count = 0;
+    for(size_t i = 0; i < size; i++)
+    {
+        block_t* block = data->blocks_p[blocks[i]];
+        count+= block->end_index - block->start_index + 1;
+    }
+    return count;
 }

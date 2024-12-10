@@ -15,7 +15,7 @@
 // Define the maximum number of blocks in a trace
 #define MAX_BLOCKS 1000
 // Define the maximum number of instructions in trace
-#define MAX_INSTRUCTIONS 1000
+#define MAX_INSTRUCTIONS 32
 // Define the maximum number of traces
 #define MAX_TRACES 1000
 
@@ -33,12 +33,6 @@ typedef struct {
     size_t end_index;
     char metadata;
 } block_t;
-
-// Structure for storing values
-typedef struct {
-    unsigned int key; // hash of start address + end address
-    char *value; // Trace structure
-} hash_t_value;
 
 typedef struct {
     block_t** blocks_p;

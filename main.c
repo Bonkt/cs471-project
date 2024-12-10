@@ -64,15 +64,16 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
+    //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
     while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
-        printf("Index: %d\n", *index);
         trace = trace_parser(&data, index);
         if (!trace) { 
             fprintf(stderr, "Error parsing trace\n");
             return EXIT_FAILURE;
         }
-        print_trace(&data, trace, PRINT_TRACE);
+        if(*index % 1000 < 20) printf("Index: %d\n", *index);
+        if(trace->nb_instructions > 32) print_trace(&data, trace, PRINT_TRACE);
     }
 
     // End --------------------
