@@ -9,6 +9,8 @@
 
 #include "parser.h"
 
+unsigned instructions_count = 0;
+
 inst_t parse_inst(data_t* data, unsigned int index) {
     inst_t inst = {0};
     if (index >= (data->file_size/9)) {
@@ -37,7 +39,7 @@ inst_t parse_inst(data_t* data, unsigned int index) {
     return inst;
 }
 
-unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* remaining) {
+unsigned int parse_block(data_t* data, unsigned int* start_index) {
     // Allocate memory for the block
     block_t *block = malloc(sizeof(block_t));
     if (!block) {
@@ -47,30 +49,46 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
     block->start_index = *start_index;
     inst_t inst = {0};
     do {
-        inst = parse_inst(data, (*start_index)++);
-        *remaining -= 1;
-    } while (((inst.metadata & 0x03) == 0) && (*remaining) != 0 && inst.address != -1);
-    block->end_index = *start_index;
-    *start_index += 1;
-    if (inst.address == -1) {
-        block->metadata = _EOF;
-        insert_block(data, block);
-        return data->nb_blocks - 1;
-    }
+        inst = parse_inst(data, *start_index); // parse the instruction
+        (*start_index)++; // increment the index
+        instructions_count++;
+    } while (((inst.metadata & 0x03) == 0) && instructions_count < MAX_INSTRUCTIONS && inst.address != -1);
+
+    block->end_index = *start_index - 1; // set the end index of the block
+
     // check if block already exists
     for (size_t i = 0; i < data->nb_blocks; i++)
     {
         if (compare_block(data, block, data->blocks_p[i]))
         {
             free(block);
-            return i;
+            // update the metadata of the block if the block already exists
+            if (instructions_count == MAX_INSTRUCTIONS)
+            {
+                data->blocks_p[i]->metadata |= TERMINATING;
+                return i;
+            }
+            else if (inst.address == -1)
+            {
+                data->blocks_p[i]->metadata |= _EOF;
+                return i;
+            }
+            else
+            {
+                data->blocks_p[i]->metadata = inst.metadata & 0x03;
+                return i;
+            }
         }
     }
 
     // Set the metadata of the block if the block does not exist
-    if (*remaining == 0)
+    if (instructions_count == MAX_INSTRUCTIONS)
     {
-        block->metadata = 0x02;
+        block->metadata |= TERMINATING;
+    }
+    else if (inst.address == -1)
+    {
+        block->metadata |= _EOF;
     }
     else
     {
@@ -82,37 +100,24 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
     return data->nb_blocks - 1;
 }
 
-unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* remaining, unsigned int* size_o) {
+unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* size_o) {
     // Allocate memory for the block
     unsigned int *blocks = malloc(sizeof(unsigned int) * MAX_BLOCKS);
     if (!blocks) {
         perror("Error allocating memory");
         return NULL;
     }
+
     size_t i = 0;
-    //size_t curr_index = *start_index;
-    blocks[i++] = parse_block(data, start_index, remaining);
-    //curr_index = blocks[i++]->end_index + 1;
-    if(data->blocks_p[blocks[i-1]]->metadata & 0x04) {
-        *size_o = i;
-        return blocks;
-    }
-    while((data->blocks_p[blocks[i-1]]->metadata & 0x02) == 0 && i < MAX_BLOCKS) {
-        blocks[i++] = parse_block(data, start_index, remaining);
+    instructions_count = 0;
+    do {
+        blocks[i++] = parse_block(data, start_index);
         if(data->blocks_p[blocks[i-1]]->metadata & 0x04) {
             *size_o = i;
             return blocks;
         }
-    }
-    *size_o = i;
-    /* if we want to optimize memory usage, we can realloc the blocks array to the correct size
-    // currently losing up to 8Kb of memory for each trace, way too much
-    blocks = realloc(blocks, sizeof(block_t*) * (i + 1));
-    if (!blocks) {
-        perror("Error reallocating memory");
-        return NULL;
-    }
-    */ 
+    } while (i < MAX_BLOCKS && (data->blocks_p[blocks[i-1]]->metadata & 0x06) == 0);
+    *size_o = i; // set the size of the blocks
     return blocks;
 }
 

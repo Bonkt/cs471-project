@@ -15,7 +15,7 @@
 // Define the maximum number of blocks in a trace
 #define MAX_BLOCKS 1000
 // Define the maximum number of instructions in trace
-#define MAX_INSTRUCTIONS 32
+#define MAX_INSTRUCTIONS 1000
 // Define the maximum number of traces
 #define MAX_TRACES 1000
 

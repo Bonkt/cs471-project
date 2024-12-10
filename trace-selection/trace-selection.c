@@ -28,8 +28,7 @@ void print_trace(data_t* data, Trace *trace, size_t FLAGS) {
 
 Trace* trace_parser(data_t* data, unsigned int* start_index) {
     unsigned int nb_blocks = 0;
-    unsigned int remaining = MAX_INSTRUCTIONS;
-    unsigned int* blocks = parse_block_terminating(data, start_index, &remaining, &nb_blocks);
+    unsigned int* blocks = parse_block_terminating(data, start_index, &nb_blocks);
     if (!blocks) {
         perror("Error parsing blocks");
         return NULL;

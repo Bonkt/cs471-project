@@ -31,7 +31,7 @@ inst_t parse_inst(data_t* data, unsigned int index);
  * @return The block of instructions read from the file.
  * @note The caller is responsible for freeing the memory allocated by this function.
  */
-unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* remaining);
+unsigned int parse_block(data_t* data, unsigned int* start_index);
 
 
 /**
@@ -44,7 +44,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index, unsigned int* 
  * @return The block of instructions read from the file.
  * @note The caller is responsible for freeing the memory allocated by this function.
  */
-unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* remaining, unsigned int* size_o);
+unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* size_o);
 
 // Shouldn't be used I think... remnant of a previous implementation
 void free_blocks(block_t** blocks, size_t size);

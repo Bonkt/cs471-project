@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
             return EXIT_FAILURE;
         }
         if(*index % 1000 < 20) printf("Index: %d\n", *index);
-        if(trace->nb_instructions > 32) print_trace(&data, trace, PRINT_TRACE);
+        print_trace(&data, trace, PRINT_TRACE);
     }
 
     // End --------------------
