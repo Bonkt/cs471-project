@@ -214,12 +214,6 @@ static void trex_insn_exec_cb(unsigned int cpu_index, void *udata)
     // extract the trex_insn of the current instruction.
     trex_insn_t* trex_insn = (trex_insn_t*)udata;
 
-    trex_instructions_simulated++;
-    if (trex_instructions_simulated % 10000000 == 0) {
-        printf("# of trex_instructions_simulated: %lu \n", trex_instructions_simulated);
-        // printf("vaddr: 0x%016" PRIx64 ", metadata: 0x%02X\n", trex_insn->vaddr, trex_insn->metadata);
-    }
-
     // two billions, then exit.
     if (trex_instructions_simulated >= 2000000000) {
         // Close file, and terminate process
@@ -229,13 +223,17 @@ static void trex_insn_exec_cb(unsigned int cpu_index, void *udata)
         exit(0);
     }
 
-    // this callback is registered for ALL instructions to enable counting # of insn executed,
-    // But we only want to log the branches:
-    if (trex_insn->metadata.direct_branch || trex_insn->metadata.indirect_branch) {
+    // only count and log instructions from the server cpu:
+    if (cpu_index == 1) {
+        trex_instructions_simulated++;
+        if (trex_instructions_simulated % 10000000 == 0) {
+            printf("# of trex_instructions_simulated: %lu \n", trex_instructions_simulated);
+            // printf("vaddr: 0x%016" PRIx64 ", metadata: 0x%02X\n", trex_insn->vaddr, trex_insn->metadata);
+        }
+
         fwrite(&trex_insn->vaddr, sizeof(trex_insn->vaddr), 1, trex_binary_ins_log_file);
         fwrite(&trex_insn->metadata, sizeof(trex_insn->metadata), 1, trex_binary_ins_log_file);
     }
-
 }
 
 
@@ -319,7 +317,6 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
 
             /* reset skip */
             skip = (imatches || amatches);
-            // g_free(insn_disas);
         }
 
     }
