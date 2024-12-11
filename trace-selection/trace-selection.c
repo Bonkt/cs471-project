@@ -5,6 +5,7 @@
  * Description: This file contains the implementation of the trace selection for the project.
  */
 
+#include "parser.h"    
 #include <trace-selection.h>
 
 void print_trace(data_t* data, Trace *trace, size_t FLAGS) {
@@ -64,8 +65,8 @@ Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsi
     trace->id = 0;
     trace->nb_blocks = size;
     trace->nb_instructions = count_inst(data, blocks, size);
-    trace->start_address = parse_inst(data, data->blocks_p[blocks[0]]->start_index).address;
-    trace->end_address = parse_inst(data, data->blocks_p[blocks[size - 1]]->end_index).address;
+    trace->start_address = get_inst(data, data->blocks_p[blocks[0]]->start_index).address;
+    trace->end_address = get_inst(data, data->blocks_p[blocks[size - 1]]->end_index).address;
     trace->blocks_p = blocks;
     trace->reuse = 1;
     trace->distance = 0;

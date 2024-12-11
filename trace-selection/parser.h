@@ -12,6 +12,8 @@
 #include <glib.h>
 #include <datatype.h>
 
+inst_t get_inst(data_t* data, unsigned int index);
+
 /**
  * Parses an instruction from the file.
  * 

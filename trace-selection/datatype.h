@@ -39,8 +39,9 @@ typedef struct {
     unsigned int nb_blocks;
     unsigned int size;
     unsigned int trace_count;
-    FILE* file;
     unsigned int file_size;
+    // FILE* file; // We will no longer need this
+    unsigned char *mapped_file; // base pointer to the mmapped file
     GHashTable *hash_table; // Hash table for storing the traces structure
 } data_t;
 

@@ -6,6 +6,7 @@
  * 
  */
 
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,6 +14,11 @@
 #include <hashmap.h>
 #include <glib.h>
 #include <trace-selection.h>
+
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 // Comparison function for sorting by trace->id
 static gint compare_trace_ids(gconstpointer a, gconstpointer b) {
@@ -36,23 +42,35 @@ int main(int argc, char *argv[]) {
     argc = argc;
     argv = argv;
 
-    FILE *file = fopen("processed_trace2", "r");
-    if (!file) {
-        perror("Error opening file");
+    struct timespec start, end;
+    // Record start time
+    if (clock_gettime(CLOCK_MONOTONIC, &start) != 0) {
+        perror("clock_gettime start");
         return EXIT_FAILURE;
     }
 
-    // Start ------------------
+    int fd = open("processed_trace2", O_RDONLY);
+    if (fd == -1) {
+        perror("open");
+        return EXIT_FAILURE;
+    }
 
-    data_t data = {0}; // initialize data structure
-    data.file = file; // set file pointer in data structure
+    data_t data;
 
-    fseek(file, 0, SEEK_END);  
-    size_t size = ftell(file);
-    rewind(file);
-    printf("File size: %zu\n", size); 
+    struct stat st;
+    if (fstat(fd, &st) == -1) {
+        perror("fstat");
+        close(fd);
+        return EXIT_FAILURE;
+    }
+    data.file_size = st.st_size;
 
-    data.file_size = size; // set file size in data structure
+    data.mapped_file = mmap(NULL, data.file_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    close(fd);
+    if (data.mapped_file == MAP_FAILED) {
+        perror("mmap");
+        return EXIT_FAILURE;
+    }
 
     data.blocks_p = malloc(sizeof(block_t*) * MAX_BLOCKS); // allocate memory for blocks
     if (!data.blocks_p) {
@@ -78,7 +96,7 @@ int main(int argc, char *argv[]) {
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
     //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
-    FILE* output = fopen("output2.csv", "w");
+    FILE* output = fopen("output.csv", "w");
     while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
         trace = trace_parser(&data, index);
@@ -96,7 +114,7 @@ int main(int argc, char *argv[]) {
     
     // Parse the hash table and save the traces to a file
     // Create an output CSV file
-    FILE *output_file = fopen("hashmap-output2.csv", "w");
+    FILE *output_file = fopen("hashmap-output.csv", "w");
     if (!output_file) {
         perror("Error opening output file");
         return EXIT_FAILURE;
@@ -138,8 +156,16 @@ int main(int argc, char *argv[]) {
 
     // Close the output file
     fclose(output_file);
+    //fclose(file);
 
-    
-    fclose(file);
+        // Record end time and compute elapsed
+    if (clock_gettime(CLOCK_MONOTONIC, &end) != 0) {
+        perror("clock_gettime end");
+        return EXIT_FAILURE;
+    }
+
+    double elapsed = (end.tv_sec - start.tv_sec) + (end.tv_nsec - start.tv_nsec)/1000000000.0;
+    printf("Total runtime: %.3f seconds\n", elapsed);
+
     return EXIT_SUCCESS;
 }

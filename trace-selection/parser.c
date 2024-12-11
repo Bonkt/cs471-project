@@ -10,7 +10,7 @@
 #include "parser.h"
 
 unsigned instructions_count = 0;
-
+/*
 inst_t parse_inst(data_t* data, unsigned int index) {
     inst_t inst = {0};
     if (index >= (data->file_size/9)) {
@@ -20,21 +20,20 @@ inst_t parse_inst(data_t* data, unsigned int index) {
     fseek(data->file, index * 9, SEEK_SET);
     fread(&inst, 1, 9, data->file);
 
-    /*
-    
-    if(fseek(data->file, index * 9, SEEK_SET))
-    {
+    return inst;
+}
+*/
+
+inst_t get_inst(data_t* data, unsigned int index) {
+    inst_t inst;
+    if (index >= data->file_size / 9) {
         inst.address = -1;
         return inst;
     }
-    if(fread(&inst, 1, 9, data->file) != 9)
-    {
-        if(feof(data->file)) printf("Reached EOF\n");
-        else printf("Error while reading inst at index : %d\n", index);
-        inst.address = -1;
-        return inst;
-    }
-    */
+
+    unsigned char *ptr = data->mapped_file + (index * 9);
+    inst.address = *(long int*)ptr;
+    inst.metadata = *(ptr + 8);
 
     return inst;
 }
@@ -49,7 +48,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     block->start_index = *start_index;
     inst_t inst = {0};
     do {
-        inst = parse_inst(data, *start_index); // parse the instruction
+        inst = get_inst(data, *start_index); // parse the instruction
         (*start_index)++; // increment the index
         instructions_count++;
     } while (((inst.metadata & 0x03) == 0) && instructions_count < MAX_INSTRUCTIONS && inst.address != -1);
@@ -137,7 +136,7 @@ void print_block(data_t* data, unsigned int block) {
     inst_t inst = {0};
     for (size_t i = block_p->start_index; i <= block_p->end_index; i++)
     {
-        inst = parse_inst(data, i);
+        inst = get_inst(data, i);
         printf("Instruction index %3zu: Address: %lx, Metadata: %x\n", i, inst.address, inst.metadata);
     }
     printf("\n");
@@ -145,14 +144,14 @@ void print_block(data_t* data, unsigned int block) {
 }
 
 int compare_block(data_t* data, const block_t *a, const block_t *b) {
-    inst_t inst_a = parse_inst(data, a->start_index);
-    inst_t inst_b = parse_inst(data, b->start_index);
+    inst_t inst_a = get_inst(data, a->start_index);
+    inst_t inst_b = get_inst(data, b->start_index);
     if (inst_a.address != inst_b.address)
     {
         return 0;
     }
-    inst_a = parse_inst(data, a->end_index);
-    inst_b = parse_inst(data, b->end_index);
+    inst_a = get_inst(data, a->end_index);
+    inst_b = get_inst(data, b->end_index);
     if (inst_a.address != inst_b.address)
     {
         return 0;
