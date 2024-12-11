@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
         if(*index % 1000 < 20) printf("Index: %d\n", *index);
         print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
-        fprintf(output, "%6d,", trace->id);
+        //fprintf(output, "%6d,", trace->id);
     }
 
     // End --------------------
