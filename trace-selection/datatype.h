@@ -32,6 +32,9 @@ typedef struct {
     size_t start_index;
     size_t end_index;
     char metadata;
+    unsigned long long start_address;
+    unsigned long long end_address;
+    guint block_hash;
 } block_t;
 
 typedef struct {

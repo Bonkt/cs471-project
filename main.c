@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    int fd = open("processed_trace2", O_RDONLY);
+    int fd = open("processed_trace", O_RDONLY);
     if (fd == -1) {
         perror("open");
         return EXIT_FAILURE;
@@ -118,6 +118,8 @@ int main(int argc, char *argv[]) {
     printf("Index: %d\n", *index);
     // Print the number of blocks
     printf("Number of blocks: %d\n", data.nb_blocks);
+    // Print the number of traces
+    printf("Number of traces: %d\n", data.trace_count);
 
     // End --------------------
     

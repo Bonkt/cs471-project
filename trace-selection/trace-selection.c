@@ -65,8 +65,11 @@ Trace* trace_builder(data_t* data, unsigned int* blocks, unsigned int size, unsi
     trace->id = 0;
     trace->nb_blocks = size;
     trace->nb_instructions = count_inst(data, blocks, size);
-    trace->start_address = get_inst(data, data->blocks_p[blocks[0]]->start_index).address;
-    trace->end_address = get_inst(data, data->blocks_p[blocks[size - 1]]->end_index).address;
+    // Use cached block addresses:
+    block_t* first_block = data->blocks_p[blocks[0]];
+    block_t* last_block = data->blocks_p[blocks[size - 1]];
+    trace->start_address = first_block->start_address;
+    trace->end_address = last_block->end_address;
     trace->blocks_p = blocks;
     trace->reuse = 1;
     trace->distance = 0;

@@ -59,13 +59,17 @@ GHashTable* create_hash_table(void) {
 static guint compute_block_sequence_hash(data_t* data, Trace* trace) {
     guint block_sequence_hash = 0;
     for (unsigned int i = 0; i < trace->nb_blocks; i++) {
-        // Get the block indices
-        size_t s = data->blocks_p[trace->blocks_p[i]]->start_index;
-        size_t e = data->blocks_p[trace->blocks_p[i]]->end_index;
-        // Combine them into the hash
-        block_sequence_hash ^= g_int_hash(&s);
-        block_sequence_hash ^= (g_int_hash(&e) << 1);
+        block_t* b = data->blocks_p[trace->blocks_p[i]];
+        block_sequence_hash ^= b->block_hash;
     }
+
+    // Optional: add a final mixing
+    block_sequence_hash ^= block_sequence_hash >> 16;
+    block_sequence_hash *= 0x85ebca6b;
+    block_sequence_hash ^= block_sequence_hash >> 13;
+    block_sequence_hash *= 0xc2b2ae35;
+    block_sequence_hash ^= block_sequence_hash >> 16;
+
     return block_sequence_hash;
 }
 

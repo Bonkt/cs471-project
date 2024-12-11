@@ -55,6 +55,27 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
 
     block->end_index = *start_index - 1; // set the end index of the block
 
+    // Precompute block start and end addresses here:
+    inst_t start_inst = get_inst(data, block->start_index);
+    inst_t end_inst = get_inst(data, block->end_index);
+    block->start_address = start_inst.address;
+    block->end_address = end_inst.address;
+
+    // Precompute a block-specific hash. For simplicity, just hash start and end addresses:
+    // You can use a simple mixing function:
+    guint h = 0;
+    h ^= (guint)block->start_address;
+    h ^= (guint)(block->start_address >> 32);
+    h ^= (guint)block->end_address;
+    h ^= (guint)(block->end_address >> 32);
+    // Simple mixing function (example):
+    h ^= h >> 16;
+    h *= 0x85ebca6b;
+    h ^= h >> 13;
+    h *= 0xc2b2ae35;
+    h ^= h >> 16;
+    block->block_hash = h;
+
     // check if block already exists
     for (size_t i = 0; i < data->nb_blocks; i++)
     {
@@ -144,18 +165,10 @@ void print_block(data_t* data, unsigned int block) {
 }
 
 int compare_block(data_t* data, const block_t *a, const block_t *b) {
-    inst_t inst_a = get_inst(data, a->start_index);
-    inst_t inst_b = get_inst(data, b->start_index);
-    if (inst_a.address != inst_b.address)
-    {
+    if (a->start_address != b->start_address)
         return 0;
-    }
-    inst_a = get_inst(data, a->end_index);
-    inst_b = get_inst(data, b->end_index);
-    if (inst_a.address != inst_b.address)
-    {
+    if (a->end_address != b->end_address)
         return 0;
-    }
     return 1;
 }
 
