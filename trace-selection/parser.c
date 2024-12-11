@@ -35,6 +35,9 @@ inst_t get_inst(data_t* data, unsigned int index) {
     inst.address = *(long int*)ptr;
     inst.metadata = *(ptr + 8);
 
+    // Print the index every 1 milion instructions
+    if(index % 100000000 == 0) printf("Index: %d\n", index);
+
     return inst;
 }
 
@@ -79,7 +82,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     // check if block already exists
     for (size_t i = 0; i < data->nb_blocks; i++)
     {
-        if (compare_block(data, block, data->blocks_p[i]))
+        if (compare_block(block, data->blocks_p[i]))
         {
             free(block);
             // update the metadata of the block if the block already exists
@@ -164,7 +167,7 @@ void print_block(data_t* data, unsigned int block) {
     return;
 }
 
-int compare_block(data_t* data, const block_t *a, const block_t *b) {
+int compare_block(const block_t *a, const block_t *b) {
     if (a->start_address != b->start_address)
         return 0;
     if (a->end_address != b->end_address)

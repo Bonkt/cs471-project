@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    int fd = open("processed_trace", O_RDONLY);
+    int fd = open("processed_trace2", O_RDONLY);
     if (fd == -1) {
         perror("open");
         return EXIT_FAILURE;
@@ -109,8 +109,6 @@ int main(int argc, char *argv[]) {
             fprintf(stderr, "Error parsing trace\n");
             return EXIT_FAILURE;
         }
-        // Print index every 100 000 000 indexes
-        if(*index % 100000000 == 0) printf("Index: %d\n", *index);
         //if(*index % 1000 < 20) printf("Index: %d\n", *index);
         //print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file

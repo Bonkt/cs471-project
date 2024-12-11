@@ -62,12 +62,11 @@ void print_block(data_t* data, unsigned int block);
 /**
  * Compares two blocks of instructions.
  * 
- * @param data The global data structure.
  * @param a The first block of instructions.
  * @param b The second block of instructions.
  * @return 1 if the blocks are equal, 0 otherwise.
  */
-int compare_block(data_t* data, const block_t *a, const block_t *b);
+int compare_block(const block_t *a, const block_t *b);
 
 void insert_block(data_t* data, block_t* block);
 
