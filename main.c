@@ -78,8 +78,8 @@ int main(int argc, char *argv[]) {
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
     //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
-    FILE* output = fopen("output2.csv", "w");
-    while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
+    //FILE* output = fopen("output2.csv", "w");
+    while(trace && *index < 100000 && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
         trace = trace_parser(&data, index);
         if (!trace) { 
@@ -89,13 +89,14 @@ int main(int argc, char *argv[]) {
         if(*index % 1000 < 20) printf("Index: %d\n", *index);
         print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
-        fprintf(output, "%6d,", trace->id);
+        //fprintf(output, "%6d,", trace->id);
     }
 
     // End --------------------
     
     // Parse the hash table and save the traces to a file
     // Create an output CSV file
+    /*
     FILE *output_file = fopen("hashmap-output2.csv", "w");
     if (!output_file) {
         perror("Error opening output file");
@@ -138,6 +139,7 @@ int main(int argc, char *argv[]) {
 
     // Close the output file
     fclose(output_file);
+    */
 
     
     fclose(file);

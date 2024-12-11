@@ -9,8 +9,8 @@
 
 void print_trace(data_t* data, Trace *trace, size_t FLAGS) {
     if (FLAGS & PRINT_TRACE) {
-        printf("Trace: %d,   %d blocks,    %d instructions,    start address: 0x%llx,    end address: 0x%llx\n",
-               trace->id, trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address);
+        printf("Trace: %d,   %d blocks,    %d instructions,    start address: 0x%llx,    end address: 0x%llx, index: %d\n",
+               trace->id, trace->nb_blocks, trace->nb_instructions, trace->start_address, trace->end_address, data->nb_blocks);
         }
     
     if (FLAGS & PRINT_BLOCK) {

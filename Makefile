@@ -2,7 +2,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -Itrace-selection -O0 -g
+CFLAGS = -Wall -Wextra -Itrace-selection -O3 -g
 
 # Source files
 SRCS = $(wildcard trace-selection/*.c) main.c
@@ -15,6 +15,9 @@ GLIB_CFLAGS = $(shell pkg-config --cflags glib-2.0)
 GLIB_LDFLAGS = $(shell pkg-config --libs glib-2.0)
 CFLAGS += $(GLIB_CFLAGS)
 LDFLAGS = $(GLIB_LDFLAGS)
+CFLAGS += -pg
+LDFLAGS += -pg
+
 
 # Executable name
 EXEC = main
