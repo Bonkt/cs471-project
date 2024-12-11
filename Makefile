@@ -15,8 +15,8 @@ GLIB_CFLAGS = $(shell pkg-config --cflags glib-2.0)
 GLIB_LDFLAGS = $(shell pkg-config --libs glib-2.0)
 CFLAGS += $(GLIB_CFLAGS)
 LDFLAGS = $(GLIB_LDFLAGS)
-CFLAGS += -pg
-LDFLAGS += -pg
+CFLAGS += 
+LDFLAGS += 
 
 
 # Executable name

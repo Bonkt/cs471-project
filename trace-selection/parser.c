@@ -35,9 +35,6 @@ inst_t get_inst(data_t* data, unsigned int index) {
     inst.address = *(long int*)ptr;
     inst.metadata = *(ptr + 8);
 
-    // Print the index every 1 milion instructions
-    if(index % 100000000 == 0) printf("Index: %d\n", index);
-
     return inst;
 }
 
@@ -51,6 +48,10 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     block->start_index = *start_index;
     inst_t inst = {0};
     do {
+        // Print the index every 1 milion instructions
+        
+        if(*start_index % 1000000 == 0) printf("Index: %d\n", *start_index);
+
         inst = get_inst(data, *start_index); // parse the instruction
         (*start_index)++; // increment the index
         instructions_count++;

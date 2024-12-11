@@ -114,6 +114,8 @@ int main(int argc, char *argv[]) {
         // write id as 6 numbers + ';' in output file
         //fprintf(output, "%6d,", trace->id);
     }
+    
+
     // Print the last index
     printf("Index: %d\n", *index);
     // Print the number of blocks
