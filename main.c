@@ -6,6 +6,8 @@
  * 
  */
 
+#define _POSIX_C_SOURCE 199309L
+
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +34,9 @@ static gint compare_trace_ids(gconstpointer a, gconstpointer b) {
     else
         return 0;
 }
+
+
+
 
 // Your code here
 int main(int argc, char *argv[]) {
@@ -96,7 +101,7 @@ int main(int argc, char *argv[]) {
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
     //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
-    FILE* output = fopen("output.csv", "w");
+    //FILE* output = fopen("output.csv", "w");
     while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
         trace = trace_parser(&data, index);
@@ -104,11 +109,15 @@ int main(int argc, char *argv[]) {
             fprintf(stderr, "Error parsing trace\n");
             return EXIT_FAILURE;
         }
-        if(*index % 1000 < 20) printf("Index: %d\n", *index);
-        print_trace(&data, trace, PRINT_TRACE);
+        //if(*index % 1000 < 20) printf("Index: %d\n", *index);
+        //print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
         //fprintf(output, "%6d,", trace->id);
     }
+    // Print the last index
+    printf("Index: %d\n", *index);
+    // Print the number of blocks
+    printf("Number of blocks: %d\n", data.nb_blocks);
 
     // End --------------------
     

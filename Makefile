@@ -2,7 +2,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -Itrace-selection -O3 -g
+CFLAGS = -Wall -Wextra -Itrace-selection -O3 -flto -g
 
 # Source files
 SRCS = $(wildcard trace-selection/*.c) main.c
