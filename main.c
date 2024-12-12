@@ -163,7 +163,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
-    if (output_filename) { fprintf(output, "%05d,", trace->id); }  
+    if (output_filename) { fprintf(output, "%d,", trace->id); }  
     //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
     while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
@@ -173,10 +173,10 @@ int main(int argc, char *argv[]) {
             return EXIT_FAILURE;
         }
         //if(*index % 1000 < 20) printf("Index: %d\n", *index);
-        if(flags) print_trace(&data, trace, flags);
+   if(flags) print_trace(&data, trace, flags);
         //print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
-        if (output_filename) { fprintf(output, "%05d,", trace->id); }  
+        if (output_filename) { fprintf(output, "%d,", trace->id); }  
     }
     if (output_filename) { fclose(output); }
 
