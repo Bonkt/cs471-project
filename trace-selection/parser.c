@@ -65,45 +65,66 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     block->start_address = start_inst.address;
     block->end_address = end_inst.address;
 
+
     // Precompute a block-specific hash. For simplicity, just hash start and end addresses:
     // You can use a simple mixing function:
     guint h = 0;
     h ^= (guint)block->start_address;
-    h ^= (guint)(block->start_address >> 32);
+    // h ^= (guint)(block->start_address >> 32);
     h ^= (guint)block->end_address;
-    h ^= (guint)(block->end_address >> 32);
-    // Simple mixing function (example):
+    // h ^= (guint)(block->end_address >> 32);
     h ^= h >> 16;
     h *= 0x85ebca6b;
     h ^= h >> 13;
     h *= 0xc2b2ae35;
     h ^= h >> 16;
+
     block->block_hash = h;
 
-    // check if block already exists
-    for (size_t i = 0; i < data->nb_blocks; i++)
-    {
-        if (compare_block(block, data->blocks_p[i]))
+    block_t* block_ptr_ptr = g_hash_table_lookup(data->blocks_map, block);
+    if(block_ptr_ptr) {
+        free(block);
+        // update the metadata of the block if the block already exists
+        if (instructions_count == MAX_INSTRUCTIONS)
         {
-            free(block);
-            // update the metadata of the block if the block already exists
-            if (instructions_count == MAX_INSTRUCTIONS)
-            {
-                data->blocks_p[i]->metadata |= TERMINATING;
-                return i;
-            }
-            else if (inst.address == -1)
-            {
-                data->blocks_p[i]->metadata |= _EOF;
-                return i;
-            }
-            else
-            {
-                data->blocks_p[i]->metadata = inst.metadata & 0x03;
-                return i;
-            }
+            (block_ptr_ptr)->metadata |= TERMINATING;
+            return (block_ptr_ptr)->block_index;
+        }
+        else if (inst.address == -1)
+        {
+            (block_ptr_ptr)->metadata |= _EOF;
+            return (block_ptr_ptr)->block_index;
+        }
+        else
+        {
+            (block_ptr_ptr)->metadata = inst.metadata & 0x03;
+            return (block_ptr_ptr)->block_index;
         }
     }
+    // check if block already exists
+    // for (size_t i = 0; i < data->nb_blocks; i++)
+    // {
+    //     if (compare_block(block, data->blocks_p[i]))
+    //     {
+    //         free(block);
+    //         // update the metadata of the block if the block already exists
+    //         if (instructions_count == MAX_INSTRUCTIONS)
+    //         {
+    //             data->blocks_p[i]->metadata |= TERMINATING;
+    //             return i;
+    //         }
+    //         else if (inst.address == -1)
+    //         {
+    //             data->blocks_p[i]->metadata |= _EOF;
+    //             return i;
+    //         }
+    //         else
+    //         {
+    //             data->blocks_p[i]->metadata = inst.metadata & 0x03;
+    //             return i;
+    //         }
+    //     }
+    // }
 
     // Set the metadata of the block if the block does not exist
     if (instructions_count == MAX_INSTRUCTIONS)
@@ -119,8 +140,12 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
         block->metadata = inst.metadata & 0x03;
     }
 
-    // Add the block to the data structure
     insert_block(data, block);
+    block->block_index = data->nb_blocks - 1;
+    g_hash_table_insert(data->blocks_map, block, block);
+
+
+
     return data->nb_blocks - 1;
 }
 

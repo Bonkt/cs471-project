@@ -32,6 +32,7 @@ typedef struct {
     size_t start_index;
     size_t end_index;
     char metadata;
+    unsigned int block_index;
     unsigned long long start_address;
     unsigned long long end_address;
     guint block_hash;
@@ -46,6 +47,9 @@ typedef struct {
     // FILE* file; // We will no longer need this
     unsigned char *mapped_file; // base pointer to the mmapped file
     GHashTable *hash_table; // Hash table for storing the traces structure
+    
+    
+    GHashTable *blocks_map; // hashmap<KEY(block_t), block_t*>
 } data_t;
 
 // Traces structure

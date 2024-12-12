@@ -34,6 +34,46 @@ static gint compare_trace_ids(gconstpointer a, gconstpointer b) {
     else
         return 0;
 }
+// OLD implementation:
+// Index: 0
+// Trace: 0,   1 blocks,    9 instructions,    start address: 0xffff80000882a534,    end address: 0xffff80000882a554, index: 1
+// Block: [0, 8], Metadata: 2, Block index: 0
+// Instruction index   0: Address: ffff80000882a534, Metadata: 0
+// Instruction index   1: Address: ffff80000882a538, Metadata: 0
+// Instruction index   2: Address: ffff80000882a53c, Metadata: 0
+// Instruction index   3: Address: ffff80000882a540, Metadata: 0
+// Instruction index   4: Address: ffff80000882a544, Metadata: 0
+// Instruction index   5: Address: ffff80000882a548, Metadata: 0
+// Instruction index   6: Address: ffff80000882a54c, Metadata: 0
+// Instruction index   7: Address: ffff80000882a550, Metadata: 0
+// Instruction index   8: Address: ffff80000882a554, Metadata: 2
+
+// Index: 1000000
+// Index: 2000000
+// Index: 3000000
+// Index: 4000000
+// Index: 4695533
+// Number of blocks: 8003
+// Number of traces: 2312
+// Total runtime: 3.120 second
+
+// 3.120 s to do processed_trace2
+guint block_hash_func(gconstpointer key) {
+    const block_t *block = (const block_t *)key;
+    return block->block_hash;
+}
+
+gboolean block_equal_func(gconstpointer a_, gconstpointer b_) {
+    const block_t *a = (const block_t *)a_;
+    const block_t *b = (const block_t *)b_;
+    if (a->start_address != b->start_address)
+        return 0;
+    if (a->end_address != b->end_address)
+        return 0;
+    return 1;
+}
+
+
 
 
 
@@ -103,6 +143,7 @@ int main(int argc, char *argv[]) {
     }
     data.size = MAX_BLOCKS; // set size of blocks array in data structure
     data.nb_blocks = 0; // set number of blocks in data structure
+    data.blocks_map = g_hash_table_new(block_hash_func, block_equal_func);
 
     GHashTable *hash_table = create_hash_table();
     if (!hash_table) {
