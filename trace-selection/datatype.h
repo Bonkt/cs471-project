@@ -1,6 +1,7 @@
 #ifndef DATATYPE_H
 #define DATATYPE_H
 
+#include <stdint.h>  
 #include <stdlib.h>
 #include <glib.h>
 
@@ -13,11 +14,11 @@
 #define _EOF 0x04
 
 // Define the maximum number of blocks in a trace
-#define MAX_BLOCKS 1000
+extern uint64_t g_max_blocks;
 // Define the maximum number of instructions in trace
-#define MAX_INSTRUCTIONS 1000
+extern uint64_t g_max_instructions;
 // Define the maximum number of traces
-#define MAX_TRACES 1000
+#define MAX_TRACES 1000 // not used for now.
 
 #define BLOCK_LENGTH(x) (x.end_index - x.start_index + 1)
 #define IS_BRANCH(x) (x.metadata & BRANCH)

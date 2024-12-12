@@ -9,6 +9,10 @@
 
 #include "parser.h"
 
+// Define the maximum number of blocks in a trace
+uint64_t g_max_blocks = 1000;
+uint64_t g_max_instructions = 1000;
+
 unsigned instructions_count = 0;
 /*
 inst_t parse_inst(data_t* data, unsigned int index) {
@@ -55,7 +59,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
         inst = get_inst(data, *start_index); // parse the instruction
         (*start_index)++; // increment the index
         instructions_count++;
-    } while (((inst.metadata & 0x03) == 0) && instructions_count < MAX_INSTRUCTIONS && inst.address != -1);
+    } while (((inst.metadata & 0x03) == 0) && instructions_count < g_max_instructions && inst.address != -1);
 
     block->end_index = *start_index - 1; // set the end index of the block
 
@@ -69,22 +73,19 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     guint64 h64 = 0;
     guint64 sa = block->start_address;
     guint64 ea = block->end_address;
-
     h64 ^= sa;
     h64 = (h64 ^ (h64 >> 33)) * 0xff51afd7ed558ccdULL;
     h64 = (h64 ^ (h64 >> 33)) * 0xc4ceb9fe1a85ec53ULL;
     h64 ^= ea;
     h64 = (h64 ^ (h64 >> 33)) * 0xff51afd7ed558ccdULL;
     h64 = (h64 ^ (h64 >> 33)) * 0xc4ceb9fe1a85ec53ULL;
-
     block->block_hash = (guint)(h64 & 0xffffffffU);
-
 
     block_t* block_ptr_ptr = g_hash_table_lookup(data->blocks_map, block);
     if(block_ptr_ptr) {
         free(block);
         // update the metadata of the block if the block already exists
-        if (instructions_count == MAX_INSTRUCTIONS)
+        if (instructions_count == g_max_instructions)
         {
             (block_ptr_ptr)->metadata |= TERMINATING;
             return (block_ptr_ptr)->block_index;
@@ -107,7 +108,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     //     {
     //         free(block);
     //         // update the metadata of the block if the block already exists
-    //         if (instructions_count == MAX_INSTRUCTIONS)
+    //         if (instructions_count == g_max_instructions)
     //         {
     //             data->blocks_p[i]->metadata |= TERMINATING;
     //             return i;
@@ -126,7 +127,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     // }
 
     // Set the metadata of the block if the block does not exist
-    if (instructions_count == MAX_INSTRUCTIONS)
+    if (instructions_count == g_max_instructions)
     {
         block->metadata |= TERMINATING;
     }
@@ -150,7 +151,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
 
 unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* size_o) {
     // Allocate memory for the block
-    unsigned int *blocks = malloc(sizeof(unsigned int) * MAX_BLOCKS);
+    unsigned int *blocks = malloc(sizeof(unsigned int) * g_max_blocks);
     if (!blocks) {
         perror("Error allocating memory");
         return NULL;
@@ -164,7 +165,7 @@ unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, u
             *size_o = i;
             return blocks;
         }
-    } while (i < MAX_BLOCKS && (data->blocks_p[blocks[i-1]]->metadata & 0x06) == 0);
+    } while (i < g_max_blocks && (data->blocks_p[blocks[i-1]]->metadata & 0x06) == 0);
     *size_o = i; // set the size of the blocks
     return blocks;
 }
