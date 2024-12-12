@@ -66,20 +66,19 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     block->end_address = end_inst.address;
 
 
-    // Precompute a block-specific hash. For simplicity, just hash start and end addresses:
-    // You can use a simple mixing function:
-    guint h = 0;
-    h ^= (guint)block->start_address;
-    // h ^= (guint)(block->start_address >> 32);
-    h ^= (guint)block->end_address;
-    // h ^= (guint)(block->end_address >> 32);
-    h ^= h >> 16;
-    h *= 0x85ebca6b;
-    h ^= h >> 13;
-    h *= 0xc2b2ae35;
-    h ^= h >> 16;
+    guint64 h64 = 0;
+    guint64 sa = block->start_address;
+    guint64 ea = block->end_address;
 
-    block->block_hash = h;
+    h64 ^= sa;
+    h64 = (h64 ^ (h64 >> 33)) * 0xff51afd7ed558ccdULL;
+    h64 = (h64 ^ (h64 >> 33)) * 0xc4ceb9fe1a85ec53ULL;
+    h64 ^= ea;
+    h64 = (h64 ^ (h64 >> 33)) * 0xff51afd7ed558ccdULL;
+    h64 = (h64 ^ (h64 >> 33)) * 0xc4ceb9fe1a85ec53ULL;
+
+    block->block_hash = (guint)(h64 & 0xffffffffU);
+
 
     block_t* block_ptr_ptr = g_hash_table_lookup(data->blocks_map, block);
     if(block_ptr_ptr) {
