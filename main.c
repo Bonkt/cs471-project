@@ -40,12 +40,31 @@ static gint compare_trace_ids(gconstpointer a, gconstpointer b) {
 
 // Your code here
 int main(int argc, char *argv[]) {
-    /*if (argc < 2) {
-        fprintf(stderr, "Usage: %s <input_file>\n", argv[0]);
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <input_file> [-o <output_file>] [-O <hashmap_output_file>] [-pt] [-pb]\n", argv[0]);
         return EXIT_FAILURE;
-    }*/
-    argc = argc;
-    argv = argv;
+    }
+    char *input_file = NULL;
+
+    input_file = argv[1];
+
+    char *output_file = NULL;
+    char *hashmap_output_file = NULL;
+    char flags = 0;
+
+    // Parse command line arguments
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(argv[i], "-o") == 0 && i + 1 < argc) {
+            output_file = argv[++i];
+        } else if (strcmp(argv[i], "-O") == 0 && i + 1 < argc) {
+            hashmap_output_file = argv[++i];
+        } else if (strcmp(argv[i], "-pt") == 0 && i + 1 < argc) {
+            flags |= PRINT_TRACE;
+        } else if (strcmp(argv[i], "-pb") == 0 && i + 1 < argc) {
+            flags |= PRINT_BLOCK;
+        } 
+        
+    }
 
     struct timespec start, end;
     // Record start time
@@ -54,13 +73,13 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    int fd = open("processed_trace2", O_RDONLY);
+    int fd = open(input_file, O_RDONLY);
     if (fd == -1) {
         perror("open");
         return EXIT_FAILURE;
     }
 
-    data_t data;
+    data_t data = {0};
 
     struct stat st;
     if (fstat(fd, &st) == -1) {
@@ -92,6 +111,9 @@ int main(int argc, char *argv[]) {
     }
     data.hash_table = hash_table; // set hash table in data structure
 
+    if(output_file)
+    FILE* output = fopen(output_file, "w");
+
     // Parse the trace
     unsigned int* index = malloc(sizeof(unsigned int)); // index of the next block
     Trace *trace = trace_parser(&data, index); // parse the first trace
@@ -100,8 +122,8 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
+    if (output_file) { fprintf(output, "%05d,", trace->id); }  
     //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
-    //FILE* output = fopen("output.csv", "w");
     while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
         trace = trace_parser(&data, index);
@@ -110,11 +132,12 @@ int main(int argc, char *argv[]) {
             return EXIT_FAILURE;
         }
         //if(*index % 1000 < 20) printf("Index: %d\n", *index);
+        if(flags) print_trace(&data, trace, flags);
         //print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
-        //fprintf(output, "%6d,", trace->id);
+        if (output_file) { fprintf(output, "%05d,", trace->id); }  
     }
-    
+    if (output_file) { fclose(output); }
 
     // Print the last index
     printf("Index: %d\n", *index);
@@ -127,7 +150,8 @@ int main(int argc, char *argv[]) {
     
     // Parse the hash table and save the traces to a file
     // Create an output CSV file
-    FILE *output_file = fopen("hashmap-output.csv", "w");
+    if(!hashmap_output_file) hashmap_output_file = "hashmap-output.csv";
+    FILE *output_file = fopen(hashmap_output_file, "w");
     if (!output_file) {
         perror("Error opening output file");
         return EXIT_FAILURE;
