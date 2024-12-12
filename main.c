@@ -22,6 +22,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+
+// Define the maximum number of blocks in a trace
+// uint64_t g_max_blocks;
+// uint64_t g_max_instructions;
+
+
 // Comparison function for sorting by trace->id
 static gint compare_trace_ids(gconstpointer a, gconstpointer b) {
     const Trace *t1 = (const Trace*)a;
@@ -81,7 +87,7 @@ gboolean block_equal_func(gconstpointer a_, gconstpointer b_) {
 // Your code here
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s <input_file> [-o <output_file>] [-O <hashmap_output_file>] [-pt] [-pb]\n", argv[0]);
+        fprintf(stderr, "Usage: %s <input_file> [-o <output_file>] [-O <hashmap_output_file>] [-i <max_instructions_per_trace>] [-b <max_blocks_per_trace>] [-pt] [-pb]\n", argv[0]);
         return EXIT_FAILURE;
     }
     char *input_file = NULL;
@@ -91,6 +97,9 @@ int main(int argc, char *argv[]) {
     char *output_filename = NULL;
     char *hashmap_output_file = NULL;
     char flags = 0;
+
+    g_max_blocks = 1000;
+    g_max_instructions = 1000;
 
     // Parse command line arguments
     for (int i = 2; i < argc; i++) {
@@ -102,9 +111,13 @@ int main(int argc, char *argv[]) {
             flags |= PRINT_TRACE;
         } else if (strcmp(argv[i], "-pb") == 0) {
             flags |= PRINT_BLOCK;
+        } else if (strcmp(argv[i], "-i") == 0 && i + 1 < argc) {
+            g_max_instructions = strtoull(argv[++i], NULL, 10);
+        } else if (strcmp(argv[i], "-b") == 0 && i + 1 < argc) {
+            g_max_blocks = strtoull(argv[++i], NULL, 10);
         } 
-        
     }
+    printf("g_max_instructions: %lu \ng_max_blocks: %lu \n \n", g_max_instructions, g_max_instructions);
 
     struct timespec start, end;
     // Record start time
@@ -136,12 +149,12 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    data.blocks_p = malloc(sizeof(block_t*) * MAX_BLOCKS); // allocate memory for blocks
+    data.blocks_p = malloc(sizeof(block_t*) * g_max_blocks); // allocate memory for blocks
     if (!data.blocks_p) {
         perror("Error allocating memory");
         return EXIT_FAILURE;
     }
-    data.size = MAX_BLOCKS; // set size of blocks array in data structure
+    data.size = g_max_blocks; // set size of blocks array in data structure
     data.nb_blocks = 0; // set number of blocks in data structure
     data.blocks_map = g_hash_table_new(block_hash_func, block_equal_func);
 
