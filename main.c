@@ -48,19 +48,19 @@ int main(int argc, char *argv[]) {
 
     input_file = argv[1];
 
-    char *output_file = NULL;
+    char *output_filename = NULL;
     char *hashmap_output_file = NULL;
     char flags = 0;
 
     // Parse command line arguments
     for (int i = 2; i < argc; i++) {
         if (strcmp(argv[i], "-o") == 0 && i + 1 < argc) {
-            output_file = argv[++i];
+            output_filename = argv[++i];
         } else if (strcmp(argv[i], "-O") == 0 && i + 1 < argc) {
             hashmap_output_file = argv[++i];
-        } else if (strcmp(argv[i], "-pt") == 0 && i + 1 < argc) {
+        } else if (strcmp(argv[i], "-pt") == 0) {
             flags |= PRINT_TRACE;
-        } else if (strcmp(argv[i], "-pb") == 0 && i + 1 < argc) {
+        } else if (strcmp(argv[i], "-pb") == 0) {
             flags |= PRINT_BLOCK;
         } 
         
@@ -110,9 +110,9 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     data.hash_table = hash_table; // set hash table in data structure
-
-    if(output_file)
-    FILE* output = fopen(output_file, "w");
+    FILE* output;
+    if(output_filename)
+    	output = fopen(output_filename, "w");
 
     // Parse the trace
     unsigned int* index = malloc(sizeof(unsigned int)); // index of the next block
@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
-    if (output_file) { fprintf(output, "%05d,", trace->id); }  
+    if (output_filename) { fprintf(output, "%05d,", trace->id); }  
     //print_trace(&data, trace, PRINT_TRACE | PRINT_BLOCK); // print the first trace
     while(trace && *index < (data.file_size/9) && (data.blocks_p[trace->blocks_p[trace->nb_blocks-1]]->metadata & _EOF) == 0) // parse and print the next traces until the end of the file is reached
     {
@@ -135,9 +135,9 @@ int main(int argc, char *argv[]) {
         if(flags) print_trace(&data, trace, flags);
         //print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
-        if (output_file) { fprintf(output, "%05d,", trace->id); }  
+        if (output_filename) { fprintf(output, "%05d,", trace->id); }  
     }
-    if (output_file) { fclose(output); }
+    if (output_filename) { fclose(output); }
 
     // Print the last index
     printf("Index: %d\n", *index);

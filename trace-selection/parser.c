@@ -26,12 +26,12 @@ inst_t parse_inst(data_t* data, unsigned int index) {
 
 inst_t get_inst(data_t* data, unsigned int index) {
     inst_t inst;
-    if (index >= data->file_size / 9) {
+    if (index >= data->file_size / 9ull) {
         inst.address = -1;
         return inst;
     }
 
-    unsigned char *ptr = data->mapped_file + (index * 9);
+    unsigned char *ptr = data->mapped_file + (index * 9ull);
     inst.address = *(long int*)ptr;
     inst.metadata = *(ptr + 8);
 
