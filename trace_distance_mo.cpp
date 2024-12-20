@@ -158,8 +158,10 @@ int main(int argc, char *argv[]) {
 
         // for every query, if (distinct_count == investigated_trace_reuse_distance)
         //      Then we store its input_array[query.left] to recover the trace_id 
-        if (distinct_count == investigated_trace_reuse_distance) {
-            trace_reuse_histogram[input_array[query.left]]++;
+        if (investigated_trace_reuse_distance_histogram_output_file) {
+            if (distinct_count == investigated_trace_reuse_distance) {
+                trace_reuse_histogram[input_array[query.left]]++;
+            }
         }
 
         // Now [cur_l, cur_r] is [left,right]
