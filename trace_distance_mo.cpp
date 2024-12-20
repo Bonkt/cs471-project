@@ -8,8 +8,13 @@
 
 using namespace std;
 
-static const int MAX_ID = 20000;
-int freq[MAX_ID+1]; // frequency array of IDs
+using TraceId = int;
+
+// static const int MAX_ID = 20000;
+TraceId largest_trace_id = 0;
+
+// Frequency array of ids
+std::vector<int> freq{0}; 
 int distinct_count = 0;
 
 inline void addID(int x) {
@@ -22,31 +27,44 @@ inline void removeID(int x) {
     if(freq[x] == 0) distinct_count--;
 }
 
-// Struct to store queries
+// Struct to store queries (each query is a trace reuse.)
 struct Query {
-    int L, R, idx;
+    int left;   // first index of trace (not trace id!) 
+    int right;  // last index of trace
+    int idx;   // idx is 
 };
 
 // Mo’s ordering:  
 // - Calculate block size ~ sqrt(n)
-// - Sort queries by (L/block) then by R
+// - Sort queries by (left/block) then by right
 int block_size;
+
+int investigated_trace_reuse_distance = 12;
+const char* investigated_trace_reuse_distance_histogram_output_file = "trace_reuse_histogram.txt";
+
+    // map<trace_id, trace_reuses_with_distance_x_count>
+std::unordered_map<TraceId, int> trace_reuse_histogram;
 
 int main(int argc, char *argv[]) {
     char *input_file = NULL;
 
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s  <input_file> [-o <output_file>]]\n", argv[0]);
+        fprintf(stderr, "Usage: %s  <input_file> [-o <output_file>] [-n <trace_reuse_distance>] [-O <trace_id_histogram>]\n", argv[0]);
         return EXIT_FAILURE;
     }
 
     input_file = argv[1];
     char* output_file_name = "default_output.csv";
 
+
     // Parse command line arguments
     for (int i = 2; i < argc; i++) {
         if (strcmp(argv[i], "-o") == 0 && i + 1 < argc) {
             output_file_name = argv[++i];
+        } else if (strcmp(argv[i], "-n") == 0 && i + 1 < argc) {
+            investigated_trace_reuse_distance = stoi(argv[++i]);
+        } else if (strcmp(argv[i], "-O") == 0 && i + 1 < argc) {
+            investigated_trace_reuse_distance_histogram_output_file = argv[++i];
         }
     }
 
@@ -54,39 +72,45 @@ int main(int argc, char *argv[]) {
     // stringstream ss(input);
     ifstream file;
     file.open(input_file);
-    vector<int> arr;
-    arr.reserve(20000);
+    vector<int> input_array;
+    input_array.reserve(20000);
+    freq.reserve(20000);
     int temp;
     string line;
+    
+    // need to store a map<trace_id, >
 
-    // Read the entire file line by line
+
+
     while (getline(file, line)) {
-        stringstream ss(line); // Create a stringstream for each line
-
-        // Read comma-separated values
+        stringstream ss(line); 
         string value;
         while (getline(ss, value, ',')) {
             temp = stoi(value); // Convert to integer
-            arr.push_back(temp);
+            input_array.push_back(temp);
+            freq.push_back(0);  // default value set to 0.
+            if (temp > largest_trace_id) {
+                largest_trace_id = temp;
+            }
         }
     }
 
 
     // Last occurrence of each ID
-    vector<int> last_occurrence(MAX_ID+1, -1);
+    vector<int> last_occurrence(largest_trace_id+1, -1);
     vector<Query> queries;
     int q = 0;
 
-    long int n = arr.size();
-    // Identify queries (each repeated occurrence forms a query)
+    long int n = input_array.size();
+    // Identify queries (each repeated occurrance forms a query)
     for (int i = 0; i < n; i++) {
-        int id = arr[i];
+        int id = input_array[i];
         if (last_occurrence[id] != -1) {
             // query from last_occurrence[id]+1 to i-1
             if(i - last_occurrence[id] > 0) {
                 Query Q;
-                Q.L = last_occurrence[id] + 1;
-                Q.R = i - 1;
+                Q.left = last_occurrence[id] + 1;
+                Q.right = i - 1;
                 Q.idx = q++;
                 queries.push_back(Q);
             }
@@ -103,40 +127,59 @@ int main(int argc, char *argv[]) {
     // Prepare Mo’s algorithm
     block_size = (int) sqrt(n);
     sort(queries.begin(), queries.end(), [&](const Query &a, const Query &b){
-        int blockA = a.L / block_size;
-        int blockB = b.L / block_size;
-        if(blockA == blockB) return a.R < b.R;
-        return blockA < blockB;
+        int block_a = a.left / block_size;
+        int block_b = b.left / block_size;
+        if(block_a == block_b) return a.right < b.right;
+        return block_a < block_b;
     });
 
+    // vector of trace reuse distances for each reuse of a trace.
     vector<int> answers(q);
-    int curL = 0, curR = -1;
+    int cur_l = 0, cur_r = -1;
 
 
     // Initialize frequency array
-    for(int i=0; i<=MAX_ID; i++) freq[i] = 0;
+    for(int i=0; i<=largest_trace_id; i++) freq[i] = 0;
 
     // Process queries
     for (auto &query : queries) {
-        int L = query.L, R = query.R;
-        // Move curR
-        while (curR < R) addID(arr[++curR]);
-        while (curR > R) removeID(arr[curR--]);
+        int left = query.left, right = query.right;
+        // Move cur_r
+        while (cur_r < right) addID(input_array[++cur_r]);
+        while (cur_r > right) removeID(input_array[cur_r--]);
 
-        // Move curL
-        while (curL < L) removeID(arr[curL++]);
-        while (curL > L) addID(arr[--curL]);
+        // Move cur_l
+        while (cur_l < left) removeID(input_array[cur_l++]);
+        while (cur_l > left) addID(input_array[--cur_l]);
 
-        // Now [curL, curR] is [L,R]
+        // for every query, if (distinct_count == investigated_trace_reuse_distance)
+        //      Then we store its input_array[query.left] to recover the trace_id 
+        if (distinct_count == investigated_trace_reuse_distance) {
+            trace_reuse_histogram[input_array[query.left]]++;
+        }
+
+        // Now [cur_l, cur_r] is [left,right]
         answers[query.idx] = distinct_count;
     }
 
     ofstream out_file(output_file_name);
 
+    ofstream histogram_out_file(investigated_trace_reuse_distance_histogram_output_file);
+
     // Print answers (number of distinct IDs for each query)
     for (int ans : answers) {
 //        cout << ans << "\n";
         out_file << ans << "\n";
+    }
+
+
+    cout << "logging histogram to: " 
+        << investigated_trace_reuse_distance_histogram_output_file
+        << std::endl;
+        
+    // log the histogram:
+    for (auto& [trace_id, count] : trace_reuse_histogram) {
+        histogram_out_file << trace_id << ", " << count << "\n";
     }
 
     return 0;
