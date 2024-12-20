@@ -166,16 +166,27 @@ int main(int argc, char *argv[]) {
         answers[query.idx] = distinct_count;
     }
 
-    ofstream out_file(output_file_name);
 
+
+    ofstream out_file(output_file_name);
     //cout << "after processing queries!" << std::endl;
     ofstream histogram_out_file(investigated_trace_reuse_distance_histogram_output_file);
 
+    using TraceDistance = int;
+    std::unordered_map<TraceDistance, int> reuse_distance_count;
+
     // Print answers (number of distinct IDs for each query)
-    for (int ans : answers) {
-//        cout << ans << "\n";
-        out_file << ans << "\n";
+    for (auto& ans : answers) {
+    //        cout << ans << "\n";
+        reuse_distance_count[ans]++;
+        // out_file << ans << "\n";
     }
+
+    for (auto& [distance, count] : reuse_distance_count) {
+        out_file << distance << ", " << count << "\n";
+    } 
+
+
 
     //cout << "running! \n";    
     // Add the nr of traces that only occur once to the log.
