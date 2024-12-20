@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
             g_max_blocks = strtoull(argv[++i], NULL, 10);
         } 
     }
-    printf("g_max_instructions: %lu \ng_max_blocks: %lu \n \n", g_max_instructions, g_max_instructions);
+    printf("g_max_instructions: %lu \ng_max_blocks: %lu \n \n", g_max_instructions, g_max_blocks);
 
     struct timespec start, end;
     // Record start time
@@ -149,7 +149,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    data.blocks_p = malloc(sizeof(block_t*) * g_max_blocks); // allocate memory for blocks
+    data.blocks_p = calloc(g_max_blocks, sizeof(block_t*)); // allocate memory for blocks
     if (!data.blocks_p) {
         perror("Error allocating memory");
         return EXIT_FAILURE;
@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
     	output = fopen(output_filename, "w");
 
     // Parse the trace
-    unsigned int* index = malloc(sizeof(unsigned int)); // index of the next block
+    unsigned int* index = calloc(1, sizeof(unsigned int)); // index of the next block
     Trace *trace = trace_parser(&data, index); // parse the first trace
     if (!trace) {
         fprintf(stderr, "Error parsing trace\n");
