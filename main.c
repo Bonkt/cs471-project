@@ -186,10 +186,17 @@ int main(int argc, char *argv[]) {
             return EXIT_FAILURE;
         }
         //if(*index % 1000 < 20) printf("Index: %d\n", *index);
-   if(flags) print_trace(&data, trace, flags);
+        if(flags) print_trace(&data, trace, flags);
         //print_trace(&data, trace, PRINT_TRACE);
         // write id as 6 numbers + ';' in output file
+#define LOG_START_ADDRESS
+
+#ifndef LOG_START_ADDRESS
         if (output_filename) { fprintf(output, "%d,", trace->id); }  
+#else 
+        if (output_filename) { fprintf(output, "%d, %u \n", trace->id, trace->start_address); }  
+#endif
+
     }
     if (output_filename) { fclose(output); }
 
