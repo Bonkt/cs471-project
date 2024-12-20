@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 
+#include <unordered_set>
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -8,8 +9,12 @@
 
 using namespace std;
 
-static const int MAX_ID = 20000;
-int freq[MAX_ID+1]; // frequency array of IDs
+// static const int MAX_ID = 20000;
+int largest_trace_id = 0;
+int trace_no_reuse_count = 0;
+
+// Frequency array of ids
+std::vector<int> freq{0}; 
 int distinct_count = 0;
 
 inline void addID(int x) {
@@ -24,12 +29,12 @@ inline void removeID(int x) {
 
 // Struct to store queries
 struct Query {
-    int L, R, idx;
+    int left, right, idx;
 };
 
 // Mo’s ordering:  
 // - Calculate block size ~ sqrt(n)
-// - Sort queries by (L/block) then by R
+// - Sort queries by (left/block) then by right
 int block_size;
 
 int main(int argc, char *argv[]) {
@@ -41,7 +46,7 @@ int main(int argc, char *argv[]) {
     }
 
     input_file = argv[1];
-    char* output_file_name = "default_output.csv";
+    char* output_file_name = nullptr; 
 
     // Parse command line arguments
     for (int i = 2; i < argc; i++) {
@@ -54,58 +59,67 @@ int main(int argc, char *argv[]) {
     // stringstream ss(input);
     ifstream file;
     file.open(input_file);
-    vector<int> arr;
-    arr.reserve(20000);
+    vector<int> input_array;
+    input_array.reserve(20000);
+    freq.reserve(20000);
     int temp;
     string line;
 
-    // Read the entire file line by line
-    while (getline(file, line)) {
-        stringstream ss(line); // Create a stringstream for each line
+    //cout << "here! \n";
 
-        // Read comma-separated values
+    while (getline(file, line)) {
+        stringstream ss(line); 
         string value;
         while (getline(ss, value, ',')) {
             temp = stoi(value); // Convert to integer
-            arr.push_back(temp);
+            input_array.push_back(temp);
+            freq.push_back(0);  // default value set to 0.
+            if (temp > largest_trace_id) {
+                largest_trace_id = temp;
+            }
         }
     }
 
-
+ 	
+    //cout << "after reading in file!" << std::endl;
     // Last occurrence of each ID
-    vector<int> last_occurrence(MAX_ID+1, -1);
+    vector<int> last_occurrence(largest_trace_id+1, -1);
     vector<Query> queries;
     int q = 0;
 
-    long int n = arr.size();
-    // Identify queries (each repeated occurrence forms a query)
+    long int n = input_array.size();
+    // Identify queries ()
     for (int i = 0; i < n; i++) {
-        int id = arr[i];
-        if (last_occurrence[id] != -1) {
+        int id = input_array[i];
+	//cout << "last_occurance[id]=" << last_occurrence[id] << "\n"; 
+	if (last_occurrence[id] != -1) {
             // query from last_occurrence[id]+1 to i-1
             if(i - last_occurrence[id] > 0) {
-                Query Q;
-                Q.L = last_occurrence[id] + 1;
-                Q.R = i - 1;
+                //cout << "found a query. \n"; 
+		Query Q;
+                Q.left = last_occurrence[id] + 1;
+                Q.right = i - 1;
                 Q.idx = q++;
                 queries.push_back(Q);
             }
         }
-        last_occurrence[id] = i;
+	last_occurrence[id] = i;
     }
 
-    // If no queries, just end here
+    // If noueries, just end here
     if (q == 0) {
         // no repeats
         return 0;
     }
 
-    // Prepare Mo’s algorithm
+    //cout << "before mo's algorithm:" << std::endl;
+
+    // Mo’s algorith
     block_size = (int) sqrt(n);
     sort(queries.begin(), queries.end(), [&](const Query &a, const Query &b){
-        int blockA = a.L / block_size;
-        int blockB = b.L / block_size;
-        if(blockA == blockB) return a.R < b.R;
+        int blockA = a.left / block_size;
+        int blockB = b.left / block_size;
+        if(blockA == blockB) return a.right < b.right;
         return blockA < blockB;
     });
 
@@ -113,31 +127,44 @@ int main(int argc, char *argv[]) {
     int curL = 0, curR = -1;
 
 
-    // Initialize frequency array
-    for(int i=0; i<=MAX_ID; i++) freq[i] = 0;
+    //cout << "after mo's algoirtm" << std::endl;
+    
+    for(int i=0; i<=largest_trace_id; i++) freq[i] = 0;
 
     // Process queries
     for (auto &query : queries) {
-        int L = query.L, R = query.R;
+        int left = query.left, right = query.right;
         // Move curR
-        while (curR < R) addID(arr[++curR]);
-        while (curR > R) removeID(arr[curR--]);
+        while (curR < right) addID(input_array[++curR]);
+        while (curR > right) removeID(input_array[curR--]);
 
         // Move curL
-        while (curL < L) removeID(arr[curL++]);
-        while (curL > L) addID(arr[--curL]);
+        while (curL < left) removeID(input_array[curL++]);
+        while (curL > left) addID(input_array[--curL]);
 
-        // Now [curL, curR] is [L,R]
+        // Now [curL, curR] is [left,right]
         answers[query.idx] = distinct_count;
     }
 
     ofstream out_file(output_file_name);
+
+    //cout << "after processing queries!" << std::endl;
 
     // Print answers (number of distinct IDs for each query)
     for (int ans : answers) {
 //        cout << ans << "\n";
         out_file << ans << "\n";
     }
+
+    //cout << "running! \n";    
+    // Add the nr of traces that only occur once to the log.
+    int single_occurance_trace_count = 0;
+    for (auto& i : freq) {
+        if(i == 1) {
+	    single_occurance_trace_count++;
+	}
+    }	    
+//    out_file << single_occurance_trace_count;
 
     return 0;
 }
