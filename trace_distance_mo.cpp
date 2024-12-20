@@ -190,9 +190,16 @@ int main(int argc, char *argv[]) {
     cout << "logging histogram to: " 
         << investigated_trace_reuse_distance_histogram_output_file
         << std::endl;
-        
+
+    // Sort by value;
+    std::vector<std::pair<int, int>> sorted_vector(trace_reuse_histogram.begin(), trace_reuse_histogram.end());
+    std::sort(sorted_vector.begin(), sorted_vector.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.second > b.second; // Sort by value in ascending order
+              });
+
     // log the histogram:
-    for (auto& [trace_id, count] : trace_reuse_histogram) {
+    for (auto& [trace_id, count] : sorted_vector) {
         histogram_out_file << trace_id << ", " << count << "\n";
     }
 
