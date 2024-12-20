@@ -45,7 +45,7 @@ struct Query {
 int block_size;
 
 int investigated_trace_reuse_distance = 12;
-const char* investigated_trace_reuse_distance_histogram_output_file = "trace_reuse_histogram.txt";
+const char* investigated_trace_reuse_distance_histogram_output_file = nullptr;
 
     // map<trace_id, trace_reuses_with_distance_x_count>
 std::unordered_map<TraceId, int> trace_reuse_histogram;
@@ -170,7 +170,10 @@ int main(int argc, char *argv[]) {
 
     ofstream out_file(output_file_name);
     //cout << "after processing queries!" << std::endl;
-    ofstream histogram_out_file(investigated_trace_reuse_distance_histogram_output_file);
+    ofstream histogram_out_file;
+    if(investigated_trace_reuse_distance_histogram_output_file) {
+        histogram_out_file = ofstream(investigated_trace_reuse_distance_histogram_output_file);
+    }
 
     using TraceDistance = int;
     std::unordered_map<TraceDistance, int> reuse_distance_count;
@@ -197,10 +200,11 @@ int main(int argc, char *argv[]) {
 //	}
 //    }	    
 //    out_file << single_occurance_trace_count;
-
-    cout << "logging histogram to: " 
-        << investigated_trace_reuse_distance_histogram_output_file
-        << std::endl;
+    if (investigated_trace_reuse_distance_histogram_output_file) {
+        cout << "logging histogram to: " 
+            << investigated_trace_reuse_distance_histogram_output_file
+            << std::endl;
+    }
 
     // Sort by value;
     std::vector<std::pair<int, int>> sorted_vector(trace_reuse_histogram.begin(), trace_reuse_histogram.end());
@@ -210,8 +214,10 @@ int main(int argc, char *argv[]) {
               });
 
     // log the histogram:
-    for (auto& [trace_id, count] : sorted_vector) {
-        histogram_out_file << trace_id << ", " << count << "\n";
+    if (investigated_trace_reuse_distance_histogram_output_file) {
+        for (auto& [trace_id, count] : sorted_vector) {
+            histogram_out_file << trace_id << ", " << count << "\n";
+        }
     }
 
     return 0;
