@@ -121,7 +121,7 @@ for i, (x_90, sorted_keys, cdf_values, color, _, filename) in enumerate(cdf_data
     )
     
 # Add vertical line for 32KB cache size
-cache_line_size = inst_line_size*4+20+(1+(block_size-1)//4)+math.ceil(math.log2(block_size))
+cache_line_size = inst_line_size*4+20+math.ceil((block_size + math.log2(block_size))/8)
 cache_entries = 32*1024//cache_line_size
     
 

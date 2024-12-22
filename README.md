@@ -1,12 +1,12 @@
 CS471 Cloud workloads characterization by traceability
 
 ## Folder Hierarchy
-\ main - root folder
- | plot - contains the resulting plot
- | plugin - contains files related to plugin or QEMU
- | python - contails all python scripts
- | text - serves as the default output of scripts
- | trace-selection - contains all C files related to the trace selection algorithm
+\ main - root folder\
+ | plot - contains the resulting plot\
+ | plugin - contains files related to plugin or QEMU\
+ | python - contails all python scripts\
+ | text - serves as the default output of scripts\
+ | trace-selection - contains all C files related to the trace selection algorithm\
 
 ## Python Scripts
 ### processing.py

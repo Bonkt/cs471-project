@@ -1,5 +1,11 @@
 import time
 
+'''
+This file is deprecated, it is not used in the final version of the project.
+
+'''
+
+
 t = time.time()
 f = open("python/trace_output2.log", "r")
 lines = f.readlines()
