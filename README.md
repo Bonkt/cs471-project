@@ -13,6 +13,10 @@ CS471 Cloud workloads characterization by traceability
 
 This script is responsible for transforming the data from the previous execlog into the correct format. (deprecated)
 
+### cdf.py
+
+This script takes the output from the trace_distance_mo script and output the graph of the CDF of the TRD and saves it in the plot folder.
+
 ## C files and header
 ### main.c
 
