@@ -21,7 +21,7 @@ CFLAGS += $(GLIB_CFLAGS)
 LDFLAGS += $(GLIB_LDFLAGS)
 
 # Executable names
-C_EXEC = main_c
+C_EXEC = main
 CPP_EXEC = trace_distance_mo
 
 # Default target

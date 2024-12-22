@@ -44,7 +44,7 @@ inst_t get_inst(data_t* data, unsigned int index) {
 
 unsigned int parse_block(data_t* data, unsigned int* start_index) {
     // Allocate memory for the block
-    block_t *block = malloc(sizeof(block_t));
+    block_t *block = calloc(1, sizeof(block_t));
     if (!block) {
         perror("Error allocating memory");
         return -1;
@@ -54,7 +54,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
     do {
         // Print the index every 1 milion instructions
         
-        if(*start_index % 1000000 == 0) printf("Index: %d\n", *start_index);
+        if(*start_index % 500000000 == 0) printf("Index: %d, %d\n", *start_index, data->trace_count);
 
         inst = get_inst(data, *start_index); // parse the instruction
         (*start_index)++; // increment the index
@@ -151,7 +151,7 @@ unsigned int parse_block(data_t* data, unsigned int* start_index) {
 
 unsigned int* parse_block_terminating(data_t* data, unsigned int* start_index, unsigned int* size_o) {
     // Allocate memory for the block
-    unsigned int *blocks = malloc(sizeof(unsigned int) * g_max_blocks);
+    unsigned int *blocks = calloc(g_max_blocks, sizeof(unsigned int));
     if (!blocks) {
         perror("Error allocating memory");
         return NULL;

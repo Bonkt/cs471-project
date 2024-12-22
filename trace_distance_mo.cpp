@@ -73,6 +73,8 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    cout << "command line parsed!\n"; 
+
     // string input = "1,2,3,4,5,5,4,3, 4, 5, 3, 4, 4, 1, 6, 5, 6, 2";
     // stringstream ss(input);
     ifstream file;
@@ -98,7 +100,7 @@ int main(int argc, char *argv[]) {
     }
 
  	
-    //cout << "after reading in file!" << std::endl;
+    cout << "after reading in file!" << std::endl;
     // Last occurrence of each ID
     vector<int> last_occurrence(largest_trace_id+1, -1);
     vector<Query> queries;
